@@ -1,2 +1,1 @@
-# Project
-Software Engineering Project - GY350
+# Software Engineering Project - Whisper

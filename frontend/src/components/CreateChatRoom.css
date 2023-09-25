@@ -1,0 +1,74 @@
+/* chat-room.css */
+.chat-room {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 100px;
+  border: 1px solid #333;
+  border-radius: 10px;
+  background-color: #59418e;
+  color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  text-align: center;
+}
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #fff;
+}
+
+input[type="text"],
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #333;
+  border-radius: 5px;
+  font-size: 16px;
+  background-color: #fff;
+  color: #333;
+}
+
+button {
+  background-color: #3b3b49;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+body {
+  font-family: "Roboto", sans-serif;
+}
+.slider-value {
+  font-size: 14px;
+}
+input[type="range"] {
+  /* Change the color of the track to black */
+  background-color: #3B3B49;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  /* Change the color of the thumb to black (for Webkit browsers like Chrome) */
+  background-color: #3B3B49;
+}
+
+input[type="range"]::-moz-range-thumb {
+  /* Change the color of the thumb to black (for Firefox) */
+  background-color: #3B3B49;
+}
+.bold-text {
+  font-weight: bold;
+}

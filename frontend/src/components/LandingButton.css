@@ -1,0 +1,32 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #f0f0f0;
+}
+
+.button {
+  padding: 10px 40px;
+  font-size: 24px;
+  margin-bottom: 40px;
+  background-color: #59418e;
+  color: white;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  width: 500px;
+  height: 200px;
+}
+
+.button:hover {
+  background-color: #36245b;
+}
+
+p {
+  text-align: center;
+  font-size: 40px;
+  color: white;
+  font-weight: bold;
+}

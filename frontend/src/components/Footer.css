@@ -1,0 +1,13 @@
+.footer {
+    background-color: #59418E;
+    padding: 10px;
+    text-align: center;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+  }
+  #logo{
+    height: 70px;
+    width: 70px;
+  }
