@@ -5,3 +5,4 @@ export const containsOffensiveWords = (inputText) => {
     return filter.isProfane(inputText);
   };
 
+  

@@ -1,0 +1,13 @@
+{
+    "name": "Whisper",
+    "short_name": "WHI",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#fff",
+    "description": "A x",
+    "icons": [{
+        "src": "src/assets/Whisper1.gif",
+        "type": "image/gif",
+        "sizes": "32x32"
+      }]
+  }
