@@ -1,3 +1,8 @@
-.rooms{
+#rooms{
+    background-color: #59418e;
+    border-style: solid;
+    border-color: black;
+}
+#error{
     background-color: red;
 }

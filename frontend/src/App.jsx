@@ -1,20 +1,63 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "./components/Header";
 import LandingButton from "./components/LandingButton";
 import Footer from "./components/Footer";
 import CreateChatRoom from "./components/CreateChatRoom";
 import Rooms from "./components/Rooms";
-import "./App.css";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import gif from "./assets/Whisper1.gif";
 import { containsOffensiveWords } from "./utils/offensiveWordsChecker";
+import { calculateDistance } from "./utils/calculateDistance";
+import { rooms } from "./roomsArr";
+import "./App.css";
+
 
 function App() {
   const [createRoom, setCreateRoom] = useState(false);
   const [joinRoom, setJoinRoom] = useState(false);
   const [username, setUsername] = useState("");
   const [usernameEntered, setUsernameEntered] = useState(false);
+  const [userLocation, setUserLocation] = useState(null);
+  const [nearbyRooms, setNearbyRooms] = useState([]);
+  const [locationAccess, grantLocationAccess] = useState(false);
+
+  const getLocation = () => {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
+        setUserLocation({ latitude, longitude });
+        grantLocationAccess(true);
+      },
+      (error) => {
+        console.error("Error getting user location:", error);
+      },
+      { enableHighAccuracy: true }
+    );
+  };
+
+  useEffect(() => {
+    getLocation();
+  }, []);
+
+  useEffect(() => {
+    console.log(userLocation);
+  }, [userLocation]);
+
+  useEffect(() => {
+    if (userLocation) {
+      const newNearbyRooms = rooms.filter((room) => {
+        const distance = calculateDistance(
+          userLocation.latitude,
+          userLocation.longitude,
+          room.location.latitude,
+          room.location.longitude
+        );
+        return distance <= room.radius;
+      });
+      setNearbyRooms(newNearbyRooms);
+    }
+  }, [userLocation]);
 
   const handleCreateRoom = () => {
     setCreateRoom(true);
@@ -33,12 +76,14 @@ function App() {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (username.trim() === "") {
-      toast.error("Username cannot be empty.");
+    if (username.trim() === "" || username.length >= 20) {
+      toast.error("Username needs to be between 1 and 20 characters");
     } else if (containsOffensiveWords(username)) {
       toast.error(
         "Username contains offensive words. Please choose a different one."
       );
+    } else if (!locationAccess) {
+      toast.error("Give access to location");
     } else {
       setUsernameEntered(true);
     }
@@ -47,8 +92,6 @@ function App() {
   return (
     <>
       <Header redirectHome={handleReturnToLandingPage} />
-      {createRoom && <CreateChatRoom username={username} />}
-      {joinRoom && <Rooms />}
 
       {!createRoom && !joinRoom && !usernameEntered && (
         <>
@@ -86,6 +129,13 @@ function App() {
       )}
       {usernameEntered && (
         <p className="username-display">Username: {username}</p>
+      )}
+      {createRoom && !joinRoom && usernameEntered && (
+        <CreateChatRoom username={username} />
+      )}
+
+      {!createRoom && joinRoom && usernameEntered && (
+        <Rooms nearbyRooms={nearbyRooms} />
       )}
 
       <Footer />
