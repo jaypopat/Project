@@ -1,4 +1,4 @@
-export const getAddressFromCoordinates = async ([latitude, longitude]) => {
+export const getAddressFromCoordinates = async (latitude, longitude) => {
   const response = await fetch(
     `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}`
   );
