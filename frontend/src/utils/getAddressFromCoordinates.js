@@ -1,5 +1,5 @@
 export const getAddressFromCoordinates = async (latitude, longitude) => {
-  const api_key = "WILL PUSH AS ENV VARUABLE LATER ON - WORKS - ASK IF WANT TO TEST";
+  const api_key = "f430ca359a954c8ba0c1c67d773ef19f";
 
   var query = latitude + "," + longitude;
   var api_url = "https://api.opencagedata.com/geocode/v1/json";

@@ -1,39 +1,51 @@
 body {
-    background-color: #3B3B49;
-    margin: 0px;
-  }
-  
-  .username-display {
-    position: absolute;
-    top: 0;
-    right: 0;
-    font-size: 22px;
-    font-weight: bold;
-    color: white;
-    background-color: #3B3B49;
-    padding: 5px;
-    margin: 0;
-  }
-  
-  .submit-button{
-    background-color: #59418e;
-    margin-left: 20px;
-    text-align: center;
-    
-  }
-  #usernameSubmit {
-    margin: 0 auto; /* This centers the table horizontally */
-  }
-  .red{
-    background-color: red;
-  }
+  background-color: #3B3B49;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
 
-  #login{
-        border: 5px solid;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        padding: 10px;
-      
-  }
+#room-btns button, #login button {
+  background-color: #59418e;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+#room-btns button:hover, #login button:hover {
+  background-color: #1b1130;
+}
+#logout {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+#logout button {
+  background-color: #3B3B49; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.logout button:hover {
+  background-color: #45a049;
+}
+

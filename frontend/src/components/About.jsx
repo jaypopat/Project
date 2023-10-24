@@ -1,4 +1,5 @@
+import './About.css'
 const About = ()=>{
-    return <div>hi</div>
+    return <div id = "about">hi, this is Whisper, a proximity based chat application</div>
 }
 export default About;
