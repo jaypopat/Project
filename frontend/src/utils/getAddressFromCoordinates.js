@@ -1,20 +1,20 @@
-const API_KEY = import.meta.env.VITE_GEOCODING_API_KEY;
-
 export const getAddressFromCoordinates = async (latitude, longitude) => {
-  const response = await fetch(
-    `https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=${API_KEY}`
-  );
+  const api_key = "WILL PUSH AS ENV VARUABLE LATER ON - WORKS - ASK IF WANT TO TEST";
 
-  if (!response.ok) {
-    throw new Error(`HTTP error! status: ${response.status}`);
-  }
+  var query = latitude + "," + longitude;
+  var api_url = "https://api.opencagedata.com/geocode/v1/json";
 
-  const data = await response.json();
-  // console.log(data.results[0])
+  var request_url =
+    api_url +
+    "?" +
+    "key=" +
+    api_key +
+    "&q=" +
+    encodeURIComponent(query) +
+    "&pretty=1" +
+    "&no_annotations=1";
 
-  if (data.status.code !== 200) {
-    throw new Error(data.status.message);
-  }
-
+  const response = await fetch(request_url);
+  var data = await response.json();
   return data.results[0];
 };
