@@ -1,6 +1,8 @@
+const API_KEY = import.meta.env.VITE_GEOCODING_API_KEY;
+
 export const getAddressFromCoordinates = async (latitude, longitude) => {
   const response = await fetch(
-    `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}`
+    `https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=${API_KEY}`
   );
 
   if (!response.ok) {
@@ -8,11 +10,11 @@ export const getAddressFromCoordinates = async (latitude, longitude) => {
   }
 
   const data = await response.json();
-  console.log(data)
+  // console.log(data.results[0])
 
-  if (data.error) {
-    throw new Error(data.error);
+  if (data.status.code !== 200) {
+    throw new Error(data.status.message);
   }
 
-  return data.address;
+  return data.results[0];
 };

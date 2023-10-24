@@ -1,36 +1,61 @@
 /* eslint-disable react/prop-types */
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import "./Rooms.css";
 import "react-toastify/dist/ReactToastify.css";
 import { getAddressFromCoordinates } from "../utils/getAddressFromCoordinates";
 import Spinner from "./Spinner";
 
-const Rooms = ({ nearbyRooms }) => {
+import { UserLocationContext } from "../App";
+import { calculateDistance } from "../utils/calculateDistance";
+import { rooms } from "../roomsArr";
+
+const Rooms = () => {
   const [addresses, setAddresses] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const { userLocation } = useContext(UserLocationContext);
+  const [nearbyRooms, setNearbyRooms] = useState(null);
+
+  useEffect(() => {
+    if (userLocation) {
+      const newNearbyRooms = rooms.filter((room) => {
+        const distance = calculateDistance(
+          userLocation.latitude,
+          userLocation.longitude,
+          room.location.latitude,
+          room.location.longitude
+        );
+        return distance <= room.radius;
+      });
+      setNearbyRooms(newNearbyRooms);
+    }
+  }, [userLocation]);
 
   useEffect(() => {
     const fetchAddresses = async () => {
       setIsLoading(true);
 
       if (nearbyRooms.length === 0) {
-        setError('No nearby rooms available.');
+        setError("No nearby rooms available.");
         setIsLoading(false);
         return;
       }
 
       const newAddresses = await Promise.all(
         nearbyRooms.map(async (room) => {
-          const address = await getAddressFromCoordinates(
+          const addressObject = await getAddressFromCoordinates(
             room.location.latitude,
-            room.location.longitude,
+            room.location.longitude
           );
+          const address = addressObject.formatted
+            ? addressObject.formatted
+            : "N/A";
           return { roomName: room.name, address };
         })
       );
-      console.log(nearbyRooms);
-      console.log(newAddresses);
+
+      // console.log(nearbyRooms);
+      // console.log(newAddresses);
 
       setAddresses(newAddresses);
       setIsLoading(false);
@@ -58,15 +83,14 @@ const Rooms = ({ nearbyRooms }) => {
           <tr key={room.name}>
             <td>{room.name}</td>
             <td>
-              {roomAddress?.address?.amenity ?? 'N/A'},{" "}
-              {roomAddress?.address?.city ?? 'N/A'},{" "}
-              {roomAddress?.address?.postcode ?? 'N/A'}, {roomAddress?.address?.county ?? 'N/A'}
+              {roomAddress?.address ?? 'N/A'}
             </td>
           </tr>
         );
       })}
     </tbody>
   </table>
-}
+  
+};
 
 export default Rooms;

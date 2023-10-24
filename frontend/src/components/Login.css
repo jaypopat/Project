@@ -1,7 +1,4 @@
-#rooms{
-    background-color: #59418e;
-    border-style: solid;
-    border-color: black;
+.login{
     border: 5px solid;
     position: absolute;
     top: 50%;
@@ -9,7 +6,4 @@
     transform: translate(-50%, -50%);
     padding: 10px;
   
-}
-#error{
-    background-color: red;
 }
