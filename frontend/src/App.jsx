@@ -2,8 +2,8 @@
 // App.js
 import { useState, useEffect, createContext } from "react";
 
-import { Route, Routes, useRouteError } from "react-router-dom";
-export const UserLocationContext = createContext();
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';  
+export const UserContext = createContext();
 
 import CreateChatRoom from "./components/CreateChatRoom";
 import JoinRoom from "./components/Rooms";
@@ -19,8 +19,9 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import ErrorPage from "./components/NotFound";
 import Home from "./components/Home";
 import Login from "./components/Login";
+import ChatRoom from "./components/ChatRoom";
 
-function App() {
+const App=() =>{
   const [isLoggedIn, setisLoggedIn] = useState(false);
   const [userSet, setUser] = useState(null);
   const [userLocation, setUserLocation] = useState(null);
@@ -43,7 +44,7 @@ function App() {
   // }, []);
 
   // const [user] = useAuthState(auth);
-  const user = "jay";
+  const user = "x";
 
   const getLocation = () => {
     navigator.geolocation.getCurrentPosition(
@@ -68,64 +69,51 @@ function App() {
   }, [userLocation]);
 
   return (
-    <UserLocationContext.Provider value={{ userLocation, setUserLocation }}>
+    <UserContext.Provider value={{ userLocation, user }}>
       <>
         <Header />
 
         <Routes>
-          <Route path="/" element={<Home />} errorElement={<ErrorPage />} />
-
-          <Route
-            path="/register"
-            element={<Register />}
-            errorElement={<ErrorPage />}
-          />
-          <Route
-            path="/login"
-            element={<Login />}
-            errorElement={<ErrorPage />}
-          />
-
-          <Route
-            path="/about"
-            element={<About />}
-            errorElement={<ErrorPage />}
-          />
-
-          <Route
-            path="/profile"
-            element={
-              <Protected user={user}>
-                <ProfilePage />
-              </Protected>
-            }
-            errorElement={<ErrorPage />}
-          />
-
-          <Route
-            path="/createroom"
-            element={
-              <Protected user={user}>
-                <CreateChatRoom />
-              </Protected>
-            }
-            errorElement={<ErrorPage />}
-          />
-
-          <Route
-            path="/joinroom"
-            element={
-              <Protected user={user}>
-                <JoinRoom />
-              </Protected>
-            }
-            errorElement={<ErrorPage />}
-          />
-        </Routes>
-
-        <Footer />
+        <Route path="/" element={<Home />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/about" element={<About />} />
+        <Route
+          path="/profile"
+          element={
+            <Protected user={user}>
+              <ProfilePage />
+            </Protected>
+          }
+        />
+        <Route
+          path="/createroom"
+          element={
+            <Protected user={user}>
+              <CreateChatRoom />
+            </Protected>
+          }
+        />
+        <Route
+          path="/joinroom"
+          element={
+            <Protected user={user}>
+              <JoinRoom />
+            </Protected>
+          }
+        />
+        <Route
+          path="/joinroom/:id"
+          element={
+            <Protected user={user}>
+              <ChatRoom />
+            </Protected>
+          }
+        />
+        <Route path="*" element={<ErrorPage />} />
+      </Routes>
       </>
-    </UserLocationContext.Provider>
+    </UserContext.Provider>
   );
 }
 export default App;

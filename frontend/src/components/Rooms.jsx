@@ -4,8 +4,9 @@ import "./Rooms.css";
 import "react-toastify/dist/ReactToastify.css";
 import { getAddressFromCoordinates } from "../utils/getAddressFromCoordinates";
 import Spinner from "./Spinner";
+import { Link } from "react-router-dom";
 
-import { UserLocationContext } from "../App";
+import { UserContext } from "../App";
 import { calculateDistance } from "../utils/calculateDistance";
 import { rooms } from "../roomsArr";
 
@@ -13,7 +14,7 @@ const Rooms = () => {
   const [addresses, setAddresses] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const { userLocation } = useContext(UserLocationContext);
+  const { userLocation } = useContext(UserContext);
   const [nearbyRooms, setNearbyRooms] = useState(null);
 
   useEffect(() => {
@@ -68,29 +69,40 @@ const Rooms = () => {
 
   if (nearbyRooms == null) return;
 
-  return isLoading ? <Spinner /> : error ? <div id = "error">{error}</div> : 
-  <table id="rooms">
-    <thead>
-      <tr>
-        <th>Room Name</th>
-        <th>Address</th>
-      </tr>
-    </thead>
-    <tbody>
-      {nearbyRooms.map((room) => {
-        const roomAddress = addresses.find(address => address.roomName === room.name);
-        return (
-          <tr key={room.name}>
-            <td>{room.name}</td>
-            <td>
-              {roomAddress?.address ?? 'N/A'}
-            </td>
-          </tr>
-        );
-      })}
-    </tbody>
-  </table>
-  
+  return isLoading ? (
+    <Spinner />
+  ) : error ? (
+    <div id="error">{error}</div>
+  ) : (
+    <table id="rooms">
+  <thead>
+    <tr>
+      <th>Room Name</th>
+      <th>Address</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {nearbyRooms.map((room) => {
+      const roomAddress = addresses.find(
+        (address) => address.roomName === room.name
+      );
+      return (
+        <tr key={room.name}>
+          <td>{room.name}</td>
+          <td>{roomAddress?.address ?? "N/A"}</td>
+          <td>
+            <Link to={`/joinroom/${room.chatRoomID}`}>
+              <button className="join-button">Join</button>
+            </Link>
+          </td>
+        </tr>
+      );
+    })}
+  </tbody>
+</table>
+
+  );
 };
 
 export default Rooms;

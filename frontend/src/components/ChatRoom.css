@@ -1,0 +1,14 @@
+.welcome-message {
+    background-color: #59418e; /* Purple */
+    color: #ffffff; /* White text */
+    font-family: Arial, sans-serif;
+    font-size: 24px; /* Large font size */
+    font-weight: bold; /* Bold text */
+    padding: 20px; /* Padding around the text */
+    text-align: center; /* Center the text */
+    margin: 0 auto; /* Center the div */
+    width: 50%; /* Width of the div */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15); /* Shadow */
+  }
+  

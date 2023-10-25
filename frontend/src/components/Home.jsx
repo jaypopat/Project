@@ -1,9 +1,12 @@
 import "./Home.css";
 import { Link } from "react-router-dom";
-import { logout } from "../../firebase";
+import { useContext } from 'react';
+
+import { UserContext } from '../App';
 
 const Home = () => {
-  const user = "wdw"; // fetch from firebase auth
+
+  const { user } = useContext(UserContext);
 
   return user ? (
     <div id = "room-btns">
@@ -13,9 +16,7 @@ const Home = () => {
       <Link to="/joinroom">
         <button className="red">Join Room</button>
       </Link>
-      <div id = "logout">
-        <button onClick={logout}>Log out</button>
-      </div>
+      
     </div>
   ) : (
     <div id="login">

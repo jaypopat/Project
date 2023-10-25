@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
+import {useState } from "react";
+// import { useAuthState } from "react-firebase-hooks/auth";
 import { Link } from "react-router-dom";
 import {
-  auth,
+  // auth,
   registerWithEmailAndPassword,
   signInWithGoogle,
 } from "../../firebase";
@@ -50,7 +50,7 @@ function Register() {
           Register with Google
         </button>
         <div>
-          Already have an account? <Link to="/">Login</Link> now.
+          Already have an account? <Link to="/login">Login</Link> now.
         </div>
       </div>
     </div>
