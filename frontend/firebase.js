@@ -16,6 +16,7 @@ import {
   where,
   addDoc,
 } from "firebase/firestore";
+import { toast } from "react-toastify";
 const firebaseConfig = {
   apiKey: "AIzaSyDIXJ5YT7hoNbBFqK3TBcV41-TzIO-7n7w",
   authDomain: "fir-auth-6edd8.firebaseapp.com",
@@ -82,4 +83,5 @@ export const sendPasswordReset = async (email) => {
 };
 export const logout = () => {
   signOut(auth);
+  toast.success("signing out")
 };

@@ -1,10 +1,6 @@
 /* eslint-disable no-unused-vars */
-// App.js
 import { useState, useEffect, createContext } from "react";
-
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';  
-export const UserContext = createContext();
-
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import CreateChatRoom from "./components/CreateChatRoom";
 import JoinRoom from "./components/Rooms";
 import Register from "./components/Register";
@@ -20,9 +16,9 @@ import ErrorPage from "./components/NotFound";
 import Home from "./components/Home";
 import Login from "./components/Login";
 import ChatRoom from "./components/ChatRoom";
+export const UserContext = createContext();
 
-const App=() =>{
-  const [isLoggedIn, setisLoggedIn] = useState(false);
+const App = () => {
   const [userSet, setUser] = useState(null);
   const [userLocation, setUserLocation] = useState(null);
   const [locationAccess, grantLocationAccess] = useState(false);
@@ -44,7 +40,7 @@ const App=() =>{
   // }, []);
 
   // const [user] = useAuthState(auth);
-  const user = "x";
+  const user = "dwd "; // fetch from firebase - hardcoding for now
 
   const getLocation = () => {
     navigator.geolocation.getCurrentPosition(
@@ -54,7 +50,11 @@ const App=() =>{
         grantLocationAccess(true);
       },
       (error) => {
-        console.error("Error getting user location:", error);
+        if (error.code == error.PERMISSION_DENIED)
+          console.log("User denied the request for Geolocation.");
+        else {
+          console.log(error);
+        }
       },
       { enableHighAccuracy: true }
     );
@@ -74,46 +74,47 @@ const App=() =>{
         <Header />
 
         <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/about" element={<About />} />
-        <Route
-          path="/profile"
-          element={
-            <Protected user={user}>
-              <ProfilePage />
-            </Protected>
-          }
-        />
-        <Route
-          path="/createroom"
-          element={
-            <Protected user={user}>
-              <CreateChatRoom />
-            </Protected>
-          }
-        />
-        <Route
-          path="/joinroom"
-          element={
-            <Protected user={user}>
-              <JoinRoom />
-            </Protected>
-          }
-        />
-        <Route
-          path="/joinroom/:id"
-          element={
-            <Protected user={user}>
-              <ChatRoom />
-            </Protected>
-          }
-        />
-        <Route path="*" element={<ErrorPage />} />
-      </Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/about" element={<About />} />
+          <Route
+            path="/profile"
+            element={
+              <Protected>
+                <ProfilePage />
+              </Protected>
+            }
+          />
+          <Route
+            path="/createroom"
+            element={
+              <Protected>
+                <CreateChatRoom />
+              </Protected>
+            }
+          />
+          <Route
+            path="/joinroom"
+            element={
+              <Protected>
+                <JoinRoom />
+              </Protected>
+            }
+          />
+          <Route
+            path="/joinroom/:id"
+            element={
+              <Protected>
+                <ChatRoom />
+              </Protected>
+            }
+          />
+          <Route path="*" element={<ErrorPage />} />
+        </Routes>
+        <Footer/>
       </>
     </UserContext.Provider>
   );
-}
+};
 export default App;
