@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import "./Header.css";
-import { logout } from "../../firebase";
 import { useContext } from "react";
 
 import { UserContext } from "../App";
+import { toast } from "react-toastify";
 
 const Header = () => {
   const { user } = useContext(UserContext);
@@ -11,6 +11,11 @@ const Header = () => {
   let navigate = useNavigate();
   const redirectHome = () => {
     navigate("/");
+  };
+  const logout = () => {
+    navigate("/");
+    toast.success("signed out");
+    //firebase remove auth session
   };
 
   return (

@@ -1,7 +1,7 @@
 .chat-container {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 70%;
   justify-content: space-between;
   height: calc(100vh - 300px); /* Adjust this value based on the height of your header and footer */
   background-color: #222;
