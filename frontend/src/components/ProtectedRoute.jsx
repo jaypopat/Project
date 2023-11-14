@@ -4,10 +4,14 @@ import { useContext } from "react";
 
 import { UserContext } from "../App";
 import { toast } from "react-toastify";
+import Spinner from "./Spinner";
 
 function Protected({ children }) {
-  const { user, userLocation } = useContext(UserContext);
+  const { user, userLocation,userLocationFetchingInBackground } = useContext(UserContext);
 
+  if (userLocationFetchingInBackground) {
+    return <Spinner/>;
+  }
   if (!user) {
     return <Navigate to="/login" replace />;
   }

@@ -22,46 +22,41 @@ const App = () => {
   const [userSet, setUser] = useState(null);
   const [userLocation, setUserLocation] = useState(null);
   const [locationAccess, grantLocationAccess] = useState(false);
+  const [userLocationFetchingInBackground, setIsLoadingGeo] = useState(true);
 
-  // const auth = getAuth();
 
-  // useEffect(() => {
-  //   const unsubscribe = onAuthStateChanged(auth, (user) => {
-  //     if (user) {
-  //       setisLoggedIn(true);
-  //       setUser(user);
-  //     } else {
-  //       setisLoggedIn(false);
-  //       setUser(null);
-  //     }
-  //   });
-
-  //   return () => unsubscribe();
-  // }, []);
-
-  // const [user] = useAuthState(auth);
-  const user = "dwd "; // fetch from firebase - hardcoding for now
+  const user = "dwd ";
 
   const getLocation = () => {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        const { latitude, longitude } = position.coords;
-        setUserLocation({ latitude, longitude });
-        grantLocationAccess(true);
-      },
-      (error) => {
-        if (error.code == error.PERMISSION_DENIED)
-          console.log("User denied the request for Geolocation.");
-        else {
-          console.log(error);
-        }
-      },
-      { enableHighAccuracy: true }
-    );
+    return new Promise((resolve, reject) => {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          resolve({ latitude, longitude });
+          grantLocationAccess(true);
+        },
+        (error) => {
+          if (error.code == error.PERMISSION_DENIED)
+            console.log("User denied the request for Geolocation.");
+          else {
+            console.log(error);
+            reject(error);
+          }
+        },
+        { enableHighAccuracy: true }
+      );
+    });
   };
+  
 
   useEffect(() => {
-    getLocation();
+    getLocation().then((location) => {
+      setUserLocation(location);
+      setIsLoadingGeo(false);
+    }).catch((error) => {
+      console.log(error);
+      setIsLoadingGeo(false);
+    });
   }, []);
 
   useEffect(() => {
@@ -69,7 +64,7 @@ const App = () => {
   }, [userLocation]);
 
   return (
-    <UserContext.Provider value={{ userLocation, user }}>
+    <UserContext.Provider value={{ userLocation, user,userLocationFetchingInBackground }}>
       <>
         <Header />
 

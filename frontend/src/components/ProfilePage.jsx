@@ -1,4 +1,14 @@
+import { useContext } from "react";
+import { UserContext } from "../App";
+
 const ProfilePage = ()=>{
-    return <div>hi</div>
+    const { user} = useContext(UserContext);
+
+    return <div>{user}</div>
+//     <div>
+//     <h1>{user.displayName}</h1>
+//     <p>{user.email}</p>
+//     <img src={user.photoURL} alt={user.displayName} />
+//   </div>
 }
 export default ProfilePage;
