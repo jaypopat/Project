@@ -16,16 +16,15 @@ import ErrorPage from "./components/NotFound";
 import Home from "./components/Home";
 import Login from "./components/Login";
 import ChatRoom from "./components/ChatRoom";
+import { toast } from "react-toastify";
 export const UserContext = createContext();
 
 const App = () => {
-  const [userSet, setUser] = useState(null);
+  // const [userSet, setUser] = useState(null);
   const [userLocation, setUserLocation] = useState(null);
-  const [locationAccess, grantLocationAccess] = useState(false);
   const [userLocationFetchingInBackground, setIsLoadingGeo] = useState(true);
 
-
-  const user = "dwd ";
+  const user = "rf";
 
   const getLocation = () => {
     return new Promise((resolve, reject) => {
@@ -33,12 +32,13 @@ const App = () => {
         (position) => {
           const { latitude, longitude } = position.coords;
           resolve({ latitude, longitude });
-          grantLocationAccess(true);
         },
         (error) => {
-          if (error.code == error.PERMISSION_DENIED)
+          if (error.code == error.PERMISSION_DENIED) {
             console.log("User denied the request for Geolocation.");
-          else {
+            toast.error("Give access to location");
+            reject("Location access denied by user");
+          } else {
             console.log(error);
             reject(error);
           }
@@ -47,16 +47,17 @@ const App = () => {
       );
     });
   };
-  
 
   useEffect(() => {
-    getLocation().then((location) => {
-      setUserLocation(location);
-      setIsLoadingGeo(false);
-    }).catch((error) => {
-      console.log(error);
-      setIsLoadingGeo(false);
-    });
+    getLocation()
+      .then((location) => {
+        setUserLocation(location);
+        setIsLoadingGeo(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setIsLoadingGeo(false);
+      });
   }, []);
 
   useEffect(() => {
@@ -64,16 +65,19 @@ const App = () => {
   }, [userLocation]);
 
   return (
-    <UserContext.Provider value={{ userLocation, user,userLocationFetchingInBackground }}>
+    <UserContext.Provider
+      value={{ userLocation, user, userLocationFetchingInBackground }}
+    >
       <>
         <Header />
 
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/about" element={<About />} />
+          <Route exact path="/" element={<Home />} />
+          <Route exact path="/register" element={<Register />} />
+          <Route exact path="/login" element={<Login />} />
+          <Route exact path="/about" element={<About />} />
           <Route
+            exact
             path="/profile"
             element={
               <Protected>
@@ -82,6 +86,7 @@ const App = () => {
             }
           />
           <Route
+            exact
             path="/createroom"
             element={
               <Protected>
@@ -90,6 +95,7 @@ const App = () => {
             }
           />
           <Route
+            exact
             path="/joinroom"
             element={
               <Protected>
@@ -98,6 +104,7 @@ const App = () => {
             }
           />
           <Route
+            exact
             path="/joinroom/:id"
             element={
               <Protected>
@@ -107,7 +114,7 @@ const App = () => {
           />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
-        <Footer/>
+        <Footer />
       </>
     </UserContext.Provider>
   );
