@@ -11,7 +11,7 @@ import {
 import styles from "@chatscope/chat-ui-kit-styles/dist/default/styles.min.css";
 import Rooms from "./Rooms";
 import { Link } from "react-router-dom";
-import './ChatRoom.css';
+import "./ChatRoom.css";
 
 const messages = [
   {
@@ -36,17 +36,14 @@ const messages = [
     avatar: "https://i.pravatar.cc/50?img=3",
   },
 ];
+console.log(messages[0].createdAt.getTime);
 
 function ChatRoom() {
-
   return (
     <div className="chatroom">
       <div className="chatroom-header">
         <h2>Room name (will be fetched from uuid)</h2>
-        <Link
-          to="/joinroom"
-          className="chatroom-header-back"
-        >
+        <Link to="/joinroom" className="chatroom-header-back">
           ⬅️ Back to all rooms
         </Link>
       </div>
@@ -54,19 +51,22 @@ function ChatRoom() {
         <MainContainer>
           <Sidebar position="left">
             <ConversationList>
-              <Rooms/>
+              <Rooms />
             </ConversationList>
           </Sidebar>
           <ChatContainer>
-            <ConversationHeader>
-              Room Name
-            </ConversationHeader>
+            <ConversationHeader>Room Name</ConversationHeader>
             <MessageList>
               {messages.map((message, index) => (
-                <div
-                  key={index}
-                  className="message"
-                >
+                <div key={index} className="message">
+                  <p>{`${message.createdAt
+                    .getHours()
+                    .toString()
+                    .padStart(2, "0")}:${message.createdAt
+                    .getMinutes()
+                    .toString()
+                    .padStart(2, "0")}`}</p>
+
                   <div
                     className="avatar"
                     style={{ backgroundImage: `url(${message.avatar})` }}
