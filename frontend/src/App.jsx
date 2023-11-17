@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { useState, useEffect, createContext } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { useNavigate, BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import CreateChatRoom from "./components/CreateChatRoom";
 import JoinRoom from "./components/Rooms";
 import Register from "./components/Register";
@@ -9,7 +9,7 @@ import Footer from "./components/Footer";
 import About from "./components/About";
 import ProfilePage from "./components/ProfilePage";
 import Protected from "./components/ProtectedRoute";
-// import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import ErrorPage from "./components/NotFound";
@@ -20,11 +20,11 @@ import { toast } from "react-toastify";
 export const UserContext = createContext();
 
 const App = () => {
-  // const [userSet, setUser] = useState(null);
+  const [user, setUser] = useState(null);
+  const navigate = useNavigate();
   const [userLocation, setUserLocation] = useState(null);
   const [userLocationFetchingInBackground, setIsLoadingGeo] = useState(true);
 
-  const user = "rf";
 
   const getLocation = () => {
     return new Promise((resolve, reject) => {
@@ -64,6 +64,20 @@ const App = () => {
     console.log(userLocation);
   }, [userLocation]);
 
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser(user);
+        navigate("/");
+      } else {
+        setUser(null);
+        navigate ("/login");
+      }
+    }
+    );
+    return () => unsubscribe();
+  }, [navigate]);
+
   return (
     <UserContext.Provider
       value={{ userLocation, user, userLocationFetchingInBackground }}
@@ -72,11 +86,11 @@ const App = () => {
         <Header />
 
         <Routes>
-          <Route exact path="/" element={<Home />} />
-          <Route exact path="/register" element={<Register />} />
-          <Route exact path="/login" element={<Login />} />
-          <Route exact path="/about" element={<About />} />
-          <Route
+          {user ? (
+            // Routes for logged in users
+            <>
+              <Route exact path="/" element={<Home />} />
+              <Route
             exact
             path="/profile"
             element={
@@ -112,6 +126,14 @@ const App = () => {
               </Protected>
             }
           />
+            </>
+          ) : (
+            <>
+              <Route exact path="/register" element={<Register />} />
+              <Route exact path="/login" element={<Login />} />
+              <Route exact path="/about" element={<About />} />
+            </>
+          )}
           <Route path="*" element={<ErrorPage />} />
         </Routes>
         <Footer />

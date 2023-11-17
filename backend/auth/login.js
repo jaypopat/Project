@@ -1,14 +1,15 @@
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../frontend/firebase"
 
-const auth = getAuth();
-signInWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    // Signed in 
+export default async function signIn(email, password) {
+  try {
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;
     return user;
-  })
-  .catch((error) => {
+  } catch (error) {
     const errorCode = error.code;
     const errorMessage = error.message;
-    console.log(errorCode, errorMessage);
-  });
+    console.error("Error during sign-in:", errorCode, errorMessage);
+    throw error; // Rethrow the error if you want to handle it outside this function
+  }
+}
