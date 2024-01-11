@@ -1,0 +1,30 @@
+body {
+  background-color: #3B3B49;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+#room-btns button, #login button {
+  background-color: #59418e;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+#room-btns button:hover, #login button:hover {
+  background-color: #1b1130;
+}
+
+

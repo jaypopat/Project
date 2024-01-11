@@ -4,8 +4,17 @@ import "./CreateChatRoom.css";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { containsOffensiveWords } from "../utils/offensiveWordsChecker";
+import { v4 as uuidv4 } from "uuid";
+import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
 
-const ChatRoom = ({ username }) => {
+import { UserContext } from "../App";
+
+const ChatRoom = () => {
+  const { user } = useContext(UserContext);
+
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     chatRoomName: "",
     createRoom: false,
@@ -33,10 +42,12 @@ const ChatRoom = ({ username }) => {
         createRoom: true,
       }));
       toast.success(`${chatRoomName} has been created`);
-      console.log({ username, chatRoomName, radius }); // Log the username
+      let chatRoomID = uuidv4();
+      console.log({ user, chatRoomName, chatRoomID, radius }); // Log the username
 
       // Send data to the server as a post request to be added to the database
       // If the response is OK, proceed; otherwise, throw an error
+      navigate(`/joinroom/${chatRoomID}`);
     }
   };
 

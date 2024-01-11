@@ -1,0 +1,54 @@
+.chatroom {
+  display: flex;
+  flex-direction: column;
+  height: 80vh;
+  width: 100vw;
+  margin: auto;
+  color: #333;
+  border-radius: 10px;
+  overflow: hidden;
+
+}
+.chat-container {
+  background-color: black !important;
+ }
+ 
+.chatroom-header {
+  padding: 16px;
+  background-color: #333;
+  color: white;
+  font-size: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.chatroom-header a {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  color: #ffffff;
+}
+.chatroom-body {
+  flex: 1;
+  overflow: auto;
+  padding: 16px;
+}
+.chatroom-footer {
+  padding: 16px;
+  background-color: #333;
+  color: white;
+}
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #ccc;
+  margin-right: 10px;
+}
+.message {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 10px;
+}

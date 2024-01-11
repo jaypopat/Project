@@ -1,12 +1,40 @@
+import { useNavigate } from "react-router-dom";
 import "./Header.css";
-// eslint-disable-next-line react/prop-types
-const Header = ({redirectHome}) => {
+import { useContext } from "react";
+
+import { UserContext } from "../App";
+import { toast } from "react-toastify";
+
+const Header = () => {
+  const { user } = useContext(UserContext);
+
+  let navigate = useNavigate();
+  const redirectHome = () => {
+    navigate("/");
+  };
+  const logout = () => {
+    navigate("/");
+    toast.success("signed out");
+    //firebase remove auth session
+  };
+
   return (
-    <div className="header">
-      <p onClick = {redirectHome} id="appName">Whisper</p>
-      <p id = "slogan">Keep it close</p>
-    </div>
-    
+    <>
+      <div className="header">
+        <p onClick={redirectHome} id="appName">
+          Whisper
+        </p>
+        <p id="slogan">Keep it close</p>
+        {user ? (
+          <div id="logout">
+            <button onClick={logout}>Log out</button>
+          </div>
+        ) : (
+          ""
+        )}
+      </div>
+    </>
   );
 };
+
 export default Header;
