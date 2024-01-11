@@ -18,38 +18,17 @@ import Login from "./components/Login";
 import ChatRoom from "./components/ChatRoom";
 import { toast } from "react-toastify";
 export const UserContext = createContext();
+import { fetchLocation } from "./utils/fetchLocation";
 
 const App = () => {
   // const [userSet, setUser] = useState(null);
   const [userLocation, setUserLocation] = useState(null);
   const [userLocationFetchingInBackground, setIsLoadingGeo] = useState(true);
 
-  const user = "rf";
-
-  const getLocation = () => {
-    return new Promise((resolve, reject) => {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const { latitude, longitude } = position.coords;
-          resolve({ latitude, longitude });
-        },
-        (error) => {
-          if (error.code == error.PERMISSION_DENIED) {
-            console.log("User denied the request for Geolocation.");
-            toast.error("Give access to location");
-            reject("Location access denied by user");
-          } else {
-            console.log(error);
-            reject(error);
-          }
-        },
-        { enableHighAccuracy: true }
-      );
-    });
-  };
+  const user = "kjk";
 
   useEffect(() => {
-    getLocation()
+    fetchLocation()
       .then((location) => {
         setUserLocation(location);
         setIsLoadingGeo(false);
