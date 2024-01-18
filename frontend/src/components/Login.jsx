@@ -28,7 +28,7 @@ function Login() {
         />
         <button
           className="login__btn"
-          onClick={() => NavigateToHome(email, password)}
+          onClick={() => LoginNavigateToHome(email, password)}
         >
           Login
         </button>
@@ -43,9 +43,9 @@ function Login() {
   );
 
   // Function to useNavigate to home (/)
-  async function NavigateToHome(email, password) {
+  async function LoginNavigateToHome(email, password) {
     const user = await FirebaseLogin(email, password);
-    console.log("Returned User: ", user);
+    console.log("Login Returned User: ", user);
     if (user) {
       navigate("/home");
     } else {
