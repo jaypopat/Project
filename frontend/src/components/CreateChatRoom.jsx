@@ -45,6 +45,19 @@ const ChatRoom = () => {
       let chatRoomID = uuidv4();
       console.log({ user, chatRoomName, chatRoomID, radius }); // Log the username
 
+      fetch("https://whisper-2f40a.firebaseio.com/rooms", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ user, chatRoomName, chatRoomID, radius }),
+      })
+        .then((response) => response.json())
+        .then((data) => console.log(data))
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+
       // Send data to the server as a post request to be added to the database
       // If the response is OK, proceed; otherwise, throw an error
       navigate(`/joinroom/${chatRoomID}`);
