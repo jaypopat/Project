@@ -1,10 +1,11 @@
 /* eslint-disable no-unused-vars */
 import React, {useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { signInWithGoogle } from "../../firebase";
-import { login } from "../../auth/login";
+import { FirebaseLogin } from "../../auth/FirebaseLogin";
 import "./Login.css";
 function Login() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -27,7 +28,7 @@ function Login() {
         />
         <button
           className="login__btn"
-          onClick={() => login(email, password)}
+          onClick={() => NavigateToHome(email, password)}
         >
           Login
         </button>
@@ -40,6 +41,17 @@ function Login() {
       </div>
     </div>
   );
+
+  // Function to useNavigate to home (/)
+  async function NavigateToHome(email, password) {
+    const user = await FirebaseLogin(email, password);
+    console.log("Returned User: ", user);
+    if (user) {
+      navigate("/home");
+    } else {
+      alert("Invalid Credentials");
+    }
+  }
 }
 export default Login;
 
