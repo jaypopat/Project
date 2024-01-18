@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
 import React, {useState } from "react";
 import { Link } from "react-router-dom";
-import { auth, signInWithGoogle } from "../../firebase";
-import {signInWithEmailAndPassword} from 'firebase/auth'
+import { signInWithGoogle } from "../../firebase";
+import { login } from "../../../backend/auth/login";
 import "./Login.css";
 function Login() {
   const [email, setEmail] = useState("");
@@ -27,7 +27,7 @@ function Login() {
         />
         <button
           className="login__btn"
-          onClick={() => signInWithEmailAndPassword(email, password)}
+          onClick={() => login(email, password)}
         >
           Login
         </button>
