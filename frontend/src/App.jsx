@@ -19,13 +19,12 @@ import ChatRoom from "./components/ChatRoom";
 import { toast } from "react-toastify";
 export const UserContext = createContext();
 import { fetchLocation } from "./utils/fetchLocation";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 const App = () => {
-  // const [userSet, setUser] = useState(null);
+  const [user, setUser] = useState(null);
   const [userLocation, setUserLocation] = useState(null);
   const [userLocationFetchingInBackground, setIsLoadingGeo] = useState(true);
-
-  const user = "kjk";
 
   useEffect(() => {
     fetchLocation()
@@ -42,6 +41,17 @@ const App = () => {
   useEffect(() => {
     console.log(userLocation);
   }, [userLocation]);
+
+  const auth = getAuth();
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+
+    // Cleanup subscription on unmount
+    return () => unsubscribe();
+  }, []);
 
   return (
     <UserContext.Provider
