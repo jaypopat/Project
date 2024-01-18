@@ -1,4 +1,5 @@
 import { initializeApp } from "firebase/app";
+
 import {
   GoogleAuthProvider,
   getAuth,
@@ -17,25 +18,30 @@ import {
   addDoc,
 } from "firebase/firestore";
 import { toast } from "react-toastify";
+
 const firebaseConfig = {
-  apiKey: "AIzaSyDIXJ5YT7hoNbBFqK3TBcV41-TzIO-7n7w",
-  authDomain: "fir-auth-6edd8.firebaseapp.com",
-  projectId: "fir-auth-6edd8",
-  storageBucket: "fir-auth-6edd8.appspot.com",
-  messagingSenderId: "904760319835",
-  appId: "1:904760319835:web:44fd0d957f114b4e51447e",
-  measurementId: "G-Q4TYKH9GG7",
+  apiKey: "AIzaSyDrC7CEpSHF6W-3LeNwlYnXXNvvbMMcc1I",
+  authDomain: "whisper-2f40a.firebaseapp.com",
+  databaseURL: "https://whisper-2f40a-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "whisper-2f40a",
+  storageBucket: "whisper-2f40a.appspot.com",
+  messagingSenderId: "436334501650",
+  appId: "1:436334501650:web:689ca899ff333a44135dcb"
 };
+
+export const provider = new GoogleAuthProvider();
 export const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
-export const googleProvider = new GoogleAuthProvider();
+
+
 export const signInWithGoogle = async () => {
   try {
     const res = await signInWithPopup(auth, googleProvider);
     const user = res.user;
     const q = query(collection(db, "users"), where("uid", "==", user.uid));
     const docs = await getDocs(q);
+
     if (docs.docs.length === 0) {
       await addDoc(collection(db, "users"), {
         uid: user.uid,
@@ -49,6 +55,7 @@ export const signInWithGoogle = async () => {
     alert(err.message);
   }
 };
+
 export const logInWithEmailAndPassword = async (email, password) => {
   try {
     await signInWithEmailAndPassword(auth, email, password);
@@ -57,6 +64,7 @@ export const logInWithEmailAndPassword = async (email, password) => {
     alert(err.message);
   }
 };
+
 export const registerWithEmailAndPassword = async (name, email, password) => {
   try {
     const res = await createUserWithEmailAndPassword(auth, email, password);
@@ -72,6 +80,7 @@ export const registerWithEmailAndPassword = async (name, email, password) => {
     alert(err.message);
   }
 };
+
 export const sendPasswordReset = async (email) => {
   try {
     await sendPasswordResetEmail(auth, email);
@@ -81,7 +90,31 @@ export const sendPasswordReset = async (email) => {
     alert(err.message);
   }
 };
+
 export const logout = () => {
   signOut(auth);
-  toast.success("signing out")
+  toast.success("Signing out");
 };
+
+
+//below is Joey's work
+export function googleLogIn(){
+  signInWithPopup(auth, provider)
+    .then((result) => {
+      // This gives you a Google Access Token. You can use it to access the Google API.
+      const credential = GoogleAuthProvider.credentialFromResult(result);
+      const token = credential.accessToken;
+      // The signed-in user info.
+      const user = result.user;
+      // IdP data available using getAdditionalUserInfo(result)
+      // ...
+    }).catch((error) => {
+      // Handle Errors here.
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      // The email of the user's account used.
+      const email = error.customData.email;
+      // The AuthCredential type that was used.
+      const credential = GoogleAuthProvider.credentialFromError(error);
+      // ...
+  })};

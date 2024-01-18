@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, {useState } from "react";
 import { Link } from "react-router-dom";
-import { auth, signInWithGoogle } from "../../firebase";
+import { auth, googleLogIn, signInWithGoogle } from "../../firebase";
 import {signInWithEmailAndPassword} from 'firebase/auth'
 import "./Login.css";
 function Login() {
@@ -31,7 +31,7 @@ function Login() {
         >
           Login
         </button>
-        <button className="login__btn login__google" onClick={signInWithGoogle}>
+        <button className="login__btn login__google" onClick={googleLogIn}>
           Login with Google
         </button>
         <div>

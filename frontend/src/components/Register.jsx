@@ -2,11 +2,12 @@ import {useState } from "react";
 // import { useAuthState } from "react-firebase-hooks/auth";
 import { Link } from "react-router-dom";
 import {
-  // auth,
+  auth,
   registerWithEmailAndPassword,
-  signInWithGoogle,
+  googleLogIn,
 } from "../../firebase";
 import "./Register.css";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -41,12 +42,12 @@ function Register() {
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
         />
-        <button className="register__btn" onClick={register}>
+        <button className="register__btn" onClick={createUserWithEmailAndPassword(auth, email, password)}>
           Register
         </button>
         <button
           className="register__btn register__google"
-          onClick={signInWithGoogle}        >
+          onClick={googleLogIn}        >
           Register with Google
         </button>
         <div>

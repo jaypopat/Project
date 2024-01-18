@@ -25,7 +25,7 @@ const App = () => {
   const [userLocation, setUserLocation] = useState(null);
   const [userLocationFetchingInBackground, setIsLoadingGeo] = useState(true);
 
-  const user = "kjk";
+  const user = "";
 
   useEffect(() => {
     fetchLocation()
