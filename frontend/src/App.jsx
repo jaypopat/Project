@@ -24,7 +24,7 @@ const App = () => {
   const [userLocation, setUserLocation] = useState(null);
   const [userLocationFetchingInBackground, setIsLoadingGeo] = useState(true);
 
-  const user = "rf";
+  const user = "";
 
   const getLocation = () => {
     return new Promise((resolve, reject) => {
@@ -69,7 +69,7 @@ const App = () => {
       value={{ userLocation, user, userLocationFetchingInBackground }}
     >
       <>
-        <Header />
+        {/* <Header /> */}
 
         <Routes>
           <Route exact path="/" element={<Home />} />
@@ -114,7 +114,7 @@ const App = () => {
           />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
-        <Footer />
+        {/* <Footer /> */}
       </>
     </UserContext.Provider>
   );

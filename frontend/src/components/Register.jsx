@@ -18,41 +18,23 @@ function Register() {
   };
 
   return (
-    <div className="register">
-      <div className="register__container">
-        <input
-          type="text"
-          className="register__textBox"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          placeholder="Full Name"
-        />
-        <input
-          type="text"
-          className="register__textBox"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="E-mail Address"
-        />
-        <input
-          type="password"
-          className="register__textBox"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
-        />
-        <button className="register__btn" onClick={register}>
-          Register
-        </button>
-        <button
-          className="register__btn register__google"
-          onClick={signInWithGoogle}        >
-          Register with Google
-        </button>
-        <div>
-          Already have an account? <Link to="/login">Login</Link> now.
+    <div class="responsive-background">
+        <div class="container">
+            <h2 class="login-heading">Sign Up</h2>
+            <div class="social-icons">
+                <a href="#" class="icon"><i class="fa-brands fa-google"></i></a>
+                <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
+
+            </div>
+            <p>or use your email password</p>
+            <input type="email" placeholder="Email@address.com" class="login-box email" />
+            <input type="password" placeholder="Password" class="login-box password" />
+            
+            <button class="login-button">Login</button>
+            <a href="https://www.google.com/" class="login-reset-link">Don't have an account?</a>
         </div>
-      </div>
     </div>
   );
 }

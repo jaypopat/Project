@@ -9,35 +9,22 @@ function Login() {
   const [password, setPassword] = useState("");
 
   return (
-    <div className="login">
-      <div className="login__container">
-        <input
-          type="text"
-          className="login__textBox"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="E-mail Address"
-        />
-        <input
-          type="password"
-          className="login__textBox"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
-        />
-        <button
-          className="login__btn"
-          onClick={() => signInWithEmailAndPassword(email, password)}
-        >
-          Login
-        </button>
-        <button className="login__btn login__google" onClick={signInWithGoogle}>
-          Login with Google
-        </button>
-        <div>
-          Dont have an account? <Link to="/register">Register</Link> now.
+    <div class="responsive-background">
+        <div class="container">
+            <h2 class="login-heading">Log In</h2>
+            <div class="social-icons">
+                <a href="#" class="icon"><i class="fa-brands fa-google"></i></a>
+                <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="#" class="icon"><i class="fa-brands fa-github"></i></a>           
+
+            </div>
+            <p>or use your email password</p>
+            <input type="email" placeholder="Email@address.com" class="login-box email" />
+            <input type="password" placeholder="Password" class="login-box password" />
+            
+            <button class="login-button">Sign UP</button>
         </div>
-      </div>
     </div>
   );
 }
