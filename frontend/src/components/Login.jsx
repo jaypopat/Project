@@ -2,7 +2,7 @@
 import React, {useState } from "react";
 import { Link } from "react-router-dom";
 import { signInWithGoogle } from "../../firebase";
-import { login } from "../../../backend/auth/login";
+import { login } from "../../auth/login";
 import "./Login.css";
 function Login() {
   const [email, setEmail] = useState("");
