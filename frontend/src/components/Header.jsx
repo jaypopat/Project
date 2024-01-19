@@ -4,6 +4,7 @@ import { useContext } from "react";
 
 import { UserContext } from "../App";
 import { toast } from "react-toastify";
+import { logout } from "../../firebase";
 
 const Header = () => {
   const { user } = useContext(UserContext);
@@ -12,8 +13,9 @@ const Header = () => {
   const redirectHome = () => {
     navigate("/");
   };
-  const logout = () => {
+  const logoutHandler = () => {
     navigate("/");
+    logout();
     toast.success("signed out");
     //firebase remove auth session
   };
@@ -27,7 +29,7 @@ const Header = () => {
         <p id="slogan">Keep it close</p>
         {user ? (
           <div id="logout">
-            <button onClick={logout}>Log out</button>
+            <button onClick={logoutHandler}>Log out</button>
           </div>
         ) : (
           ""

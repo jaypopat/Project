@@ -43,10 +43,11 @@ export const signInWithGoogle = async () => {
         authProvider: "google",
         email: user.email,
       });
-    }
+    }    
   } catch (err) {
     console.error(err);
     alert(err.message);
+
   }
 };
 export const logInWithEmailAndPassword = async (email, password) => {

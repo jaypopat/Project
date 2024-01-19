@@ -1,12 +1,24 @@
 /* eslint-disable no-unused-vars */
-import React, {useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { auth, signInWithGoogle } from "../../firebase";
-import {signInWithEmailAndPassword} from 'firebase/auth'
+import { signInWithEmailAndPassword } from "firebase/auth";
 import "./Login.css";
 function Login() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        navigate("/");
+      }
+    });
+
+    // Cleanup subscription on unmount
+    return () => unsubscribe();
+  }, []);
 
   return (
     <div className="login">
@@ -42,4 +54,3 @@ function Login() {
   );
 }
 export default Login;
-
