@@ -1,9 +1,9 @@
-/* eslint-disable no-unused-vars */
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { auth, signInWithGoogle } from "../../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import "./Login.css";
+
 function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -30,27 +30,30 @@ function Login() {
           onChange={(e) => setEmail(e.target.value)}
           placeholder="E-mail Address"
         />
-        <input
-          type="password"
-          className="login__textBox"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
-        />
+          <input
+            type="password"
+            className="login__textBox"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Password"
+          />
         <button
           className="login__btn"
           onClick={() => signInWithEmailAndPassword(email, password)}
         >
           Login
         </button>
+
         <button className="login__btn login__google" onClick={signInWithGoogle}>
           Login with Google
         </button>
         <div>
-          Dont have an account? <Link to="/register">Register</Link> now.
+          Don't have an account? <Link to="/register">Register</Link>
         </div>
+        <Link to="/forgot-password">Forgot your password?</Link>
       </div>
     </div>
   );
 }
+
 export default Login;

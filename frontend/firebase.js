@@ -8,6 +8,7 @@ import {
   sendPasswordResetEmail,
   signOut,
 } from "firebase/auth";
+
 import {
   getFirestore,
   query,
@@ -73,6 +74,7 @@ export const registerWithEmailAndPassword = async (name, email, password) => {
     alert(err.message);
   }
 };
+
 export const sendPasswordReset = async (email) => {
   try {
     await sendPasswordResetEmail(auth, email);
@@ -81,7 +83,8 @@ export const sendPasswordReset = async (email) => {
     console.error(err);
     alert(err.message);
   }
-};
+ };
+ 
 export const logout = () => {
   signOut(auth);
   toast.success("signing out")

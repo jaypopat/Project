@@ -11,7 +11,6 @@ import ProfilePage from "./components/ProfilePage";
 import Protected from "./components/ProtectedRoute";
 // import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebase";
-import { useAuthState } from "react-firebase-hooks/auth";
 import ErrorPage from "./components/NotFound";
 import Home from "./components/Home";
 import Login from "./components/Login";
@@ -20,6 +19,7 @@ import { toast } from "react-toastify";
 export const UserContext = createContext();
 import { fetchLocation } from "./utils/fetchLocation";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import ForgotPassword from "./components/ForgotPassword";
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -64,6 +64,8 @@ const App = () => {
           <Route exact path="/" element={<Home />} />
           <Route exact path="/register" element={<Register />} />
           <Route exact path="/login" element={<Login />} />
+          <Route exact path="/forgot-password" element={<ForgotPassword />} />
+
           <Route exact path="/about" element={<About />} />
           <Route
             exact

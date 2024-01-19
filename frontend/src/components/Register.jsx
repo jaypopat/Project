@@ -1,21 +1,36 @@
-import {useState } from "react";
+import {useEffect, useState } from "react";
 // import { useAuthState } from "react-firebase-hooks/auth";
 import { Link } from "react-router-dom";
 import {
+  auth,
   // auth,
   registerWithEmailAndPassword,
   signInWithGoogle,
 } from "../../firebase";
 import "./Register.css";
+import { useNavigate } from "react-router-dom";
+
 function Register() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
-  // const [user, loading, error] = useAuthState(auth);
+
   const register = () => {
     if (!name) alert("Please enter name");
     registerWithEmailAndPassword(name, email, password);
   };
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        navigate("/");
+      }
+    });
+
+    // Cleanup subscription on unmount
+    return () => unsubscribe();
+  }, []);
 
   return (
     <div className="register">
