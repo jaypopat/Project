@@ -43,10 +43,20 @@ const ChatRoom = () => {
       }));
       toast.success(`${chatRoomName} has been created`);
       let chatRoomID = uuidv4();
+      let db = "rooms";
       console.log({ user, chatRoomName, chatRoomID, radius }); // Log the username
 
       // Send data to the server as a post request to be added to the database
       // If the response is OK, proceed; otherwise, throw an error
+      fetch("https://putdata-ilqswp77zq-uc.a.run.app", {
+        method: "POST",
+        headers: { "Content-Type": "application/json",
+       },
+        body: JSON.stringify({ user, chatRoomName, chatRoomID, radius, db }),
+      }).then((response) => {
+        console.log(response);
+      });
+
       navigate(`/joinroom/${chatRoomID}`);
     }
   };

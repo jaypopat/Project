@@ -23,11 +23,13 @@
   text-align: center;
   cursor: pointer;
 }
+
 #slogan{
   font-size: 18px;
   margin-top: 0px;
   font-family: "Baloo Chettan", sans-serif;
 }
+
 #logout {
   position: absolute;
   top: 0;
