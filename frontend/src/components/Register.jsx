@@ -57,7 +57,7 @@ function Register() {
     const user = await FirebaseCreateUser(email, password);
     console.log("Register Returned User: ", user);
     if (user) {
-      navigate("/home");
+      navigate("/");
     } else {
       alert("Invalid Credentials");
     }

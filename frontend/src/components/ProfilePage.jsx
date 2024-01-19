@@ -4,7 +4,7 @@ import { UserContext } from "../App";
 const ProfilePage = ()=>{
     const { user} = useContext(UserContext);
 
-    return <div>{user}</div>
+    return <div>{user.email}</div>
 //     <div>
 //     <h1>{user.displayName}</h1>
 //     <p>{user.email}</p>

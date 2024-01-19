@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { useState, useEffect, createContext } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import CreateChatRoom from "./components/CreateChatRoom";
 import JoinRoom from "./components/Rooms";
 import Register from "./components/Register";
@@ -9,6 +9,7 @@ import Footer from "./components/Footer";
 import About from "./components/About";
 import ProfilePage from "./components/ProfilePage";
 import Protected from "./components/ProtectedRoute";
+import useAuth from "./components/UseAuth";
 // import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -24,8 +25,7 @@ const App = () => {
   // const [userSet, setUser] = useState(null);
   const [userLocation, setUserLocation] = useState(null);
   const [userLocationFetchingInBackground, setIsLoadingGeo] = useState(true);
-
-  const user = "kjk";
+  const [user, loading] = useAuthState(auth);
 
   useEffect(() => {
     fetchLocation()
@@ -43,6 +43,10 @@ const App = () => {
     console.log(userLocation);
   }, [userLocation]);
 
+  if (loading) {
+    return <div>Loading...</div>; // Or any loading indicator
+  }
+  
   return (
     <UserContext.Provider
       value={{ userLocation, user, userLocationFetchingInBackground }}
@@ -51,19 +55,14 @@ const App = () => {
         <Header />
 
         <Routes>
-          <Route exact path="/" element = {<Login />} />
-          <Route exact path="/home" element={<Home />} />
+          <Route exact path="/" element={user ? <Home /> : <Navigate to="/login" />} />
           <Route exact path="/register" element={<Register />} />
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/about" element={<About />} />
           <Route
             exact
             path="/profile"
-            element={
-              <Protected>
-                <ProfilePage />
-              </Protected>
-            }
+            element={user ? <ProfilePage /> : <Navigate to="/login" />}
           />
           <Route
             exact
@@ -72,7 +71,7 @@ const App = () => {
               <Protected>
                 <CreateChatRoom />
               </Protected>
-            }
+              }
           />
           <Route
             exact

@@ -47,7 +47,7 @@ function Login() {
     const user = await FirebaseLogin(email, password);
     console.log("Login Returned User: ", user);
     if (user) {
-      navigate("/home");
+      navigate("/");
     } else {
       alert("Invalid Credentials");
     }
