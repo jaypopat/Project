@@ -1,6 +1,7 @@
+/* eslint-disable linebreak-style */
 /* eslint-disable max-len */
 const {initializeApp, applicationDefault} = require("firebase-admin/app");
-const {getDatabase} = require("firebase-admin/database");
+const {getFirestore} = require("firebase-admin/firestore");
 const {onRequest} = require("firebase-functions/v2/https");
 const cors = require("cors");
 
@@ -33,25 +34,22 @@ const putData = onRequest({
   }
 
   // Wrap your existing logic with the cors middleware
-  corsHandler(request, response, () => {
+  corsHandler(request, response, async () => {
     // Inside this function, CORS is handled with your specific domain
     if (request.method !== "POST") {
       response.status(405).send("Method Not Allowed");
       return;
     }
 
-    // Updated logging for Gen 2
-    console.log(request.body.db);
-    console.log(request.body);
-
-    const db = getDatabase();
-    const ref = db.ref(request.body.db); // Make sure to use query for parameters
-    ref.update(request.body, (error) => {
-      if (error) {
-        response.status(500).send("Data could not be updated. Error: " + error.message);
-      } else {
-        response.status(200).send("Data updated successfully.");
-      }
+    const data = request.body;
+    console.log("Request body: ", data);
+    const db = getFirestore();
+    const collection = db.collection("rooms").doc(data.chatRoomID);
+    await collection.set({
+      chatRoomId: data.chatRoomID,
+      chatRoomName: data.chatRoomName,
+      radius: data.radius,
+      user: data.user.email,
     });
   });
 });
