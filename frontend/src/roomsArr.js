@@ -1,3 +1,5 @@
+import { getDataByCollection } from "../../functions/getData";
+
 export const rooms = [
     {
       name: "Room 1",
@@ -46,3 +48,17 @@ export const rooms = [
       chatRoomID : '8ff7c430-9c85-4e86-a5d2-a1d511de42d2'
     },
   ]; // will be fetched from firestore - hardcoding for testing purposes
+
+// Fetch rooms from firestore
+const roomsFirestore = getDataByCollection('rooms');
+export const roomsArr = roomsFirestore.map((room) => {
+  return {
+    name: room.chatRoomName,
+    location: { latitude: room.latitude, longitude: room.longitude },
+    radius: room.radius,
+    chatRoomID : room.chatRoomID
+  }
+}
+);
+
+

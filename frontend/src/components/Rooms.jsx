@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 import { UserContext } from "../App";
 import { calculateDistance } from "../utils/calculateDistance";
-import { rooms } from "../roomsArr";
+import { roomsArr } from "../roomsArr";
 
 const Rooms = () => {
   const [addresses, setAddresses] = useState([]);
@@ -19,7 +19,7 @@ const Rooms = () => {
 
   useEffect(() => {
     if (userLocation) {
-      const newNearbyRooms = rooms.filter((room) => {
+      const newNearbyRooms = roomsArr.filter((room) => {
         const distance = calculateDistance(
           userLocation.latitude,
           userLocation.longitude,

@@ -51,6 +51,7 @@ const putData = onRequest({
       radius: data.radius,
       user: data.user.email,
     });
+    response.status(200).send("Success");
   });
 });
 
