@@ -29,8 +29,13 @@ const Header = () => {
         <p id="slogan">Keep it close</p>
         {user ? (
           <div id="logout">
-            <button onClick={logoutHandler}>Log out</button>
-          </div>
+          <button className="logout-button" onClick={logoutHandler}>
+             <img src={user.photoURL} className="profile-pic" />
+             <p className="username">{user.displayName}</p>
+             <span className="logout-text">Log out</span>
+          </button>
+         </div>
+         
         ) : (
           ""
         )}

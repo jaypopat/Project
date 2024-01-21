@@ -9,13 +9,10 @@ import Footer from "./components/Footer";
 import About from "./components/About";
 import ProfilePage from "./components/ProfilePage";
 import Protected from "./components/ProtectedRoute";
-// import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { auth } from "../firebase";
 import ErrorPage from "./components/NotFound";
 import Home from "./components/Home";
 import Login from "./components/Login";
 import ChatRoom from "./components/ChatRoom";
-import { toast } from "react-toastify";
 export const UserContext = createContext();
 import { fetchLocation } from "./utils/fetchLocation";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
@@ -70,11 +67,7 @@ const App = () => {
           <Route
             exact
             path="/profile"
-            element={
-              <Protected>
-                <ProfilePage />
-              </Protected>
-            }
+            element={user ? <ProfilePage /> : <Login />}
           />
           <Route
             exact
