@@ -10,5 +10,6 @@ const ProfilePage = ()=>{
 //     <p>{user.email}</p>
 //     <img src={user.photoURL} alt={user.displayName} />
 //   </div>
+
 }
 export default ProfilePage;

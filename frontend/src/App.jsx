@@ -9,23 +9,19 @@ import Footer from "./components/Footer";
 import About from "./components/About";
 import ProfilePage from "./components/ProfilePage";
 import Protected from "./components/ProtectedRoute";
-import useAuth from "./components/UseAuth";
-// import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { auth } from "../firebase";
-import { useAuthState } from "react-firebase-hooks/auth";
 import ErrorPage from "./components/NotFound";
 import Home from "./components/Home";
 import Login from "./components/Login";
 import ChatRoom from "./components/ChatRoom";
-import { toast } from "react-toastify";
 export const UserContext = createContext();
 import { fetchLocation } from "./utils/fetchLocation";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import ForgotPassword from "./components/ForgotPassword";
 
 const App = () => {
-  // const [userSet, setUser] = useState(null);
+  const [user, setUser] = useState(null);
   const [userLocation, setUserLocation] = useState(null);
   const [userLocationFetchingInBackground, setIsLoadingGeo] = useState(true);
-  const [user, loading] = useAuthState(auth);
 
   useEffect(() => {
     fetchLocation()
@@ -43,10 +39,17 @@ const App = () => {
     console.log(userLocation);
   }, [userLocation]);
 
-  if (loading) {
-    return <div>Loading...</div>; // Or any loading indicator
-  }
-  
+  const auth = getAuth();
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+
+    // Cleanup subscription on unmount
+    return () => unsubscribe();
+  }, []);
+
   return (
     <UserContext.Provider
       value={{ userLocation, user, userLocationFetchingInBackground }}
@@ -58,6 +61,8 @@ const App = () => {
           <Route exact path="/" element={user ? <Home /> : <Navigate to="/login" />} />
           <Route exact path="/register" element={<Register />} />
           <Route exact path="/login" element={<Login />} />
+          <Route exact path="/forgot-password" element={<ForgotPassword />} />
+
           <Route exact path="/about" element={<About />} />
           <Route
             exact

@@ -1,9 +1,10 @@
-import {useState } from "react";
+import {useEffect, useState } from "react";
 // import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, useNavigate } from "react-router-dom";
 import { FirebaseCreateUser } from "../../auth/createuser";
 import { signInWithGoogle } from "../../firebase";
 import "./Register.css";
+
 
 function Register() {
   const navigate = useNavigate();
@@ -11,6 +12,17 @@ function Register() {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   // const [user, loading, error] = useAuthState(auth);
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        navigate("/");
+      }
+    });
+
+    // Cleanup subscription on unmount
+    return () => unsubscribe();
+  }, []);
 
   return (
     <div className="register">

@@ -1,13 +1,25 @@
 /* eslint-disable no-unused-vars */
-import React, {useState } from "react";
+import React, {useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { signInWithGoogle } from "../../firebase";
 import { FirebaseLogin } from "../../auth/FirebaseLogin";
 import "./Login.css";
+
 function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        navigate("/");
+      }
+    });
+
+    // Cleanup subscription on unmount
+    return () => unsubscribe();
+  }, []);
 
   return (
     <div className="login">
@@ -19,25 +31,27 @@ function Login() {
           onChange={(e) => setEmail(e.target.value)}
           placeholder="E-mail Address"
         />
-        <input
-          type="password"
-          className="login__textBox"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
-        />
+          <input
+            type="password"
+            className="login__textBox"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Password"
+          />
         <button
           className="login__btn"
           onClick={() => LoginNavigateToHome(email, password)}
         >
           Login
         </button>
+
         <button className="login__btn login__google" onClick={signInWithGoogle}>
           Login with Google
         </button>
         <div>
-          Dont have an account? <Link to="/register">Register</Link> now.
+          Don't have an account? <Link to="/register">Register</Link>
         </div>
+        <Link to="/forgot-password">Forgot your password?</Link>
       </div>
     </div>
   );
@@ -53,5 +67,5 @@ function Login() {
     }
   }
 }
-export default Login;
 
+export default Login;
