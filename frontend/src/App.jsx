@@ -1,22 +1,11 @@
 /* eslint-disable no-unused-vars */
 import { useState, useEffect, createContext } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import CreateChatRoom from "./components/CreateChatRoom";
-import JoinRoom from "./components/Rooms";
-import Register from "./components/Register";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-import About from "./components/About";
-import ProfilePage from "./components/ProfilePage";
-import Protected from "./components/ProtectedRoute";
-import ErrorPage from "./components/NotFound";
-import Home from "./components/Home";
-import Login from "./components/Login";
-import ChatRoom from "./components/ChatRoom";
-export const UserContext = createContext();
+import { Route, Routes } from "react-router-dom";
+import { Home, Login, Register, Header, Footer, About, ProfilePage, Protected, ErrorPage, CreateChatRoom, JoinRoom, ChatRoom, ForgotPassword } from './components';
 import { fetchLocation } from "./utils/fetchLocation";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import ForgotPassword from "./components/ForgotPassword";
+
+export const UserContext = createContext();
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -47,7 +36,6 @@ const App = () => {
       setUser(currentUser);
     });
 
-    // Cleanup subscription on unmount
     return () => unsubscribe();
   }, []);
 
