@@ -1,4 +1,3 @@
-/* Style the table */
 #rooms {
     width: 100%;
     border-collapse: collapse;
@@ -34,4 +33,9 @@
     margin: 4px 2px;
     cursor: pointer;
   }
-  
+
+  .map {
+      height: 400px;
+      width: 400px;
+  }
+
