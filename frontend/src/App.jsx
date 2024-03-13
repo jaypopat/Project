@@ -27,6 +27,7 @@ const App = () => {
     fetchLocation()
       .then((location) => {
         setUserLocation(location);
+        console.log(location);
         setIsLoadingGeo(false);
       })
       .catch((error) => {

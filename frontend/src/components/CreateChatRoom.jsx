@@ -4,15 +4,14 @@ import "./CreateChatRoom.css";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { containsOffensiveWords } from "../utils/offensiveWordsChecker";
-import { v4 as uuidv4 } from "uuid";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
-
+import {doc, setDoc, serverTimestamp, GeoPoint, addDoc, collection} from 'firebase/firestore';
 import { UserContext } from "../App";
+import { db } from "../../firebase.js";
 
 const ChatRoom = () => {
-  const { user } = useContext(UserContext);
-
+  const { user, userLocation } = useContext(UserContext);
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -22,15 +21,15 @@ const ChatRoom = () => {
   });
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const {name, value} = e.target;
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
   };
 
-  const handleCreateChatRoom = () => {
-    const { chatRoomName, radius } = formData;
+  const handleCreateChatRoom = async () => {
+    const {chatRoomName, radius} = formData;
 
     if (containsOffensiveWords(chatRoomName)) {
       toast.error("Don't use bad words in chat room");
@@ -41,67 +40,58 @@ const ChatRoom = () => {
         ...prevData,
         createRoom: true,
       }));
+      const roomRef = collection(db, "rooms");
+      const createdLocation = new GeoPoint(userLocation.latitude, userLocation.longitude);
+
+      const docRef = await addDoc(roomRef, {
+        name: chatRoomName,
+        createdAt: serverTimestamp(),
+        createdBy: user.displayName,
+        createdLocation: createdLocation,
+        radius: radius
+      });
       toast.success(`${chatRoomName} has been created`);
-      let chatRoomID = uuidv4();
-      console.log({ user, chatRoomName, chatRoomID, radius }); // Log the username
-
-      fetch("https://whisper-2f40a.firebaseio.com/rooms", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ user, chatRoomName, chatRoomID, radius }),
-      })
-        .then((response) => response.json())
-        .then((data) => console.log(data))
-        .catch((error) => {
-          console.error("Error:", error);
-        });
-
-      // Send data to the server as a post request to be added to the database
-      // If the response is OK, proceed; otherwise, throw an error
-      navigate(`/joinroom/${chatRoomID}`);
+      navigate(`/joinroom/${docRef.id}`);
     }
+    ;
   };
-
-  return (
-    <div className="chat-room">
-      <h2>Create a New Chat Room</h2>
-      <form>
-        <div className="form-group">
-          <label htmlFor="chatRoomName">Chat Room Name</label>
-          <input
-            type="text"
-            id="chatRoomName"
-            name="chatRoomName"
-            placeholder="Enter chat room name"
-            value={formData.chatRoomName}
-            onChange={handleChange}
-          />
+    return (
+        <div className="chat-room">
+          <h2>Create a New Chat Room</h2>
+          <form>
+            <div className="form-group">
+              <label htmlFor="chatRoomName">Chat Room Name</label>
+              <input
+                  type="text"
+                  id="chatRoomName"
+                  name="chatRoomName"
+                  placeholder="Enter chat room name"
+                  value={formData.chatRoomName}
+                  onChange={handleChange}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="radius">Radius (in km)</label>
+              <input
+                  type="range"
+                  id="radius"
+                  name="radius"
+                  min="0"
+                  max="20"
+                  value={formData.radius}
+                  onChange={handleChange}
+              />
+              <p className="slider-value bold-text">Value: {formData.radius} km</p>
+            </div>
+            <button
+                type="button"
+                onClick={handleCreateChatRoom}
+                className="bold-text"
+            >
+              Create Chat Room
+            </button>
+          </form>
         </div>
-        <div className="form-group">
-          <label htmlFor="radius">Radius (in km)</label>
-          <input
-            type="range"
-            id="radius"
-            name="radius"
-            min="0"
-            max="20"
-            value={formData.radius}
-            onChange={handleChange}
-          />
-          <p className="slider-value bold-text">Value: {formData.radius} km</p>
-        </div>
-        <button
-          type="button"
-          onClick={handleCreateChatRoom}
-          className="bold-text"
-        >
-          Create Chat Room
-        </button>
-      </form>
-    </div>
-  );
-};
-
+    );
+}
 export default ChatRoom;

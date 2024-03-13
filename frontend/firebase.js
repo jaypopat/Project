@@ -18,19 +18,22 @@ import {
   addDoc,
 } from "firebase/firestore";
 import { toast } from "react-toastify";
+
 const firebaseConfig = {
-  apiKey: "AIzaSyDIXJ5YT7hoNbBFqK3TBcV41-TzIO-7n7w",
-  authDomain: "fir-auth-6edd8.firebaseapp.com",
-  projectId: "fir-auth-6edd8",
-  storageBucket: "fir-auth-6edd8.appspot.com",
-  messagingSenderId: "904760319835",
-  appId: "1:904760319835:web:44fd0d957f114b4e51447e",
-  measurementId: "G-Q4TYKH9GG7",
+  apiKey: "AIzaSyDrC7CEpSHF6W-3LeNwlYnXXNvvbMMcc1I",
+  authDomain: "whisper-2f40a.firebaseapp.com",
+  databaseURL: "https://whisper-2f40a-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "whisper-2f40a",
+  storageBucket: "whisper-2f40a.appspot.com",
+  messagingSenderId: "436334501650",
+  appId: "1:436334501650:web:39b308b96a9a78bf135dcb"
 };
+
 export const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
 export const googleProvider = new GoogleAuthProvider();
+
 export const signInWithGoogle = async () => {
   try {
     const res = await signInWithPopup(auth, googleProvider);
@@ -51,6 +54,7 @@ export const signInWithGoogle = async () => {
 
   }
 };
+
 export const logInWithEmailAndPassword = async (email, password) => {
   try {
     await signInWithEmailAndPassword(auth, email, password);
@@ -59,6 +63,7 @@ export const logInWithEmailAndPassword = async (email, password) => {
     alert(err.message);
   }
 };
+
 export const registerWithEmailAndPassword = async (name, email, password) => {
   try {
     const res = await createUserWithEmailAndPassword(auth, email, password);

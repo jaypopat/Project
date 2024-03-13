@@ -10,35 +10,55 @@ import {
 } from "@chatscope/chat-ui-kit-react";
 import styles from "@chatscope/chat-ui-kit-styles/dist/default/styles.min.css";
 import Rooms from "./Rooms";
-import { Link } from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import "./ChatRoom.css";
-
-const messages = [
-  {
-    id: "1",
-    text: "Hello!",
-    createdAt: new Date(),
-    uid: "user1",
-    avatar: "https://i.pravatar.cc/50?img=1",
-  },
-  {
-    id: "2",
-    text: "Hi!",
-    createdAt: new Date(),
-    uid: "user2",
-    avatar: "https://i.pravatar.cc/50?img=2",
-  },
-  {
-    id: "3",
-    text: "How are you?",
-    createdAt: new Date(),
-    uid: "user1",
-    avatar: "https://i.pravatar.cc/50?img=3",
-  },
-];
-console.log(messages[0].createdAt.getTime);
+import {useEffect, useState} from "react";
+import {addDoc, collection, doc, onSnapshot, orderBy, query, serverTimestamp} from "firebase/firestore";
+import {auth, db} from "../../firebase";
 
 function ChatRoom() {
+  const { id: roomId } = useParams();
+  const [newMessage, setNewMessage] = useState("");
+  const [messages, setMessages] = useState([]);
+
+
+  useEffect(() => {
+    if (!roomId) return;
+
+    const roomRef = doc(db, "rooms", roomId);
+    const messagesRef = collection(roomRef, "messages");
+
+    const q = query(messagesRef, orderBy("createdAt", "asc"));
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      const messages = snapshot.docs.map(doc => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+      setMessages(messages);
+    });
+
+    return () => unsubscribe();
+  }, [messages]);
+
+  const handleSubmit = async (messageText) => {
+    if (!messageText.trim()) return;
+    try {
+      const roomRef = doc(db, "rooms", roomId);
+      const messagesRef = collection(roomRef, "messages");
+
+      await addDoc(messagesRef, {
+        text: messageText,
+        createdAt: serverTimestamp(),
+        user: auth.currentUser.displayName,
+        userPic: auth.currentUser.photoURL,
+      });
+      setNewMessage("");
+    } catch (error) {
+      console.error("Failed to send message: ", error);
+    }
+  }
+
+
   return (
     <div className="chatroom">
       <div className="chatroom-header">
@@ -57,31 +77,48 @@ function ChatRoom() {
           <ChatContainer>
             <ConversationHeader>Room Name</ConversationHeader>
             <MessageList>
-              {messages.map((message, index) => (
-                <div key={index} className="message">
-                  <p>{`${message.createdAt
-                    .getHours()
-                    .toString()
-                    .padStart(2, "0")}:${message.createdAt
-                    .getMinutes()
-                    .toString()
-                    .padStart(2, "0")}`}</p>
 
-                  <div
-                    className="avatar"
-                    style={{ backgroundImage: `url(${message.avatar})` }}
-                  />
-                  <Message
-                    model={{
-                      message: message.text,
-                      sentTime: message.createdAt,
-                      sender: message.uid,
-                    }}
-                  />
+              {/* replace with nicer display*/}
+              <div className="messages">
+                {messages.map((message) => (
+                    <div className="message" key={message.id}>
+                      <span className="user">{message.user} : </span>
+                      { message.text}
+                    </div>
+                ))}
                 </div>
-              ))}
+
+
+              {/*{messages.map((message, index) => (*/}
+              {/*  <div key={index} className="message">*/}
+              {/*    <p>{`${message.createdAt*/}
+              {/*      .getHours()*/}
+              {/*      .toString()*/}
+              {/*      .padStart(2, "0")}:${message.createdAt*/}
+              {/*      .getMinutes()*/}
+              {/*      .toString()*/}
+              {/*      .padStart(2, "0")}`}</p>*/}
+
+              {/*    <div*/}
+              {/*      className="avatar"*/}
+              {/*      style={{ backgroundImage: `url(${message.avatar})` }}*/}
+              {/*    />*/}
+              {/*    <Message*/}
+              {/*      model={{*/}
+              {/*        message: message.text,*/}
+              {/*        sentTime: message.createdAt,*/}
+              {/*        sender: message.uid,*/}
+              {/*      }}*/}
+              {/*    />*/}
+              {/*  </div>*/}
+              {/*))}*/}
             </MessageList>
-            <MessageInput placeholder="Type message here" />
+            <MessageInput
+                value={newMessage}
+                onChange={(val) => setNewMessage(val)}
+                onSend={handleSubmit}
+                placeholder="Type message here"
+            />
           </ChatContainer>
         </MainContainer>
       </div>
