@@ -110,7 +110,6 @@ function ChatRoom() {
             </ConversationList>
           </Sidebar>
           <ChatContainer>
-            <ConversationHeader>Room Name</ConversationHeader>
             <MessageList>
               <div className="messages">
                 {messages.map((message) => (

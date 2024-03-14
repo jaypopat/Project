@@ -53,7 +53,6 @@ const ChatRoom = () => {
       toast.success(`${chatRoomName} has been created`);
       navigate(`/joinroom/${docRef.id}`);
     }
-    ;
   };
     return (
         <div className="chat-room">

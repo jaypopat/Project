@@ -22,7 +22,7 @@
   }
   
   .join-button {
-    background-color: #59418e; /* Purple */
+    background-color: #59418e;
     color: #ffffff; 
     border: none;
     padding: 10px 20px;
@@ -34,8 +34,12 @@
     cursor: pointer;
   }
 
-  .map {
-      height: 400px;
-      width: 400px;
-  }
-
+  #map {
+    height: 700px;
+    width: 700px;
+    margin-right: 0px;
+    position: fixed;
+    top: 20%;
+    right: 0;
+   }
+   

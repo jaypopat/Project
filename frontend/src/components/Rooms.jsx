@@ -9,11 +9,13 @@ import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { db } from "../../firebase";
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
-mapboxgl.accessToken = "pk.eyJ1IjoiamF5cDEiLCJhIjoiY2x0cTh4MWR0MDNsbTJpcGNpYWpvcWlsNSJ9.ebl8ozkVTD0hNk8mAKzDcQ";
+import MapboxCircle from 'mapbox-gl-circle';
+
+mapboxgl.accessToken = "pk.eyJ1IjoiamF5cDEiLCJhIjoiY2x0cThxeTRoMDNoZjJtb2FxbHZxNWswdCJ9.klviohbHw0SiLmti0NQXPA";
 
 const Rooms = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [showMapBox, setShowMap] = useState(false); 
+  const [showMapBox, setShowMap] = useState(false);
   const { userLocation } = useContext(UserContext);
   const [rooms, setRooms] = useState([]);
 
@@ -47,48 +49,55 @@ const Rooms = () => {
   }, [userLocation]);
 
   const showMap = (centrePoint, radius) => {
+
+
+    console.log(centrePoint, radius);
     setShowMap(true);
+
     if (!map.current) {
-       map.current = new mapboxgl.Map({
-         container: mapContainer.current,
-         style: 'mapbox://styles/mapbox/streets-v12',
-         center: centrePoint,
-         zoom: 12,
-       });
-   
-       map.current.on('load', () => {
-         // Add a GeoJSON source for the circle
-         map.current.addSource("circleSource", {
-           "type": "geojson",
-           "data": {
-             "type": "FeatureCollection",
-             "features": [{
-               "type": "Feature",
-               "geometry": {
-                 "type": "Point",
-                 "coordinates": centrePoint
-               }
-             }]
-           }
-         });
-   
-         map.current.addLayer({
-           "id": "circleLayer",
-           "type": "circle",
-           "source": "circleSource",
-           "paint": {
-             "circle-radius": radius*1000, // Specify the radius in meters
-             "circle-color": "#ff0000", // Red color
-             "circle-opacity": 0.6
-           }
-         });
-       });
+      map.current = new mapboxgl.Map({
+        container: mapContainer.current,
+        style: 'mapbox://styles/mapbox/streets-v12',
+        center: centrePoint,
+        zoom: 5,
+      });
+
+      map.current.on('load', () => {
+        map.current.addSource("circleSource", {
+          "type": "geojson",
+          "data": {
+            "type": "FeatureCollection",
+            "features": [{
+              "type": "Feature",
+              "geometry": {
+                "type": "Point",
+                "coordinates": centrePoint
+              }
+            }]
+          }
+        });
+
+      })
+
+      rooms.map((room) => {
+        new MapboxCircle([room.createdLocation.latitude, room.createdLocation.longitude], 25000, {
+          editable: true,
+          minRadius: room.radius * 1000,
+          fillColor: '#29AB87'
+        }).addTo(map);
+      })
     } else {
-       map.current.setCenter(centrePoint);
-       map.current.setZoom(12);
+      // Update the map's center and zoom level
+      map.current.setCenter(centrePoint);
+      map.current.setZoom(5);
+
+      // Update the circle layer's radius
+      if (map.current.getLayer('circleLayer')) {
+        map.current.setPaintProperty('circleLayer', 'circle-radius', parseInt(radius));
+      }
     }
-   }
-   
+  };
+
 
   return isLoading ? <Spinner /> : (
     <div>
