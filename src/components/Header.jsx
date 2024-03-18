@@ -4,7 +4,7 @@ import { useContext } from "react";
 
 import { UserContext } from "../App";
 import { toast } from "react-toastify";
-import { logout } from "../../firebase";
+import { logout } from "../firebaseAuth.js";
 
 const Header = () => {
   const { user } = useContext(UserContext);

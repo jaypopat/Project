@@ -13,7 +13,7 @@ import { Link, useParams } from "react-router-dom";
 import "./ChatRoom.css";
 import { useEffect, useState } from "react";
 import { addDoc, collection, getDoc, doc, onSnapshot, orderBy, query } from "firebase/firestore";
-import { auth, db } from "../../firebase";
+import { auth, db } from "../firebaseAuth.js";
 
 function ChatRoom() {
   const { id: roomId } = useParams();

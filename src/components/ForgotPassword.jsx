@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { sendPasswordReset } from "../../firebase";
+import { sendPasswordReset } from "../firebaseAuth.js";
 import "./ForgotPassword.css";
 
 function ForgotPassword() {

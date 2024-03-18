@@ -6,7 +6,7 @@ import {
   // auth,
   registerWithEmailAndPassword,
   signInWithGoogle,
-} from "../../firebase";
+} from "../firebaseAuth.js";
 import "./Register.css";
 import { useNavigate } from "react-router-dom";
 

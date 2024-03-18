@@ -1,5 +1,5 @@
 export const getAddressFromCoordinates = async (latitude, longitude) => {
-  const api_key = "f430ca359a954c8ba0c1c67d773ef19f";
+  const api_key = import.meta.env.VITE_OPENCAGE_API_KEY;
 
   var query = latitude + "," + longitude;
   var api_url = "https://api.opencagedata.com/geocode/v1/json";

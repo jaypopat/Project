@@ -6,9 +6,9 @@ import "react-toastify/dist/ReactToastify.css";
 import { containsOffensiveWords } from "../utils/offensiveWordsChecker";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
-import {doc, setDoc, serverTimestamp, GeoPoint, addDoc, collection} from 'firebase/firestore';
+import {GeoPoint, addDoc, collection} from 'firebase/firestore';
 import { UserContext } from "../App";
-import { db } from "../../firebase.js";
+import { db } from "../firebaseAuth.js";
 
 const ChatRoom = () => {
   const { user, userLocation } = useContext(UserContext);
@@ -45,7 +45,7 @@ const ChatRoom = () => {
 
       const docRef = await addDoc(roomRef, {
         name: chatRoomName,
-        createdAt: serverTimestamp(),
+        createdAt: new Date,
         createdBy: user.displayName,
         createdLocation: createdLocation,
         radius: radius
