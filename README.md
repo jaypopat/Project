@@ -17,6 +17,10 @@ Welcome to Whisper, a chatroom application designed to connect users based on th
 
 ### Installation
 
+### Setup Project
+
+Rename the .env.sample file to .env and fill in the necessary fields with the appropriate values.
+
 #### Running Locally
 
 1. Clone the repository to your local machine.

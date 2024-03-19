@@ -8,6 +8,8 @@ import {
   sendPasswordResetEmail,
   signOut,
 } from "firebase/auth";
+import { updateProfile } from "firebase/auth";
+
 
 import {
   getFirestore,
@@ -55,30 +57,48 @@ export const signInWithGoogle = async () => {
   }
 };
 
-export const logInWithEmailAndPassword = async (email, password) => {
-  try {
-    await signInWithEmailAndPassword(auth, email, password);
-  } catch (err) {
-    console.error(err);
-    alert(err.message);
-  }
+export const logInWithEmailAndPassword = (email, password) => {
+ signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      const user = userCredential.user;
+      return user;
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log(errorCode, errorMessage);
+    });
 };
+
+
 
 export const registerWithEmailAndPassword = async (name, email, password) => {
   try {
-    const res = await createUserWithEmailAndPassword(auth, email, password);
-    const user = res.user;
-    await addDoc(collection(db, "users"), {
-      uid: user.uid,
-      name,
-      authProvider: "local",
-      email,
-    });
+     const res = await createUserWithEmailAndPassword(auth, email, password);
+     const user = res.user;
+     console.log(user);
+     await addDoc(collection(db, "users"), {
+       uid: user.uid,
+       name,
+       authProvider: "email",
+       email,
+     });
+ 
+     // Update the user's display name and profile picture
+     await updateProfile(user, {
+       displayName: name,
+       photoURL: `https://api.dicebear.com/8.x/pixel-art/svg?seed=${name}`
+     });
+ 
+     // Reload the user object to ensure it's up-to-date
+     await user.reload();
+ 
+     console.log("User registered and profile updated successfully");
   } catch (err) {
-    console.error(err);
-    alert(err.message);
+     console.error(err);
+     alert(err.message);
   }
-};
+ };
 
 export const sendPasswordReset = async (email) => {
   try {
