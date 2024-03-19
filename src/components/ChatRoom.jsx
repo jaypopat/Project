@@ -12,7 +12,7 @@ import Rooms from "./Rooms";
 import { Link, useParams } from "react-router-dom";
 import "./ChatRoom.css";
 import { useEffect, useState } from "react";
-import { addDoc, collection, getDoc, doc, onSnapshot, orderBy, query } from "firebase/firestore";
+import { addDoc, collection, getDoc, doc, onSnapshot, orderBy, query,Timestamp } from "firebase/firestore";
 import { auth, db } from "../firebaseAuth.js";
 
 function ChatRoom() {
@@ -73,7 +73,7 @@ function ChatRoom() {
 
       await addDoc(messagesRef, {
         text: messageText,
-        createdAt: new Date,
+        createdAt: Timestamp.now(),
         user: auth.currentUser.displayName,
         userPic: auth.currentUser.photoURL,
       });
@@ -83,17 +83,6 @@ function ChatRoom() {
     }
   }
 
-  const formatDate = (date) => {
-
-    let minutes = date.getMinutes();
-    let hours = date.getHours();
-
-    let ampm = hours >= 12 ? 'PM' : 'AM';
-    hours = hours % 12;
-    hours = hours ? hours : 12;
-    minutes = minutes < 10 ? '0' + minutes : minutes;
-    return `${hours}:${minutes} ${ampm}`;
-  }
   return (
     <div className="chatroom">
       <div className="chatroom-header">
@@ -119,11 +108,12 @@ function ChatRoom() {
                       <span className="user-name">{message.user}</span>
                       <p className="message-text">{message.text}</p>
                       <p className="message-timestamp">
-                        {/* {console.log(message.createdAt)} */}
+                        {message.createdAt?.seconds ? new Date(message.createdAt.seconds * 1000).toLocaleTimeString() : 'No timestamp'}
                       </p>
                     </div>
                   </div>
                 ))}
+
               </div>
             </MessageList>
             <MessageInput
