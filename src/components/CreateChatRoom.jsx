@@ -11,7 +11,7 @@ import { UserContext } from "../App";
 import { db } from "../firebaseAuth.js";
 import mapboxgl from "mapbox-gl";
 import {getMetersPerPixelAtLatitude} from "../utils/getMetersPerPixelAtLatitude.js";
-mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_API_KEY;
+mapboxgl.accessToken = "pk.eyJ1IjoiamF5cDEiLCJhIjoiY2x0cThxeTRoMDNoZjJtb2FxbHZxNWswdCJ9.klviohbHw0SiLmti0NQXPA";
 
 const ChatRoom = () => {
   const { user, userLocation } = useContext(UserContext);
@@ -146,7 +146,7 @@ const ChatRoom = () => {
                   id="radius"
                   name="radius"
                   min="0"
-                  max="20"
+                  max="1000"
                   value={formData.radius}
                   onChange={handleChange}
               />
