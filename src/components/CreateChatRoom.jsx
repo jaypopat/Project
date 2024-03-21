@@ -11,7 +11,7 @@ import { UserContext } from "../App";
 import { db } from "../firebaseAuth.js";
 import mapboxgl from "mapbox-gl";
 import {getMetersPerPixelAtLatitude} from "../utils/getMetersPerPixelAtLatitude.js";
-mapboxgl.accessToken = "pk.eyJ1IjoiamF5cDEiLCJhIjoiY2x0cThxeTRoMDNoZjJtb2FxbHZxNWswdCJ9.klviohbHw0SiLmti0NQXPA";
+mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_API_KEY;
 
 const ChatRoom = () => {
   const { user, userLocation } = useContext(UserContext);
