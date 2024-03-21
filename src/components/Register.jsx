@@ -22,8 +22,9 @@ function Register() {
   };
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
+    const unsubscribe = auth.onAuthStateChanged(async (user) => {
       if (user) {
+        await user.reload();
         if (user.emailVerified) {
           navigate("/login");
         }
@@ -34,43 +35,37 @@ function Register() {
   }, []);
 
   return (
-      <div className="register">
-        <div className="registercontainer">
-          <input
-              type="text"
-              className="registertextBox"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="Full Name"
-          />
-          <input
-              type="text"
-              className="registertextBox"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="E-mail Address"
-          />
-          <input
-              type="password"
-              className="registertextBox"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Password"
-          />
-          <button className="registerbtn" onClick={register}>
-            Register
-          </button>
-          <button
-              className="registerbtn register__google"
-              onClick={signInWithGoogle}
-          >
-            Register with Google
-          </button>
-          <div>
-            Already have an account? <Link to="/login">Login</Link> now.
-          </div>
+    <div className="register">
+      <div className="register__container">
+        <input
+          type="text"
+          className="register__textBox"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          placeholder="Full Name"
+        />
+        <input
+          type="text"
+          className="register__textBox"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="E-mail Address"
+        />
+        <input
+          type="password"
+          className="register__textBox"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Password"
+        />
+        <button className="registerbtn" onClick={register}>
+          Register
+        </button>
+        <div>
+          Already have an account? <Link to="/login">Login</Link> now.
         </div>
       </div>
+    </div>
   );
 }
 

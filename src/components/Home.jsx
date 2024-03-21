@@ -9,14 +9,14 @@ const Home = () => {
   const { user } = useContext(UserContext);
 
   return user ? (
-    <div id = "room-btns">
+    <div id="room-btns">
       <Link to="/createroom">
         <button className="red">Create Room</button>
       </Link>
       <Link to="/joinroom">
         <button className="red">Join Room</button>
       </Link>
-      
+
     </div>
   ) : (
     <div id="login">

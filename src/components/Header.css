@@ -28,87 +28,9 @@
   margin-top: 0px;
   font-family: "Baloo Chettan", sans-serif;
 }
-#logout {
+#hamburger {
   position: absolute;
   top: 0;
   right: 0;
- }
- 
- .logout-button {
-  padding: 10px 20px;
-  border: none;
-  width: 200px;
-  height: 75px;
-  border-radius: 5px;
-  background-color: #3B3B49;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  transition: background-color 0.3s ease;
- }
- 
- .logout-button:hover {
-  background-color: #27272b;
- }
- 
- .profile-pic {
-  width: 40px;
-  height: 40px;
-  object-fit: cover;
-  border-radius: 50%;
-  margin-right: 10px; /* Add some margin to the right of the profile pic */
- }
- 
- @media screen and (max-width: 768px) {
-  .logout-button {
-     width: 50px; /* Adjust the width to make it a circle */
-     height: 50px; /* Adjust the height to make it a circle */
-     border-radius: 50%; /* Make it a circle */
-     padding: 0; /* Remove padding */
-     display: flex;
-     align-items: center;
-     justify-content: center;
-     gap: 0; /* Remove gap */
-  }
- 
-  .profile-pic {
-     width: 100%; /* Make the profile picture fill the button */
-     height: 100%; /* Make the profile picture fill the button */
-     object-fit: cover; /* Ensure the image covers the area without distorting */
-  }
- 
-  .username {
-     display: none; /* Hide the username on smaller screens */
-  }
- }
- 
- .username {
-  font-size: 16px;
-  font-weight: bold;
-  color: #fff;
- }
- 
- .logout-text {
-  display: none;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 16px;
-  font-weight: bold;
- }
- 
- .logout-button:hover .logout-text {
-  display: block;
- }
- 
- .logout-button:hover .username,
- .logout-button:hover .profile-pic {
-  display: none;
  }
  
