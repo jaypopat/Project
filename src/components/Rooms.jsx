@@ -9,6 +9,7 @@ import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { db } from "../firebaseAuth.js";
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
+import MapComponent from "./Map.jsx";
 mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_API_KEY;
 
 const Rooms = () => {
@@ -43,30 +44,35 @@ const Rooms = () => {
   }, [userLocation]);
 
   return isLoading ? <Spinner /> : (
-    <div>
-      <table id="rooms">
-        <thead>
+      <div>
+        <table id="rooms">
+          <thead>
           <tr>
             <th>Room Name</th>
             <th>Action</th>
           </tr>
-        </thead>
-        <tbody>
+          </thead>
+          <tbody>
           {rooms.map((room) => (
-            <tr key={room.id}>
-              <td>{room.name}</td>
-              <td>
-                <Link to={`/joinroom/${room.id}`}>
-                  <button className="join-button">Join</button>
-                </Link>
-              </td>
-            </tr>
+              <tr key={room.id}>
+                <td>{room.name}</td>
+                <td>
+                  <Link to={`/joinroom/${room.id}`}>
+                    <button className="join-button">Join</button>
+                  </Link>
+                </td>
+              </tr>
           ))}
           <tr>
           </tr>
-        </tbody>
-      </table>
-    </div>
+          </tbody>
+        </table>
+        <MapComponent locations={rooms.map((room) => ({
+          longitude: room.createdLocation.longitude,
+          latitude: room.createdLocation.latitude,
+          radius: room.radius,
+        }))} />
+      </div>
   );
 };
 
