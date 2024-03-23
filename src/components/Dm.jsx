@@ -1,15 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import { useParams } from 'react-router-dom';
 import { db } from '../firebaseAuth.js';
 import { collection, doc, onSnapshot, query, orderBy, addDoc, serverTimestamp } from 'firebase/firestore';
 import { auth } from '../firebaseAuth.js';
 import styles from "@chatscope/chat-ui-kit-styles/dist/default/styles.min.css";
 import { MainContainer, ChatContainer, MessageList, MessageInput } from "@chatscope/chat-ui-kit-react";
+import {UserContext} from "../App.jsx";
 
 function DM() {
- const { userId1, userId2 } = useParams(); // Assuming userId1 and userId2 are passed as URL parameters
- const [newMessage, setNewMessage] = useState("");
- const [messages, setMessages] = useState([]);
+    const { user } = useContext(UserContext);
+    const userId1 = user.id;
+
+    const { userId2 } = useParams(); // Assuming userId1 and userId2 are passed as URL parameters
+    const [newMessage, setNewMessage] = useState("");
+    const [messages, setMessages] = useState([]);
 
  useEffect(() => {
     if (!userId1 || !userId2) return;

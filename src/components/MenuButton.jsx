@@ -18,7 +18,6 @@ const MenuButton = () => {
     const handleLogout = () => {
         navigate('/');
         logout();
-        toast.success('Signed out');
     };
 
     const handleProfile = () => {
@@ -33,6 +32,10 @@ const MenuButton = () => {
         navigate('/friend-requests');
     }
 
+    const handleFriendList = () => {
+        navigate('/dm');
+    }
+
     return (
         <div className="menu-container">
             <button className="menu-button" onClick={handleMenuToggle}>
@@ -41,6 +44,7 @@ const MenuButton = () => {
             {isMenuOpen && (
                 <div className="menu" onMouseLeave={handleMenuClose}>
                     <button onClick={handleProfile}>Profile</button>
+                    <button onClick={handleFriendList}>Friend List</button>
                     <button onClick={handleFriendRequests}>Friend Requests</button>
                     <button onClick={handleLogout}>Logout</button>
 

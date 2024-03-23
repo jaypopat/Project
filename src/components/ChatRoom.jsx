@@ -14,7 +14,7 @@ import "./ChatRoom.css";
 import { useEffect, useState } from "react";
 import { addDoc, collection, getDoc, doc, onSnapshot, orderBy, query,Timestamp } from "firebase/firestore";
 import { auth, db } from "../firebaseAuth.js";
-import UserProfilePopup from "./userProfilePopup.jsx";
+import UserProfilePopup from "./UserProfilePopup.jsx";
 
 function ChatRoom() {
   const { id: roomId } = useParams();
