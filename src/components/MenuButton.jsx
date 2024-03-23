@@ -29,6 +29,10 @@ const MenuButton = () => {
         setIsMenuOpen(false);
     };
 
+    const handleFriendRequests = () => {
+        navigate('/friend-requests');
+    }
+
     return (
         <div className="menu-container">
             <button className="menu-button" onClick={handleMenuToggle}>
@@ -36,8 +40,10 @@ const MenuButton = () => {
             </button>
             {isMenuOpen && (
                 <div className="menu" onMouseLeave={handleMenuClose}>
-                    <button onClick={handleLogout}>Logout</button>
                     <button onClick={handleProfile}>Profile</button>
+                    <button onClick={handleFriendRequests}>Friend Requests</button>
+                    <button onClick={handleLogout}>Logout</button>
+
                 </div>
             )}
         </div>

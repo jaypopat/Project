@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import { Home, Login, Register, Header, Footer, About, ProfilePage, Protected, ErrorPage, CreateChatRoom, JoinRoom, ChatRoom, ForgotPassword } from './components';
 import { fetchLocation } from "./utils/fetchLocation";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import FriendRequests from "./components/FriendRequests.jsx";
 
 export const UserContext = createContext();
 
@@ -66,6 +67,15 @@ const App = () => {
                 <CreateChatRoom />
               </Protected>
             }
+          />
+          <Route
+              exact
+              path="/friend-requests"
+              element={
+                <Protected>
+                  <FriendRequests />
+                </Protected>
+              }
           />
           <Route
             exact
