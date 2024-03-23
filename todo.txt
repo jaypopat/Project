@@ -9,3 +9,4 @@
 - chatroom styling
 - change name from whisper to warp lol
 - dm messages too far apart
+- make name clickable as well as profile pic in chatrooms
