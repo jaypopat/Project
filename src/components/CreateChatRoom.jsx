@@ -85,7 +85,7 @@ const ChatRoom = () => {
                   id="radius"
                   name="radius"
                   min="0"
-                  max="100"
+                  max="1000"
                   value={formData.radius}
                   onChange={handleChange}
               />
