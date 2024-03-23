@@ -5,6 +5,8 @@ import { Home, Login, Register, Header, Footer, About, ProfilePage, Protected, E
 import { fetchLocation } from "./utils/fetchLocation";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import FriendRequests from "./components/FriendRequests.jsx";
+import FriendList from "./components/FriendList";
+import DM from "./components/Dm";
 
 export const UserContext = createContext();
 
@@ -32,6 +34,7 @@ const App = () => {
 
   const auth = getAuth();
 
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
@@ -39,6 +42,8 @@ const App = () => {
 
     return () => unsubscribe();
   }, []);
+  console.log(user)
+
 
   return (
     <UserContext.Provider
@@ -92,6 +97,24 @@ const App = () => {
             element={
               <Protected>
                 <ChatRoom />
+              </Protected>
+            }
+          />
+          <Route
+            exact
+            path="/dm"
+            element={
+              <Protected>
+                <FriendList />
+              </Protected>
+            }
+          />
+          <Route
+            exact
+            path="/dm/:id"
+            element={
+              <Protected>
+                <DM/>
               </Protected>
             }
           />
