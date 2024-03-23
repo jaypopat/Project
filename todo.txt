@@ -1,0 +1,10 @@
+- can have 2 of the same friend requests and friends
+- add notification for friend reqs
+- hamburger menu z index
+- adjust zoom based on radius
+- more accurate location
+- more accurate radius setting (metres)
+- profile, friend reqs and friends list pop over current screen instead of own screen
+- fix map styling
+- chatroom styling
+- change name from whisper to warp lol
