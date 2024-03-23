@@ -64,7 +64,8 @@ function DM() {
             text: messageText,
             createdAt: Timestamp.fromDate(new Date()),
             uid: user.uid,
-            userPic: user.photoURL,
+            displayName:user.displayName,
+            userPic: user.photoURL
         });
         setNewMessage("");
     };

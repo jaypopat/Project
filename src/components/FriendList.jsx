@@ -27,11 +27,13 @@ function FriendList() {
             {friends.map((friend) => (
                 <div key={friend.friendId} className="friend-item">
                     <Link to={`/dm/${friend.friendId}`} className="friend-link">
-                        {friend.friendName}
+                        <img src={friend.friendPic} alt="Profile" className="profile-pic" />
+                        <span className="friend-name">{friend.friendName}</span>
                     </Link>
                 </div>
             ))}
         </div>
+
     );
 }
 
