@@ -1,6 +1,6 @@
-# Whisper - A Location-Based Chatroom Application
+# Warp - A Location-Based Chatroom Application
 
-Welcome to Whisper, a chatroom application designed to connect users based on their geographical location. This application aims to foster local communities by providing a platform for real-time communication.
+Welcome to Warp, a chatroom application designed to connect users based on their geographical location. This application aims to foster local communities by providing a platform for real-time communication.
 
 ## Features
 
@@ -25,7 +25,7 @@ Rename the .env.sample file to .env and fill in the necessary fields with the ap
 
 1. Clone the repository to your local machine.
    ```
-   git clone https://github.com/jaypopat/Project.git
+   git clone https://github.com/jaypopat/Warp.git
    ```
 2. Install dependencies:
    ```
@@ -40,13 +40,13 @@ Rename the .env.sample file to .env and fill in the necessary fields with the ap
 
 1. Build the Docker image:
    ```
-   docker build -t whisper .
+   docker build -t Warp .
    ```
 2. Run the Docker container:
    ```
-   docker run -d --rm -p 5173:5173 whisper
+   docker run -d --rm -p 5173:5173 Warp
    ```
 
-### Accessing Whisper
+### Accessing Warp
 
-Once the server is running, you can access Whisper by navigating to `http://localhost:5173` in your web browser.
+Once the server is running, you can access Warp by navigating to `http://localhost:5173` in your web browser.
