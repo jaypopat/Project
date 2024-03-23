@@ -3,7 +3,6 @@ import {
   Sidebar,
   ConversationList,
   ChatContainer,
-  ConversationHeader,
   MessageList,
   MessageInput,
 } from "@chatscope/chat-ui-kit-react";

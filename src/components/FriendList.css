@@ -1,0 +1,35 @@
+.friend-list {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.friend-list h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.friend-item {
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+}
+
+.friend-link {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+}
+
+.friend-link:hover {
+    color: #0056b3;
+}
+
+.friend-link:visited {
+    color: #6610f2;
+}
