@@ -1,0 +1,52 @@
+.userProfilePopup {
+    position: fixed; /* Fixed position to make it appear above other content */
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Adjust position to truly center based on its size */
+    width: 300px; /* Set a fixed width */
+    background-color: #ffffff; /* Light background */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    border-radius: 8px; /* Rounded corners */
+    padding: 20px; /* Spacing inside the popup */
+    z-index: 1000; /* Ensure it's above other content */
+    display: flex; /* Flex layout for the content */
+    flex-direction: column; /* Stack children vertically */
+    align-items: center; /* Center-align children */
+}
+
+.userProfilePopup img {
+    width: 100px; /* Fixed width for the profile image */
+    height: 100px; /* Fixed height for the profile image */
+    border-radius: 50%; /* Circle shape */
+    margin-bottom: 20px; /* Space below the image */
+}
+
+.userProfilePopup h3 {
+    margin: 0; /* Remove default margin */
+    color: #333333; /* Dark text for contrast */
+    text-align: center; /* Center text */
+    margin-bottom: 20px; /* Space below the heading */
+}
+
+.userProfilePopup button {
+    cursor: pointer; /* Cursor to indicate it's clickable */
+    padding: 10px 20px; /* Spacing inside the button */
+    border: none; /* No border */
+    background-color: #007bff; /* Blue background */
+    color: #ffffff; /* White text */
+    border-radius: 5px; /* Rounded corners */
+    text-transform: uppercase; /* Uppercase text for stylistic choice */
+    font-weight: bold; /* Bold font */
+    transition: background-color 0.2s; /* Smooth transition for hover effect */
+}
+
+.userProfilePopup button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+.userProfilePopup img {
+    width: 100px; /* Fixed width for the profile image */
+    height: 100px; /* Fixed height for the profile image */
+    border-radius: 50%; /* Circle shape */
+    margin-bottom: 20px; /* Space below the image */
+}

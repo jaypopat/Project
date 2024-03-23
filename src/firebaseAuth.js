@@ -18,6 +18,8 @@ import {
     collection,
     where,
     addDoc,
+    setDoc,
+    doc
 } from "firebase/firestore";
 import { toast } from "react-toastify";
 
@@ -43,7 +45,8 @@ export const signInWithGoogle = async () => {
         const q = query(collection(db, "users"), where("uid", "==", user.uid));
         const docs = await getDocs(q);
         if (docs.docs.length === 0) {
-            await addDoc(collection(db, "users"), {
+            // Use the UID as the document ID
+            await setDoc(doc(db, "users", user.uid), {
                 uid: user.uid,
                 name: user.displayName,
                 authProvider: "google",
@@ -53,7 +56,6 @@ export const signInWithGoogle = async () => {
     } catch (err) {
         console.error(err);
         alert(err.message);
-
     }
 };
 
@@ -75,7 +77,8 @@ export const registerWithEmailAndPassword = async (name, email, password) => {
         const res = await createUserWithEmailAndPassword(auth, email, password);
         const user = res.user;
         console.log(user);
-        await addDoc(collection(db, "users"), {
+        // Use the UID as the document ID
+        await setDoc(doc(db, "users", user.uid), {
             uid: user.uid,
             name,
             authProvider: "email",
@@ -97,6 +100,7 @@ export const registerWithEmailAndPassword = async (name, email, password) => {
         alert(err.message);
     }
 };
+
 
 export const sendPasswordReset = async (email) => {
     try {

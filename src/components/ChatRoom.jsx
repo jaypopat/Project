@@ -14,12 +14,14 @@ import "./ChatRoom.css";
 import { useEffect, useState } from "react";
 import { addDoc, collection, getDoc, doc, onSnapshot, orderBy, query,Timestamp } from "firebase/firestore";
 import { auth, db } from "../firebaseAuth.js";
+import UserProfilePopup from "./userProfilePopup.jsx";
 
 function ChatRoom() {
   const { id: roomId } = useParams();
   const [newMessage, setNewMessage] = useState("");
   const [messages, setMessages] = useState([]);
   const [roomName, setRoomName] = useState("");
+  const [selectedUser, setSelectedUser] = useState(null);
 
 
   const getRoomName = async (roomId) => {
@@ -39,13 +41,14 @@ function ChatRoom() {
       return null;
     }
   }
+
   useEffect(() => {
     if (!roomId) return;
 
     const roomRef = doc(db, "rooms", roomId);
     const messagesRef = collection(roomRef, "messages");
-
     const q = query(messagesRef, orderBy("createdAt", "asc"));
+
     const unsubscribe = onSnapshot(q, (snapshot) => {
       snapshot.docChanges().forEach((change) => {
         if (change.type === "added") {
@@ -74,7 +77,8 @@ function ChatRoom() {
       await addDoc(messagesRef, {
         text: messageText,
         createdAt: Timestamp.now(),
-        user: auth.currentUser.displayName,
+        displayName: auth.currentUser.displayName,
+        uid: auth.currentUser.uid,
         userPic: auth.currentUser.photoURL,
       });
       setNewMessage("");
@@ -98,12 +102,24 @@ function ChatRoom() {
               <Rooms />
             </ConversationList>
           </Sidebar>
+          {selectedUser ? (
+              <UserProfilePopup
+                  selectedUser={selectedUser}
+                  onClose={() => setSelectedUser(null)}
+              />
+          ) : null
+          }
           <ChatContainer>
             <MessageList>
+
               <div className="messages">
                 {messages.map((message) => (
                   <div className="message-container" key={message.id}>
-                    <img src={message.userPic} alt="pfp" className="user-pic" />
+                    <img src={message.userPic} alt="pfp" className="user-pic" onClick={() => {setSelectedUser({
+                      uid: message.uid,
+                      displayName: message.displayName,
+                      photoURL: message.userPic}
+                    );}}/>
                     <div className="message-content">
                       <span className="user-name">{message.user}</span>
                       <p className="message-text">{message.text}</p>
@@ -113,8 +129,8 @@ function ChatRoom() {
                     </div>
                   </div>
                 ))}
-
               </div>
+
             </MessageList>
             <MessageInput
               value={newMessage}

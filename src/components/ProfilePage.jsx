@@ -46,6 +46,7 @@ const ProfilePage = () => {
     return (
         <div className="profile-page">
             <h1>User Profile</h1>
+            <button id="close-profile" onClick={() => window.history.back()}>Close</button>
             <input
                 type="text"
                 value={displayName}
