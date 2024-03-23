@@ -1,0 +1,52 @@
+.dm-screen {
+    /* Adjust the background color of the chat screen */
+    background-color: #f5f5f5;
+}
+
+.message-container {
+    /* Customize the appearance of individual messages */
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.user-pic {
+    /* Style the user profile picture */
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.message-content {
+    /* Style the message content */
+    display: flex;
+    flex-direction: column;
+}
+
+.user-name {
+    /* Style the user name */
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.message-text {
+    /* Style the message text */
+    margin: 0;
+}
+
+.message-timestamp {
+    /* Style the message timestamp */
+    font-size: 0.8em;
+    color: #888;
+}
+
+/* Customize the appearance of the message input */
+.message-input {
+    /* Adjust the background color, border, etc. */
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 10px;
+}
