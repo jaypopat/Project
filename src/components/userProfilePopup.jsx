@@ -1,22 +1,8 @@
-import {useContext} from "react";
-import { UserContext } from "../App";
-import {addDoc, collection, doc, query, where } from "firebase/firestore";
+import {addDoc, collection, doc } from "firebase/firestore";
 import { db } from "../firebaseAuth";
 import "./ProfilePagePopup.css"
 
 const UserProfilePopup = ({selectedUser, onClose}) => {
-    const { user } = useContext(UserContext)
-
-    // const addFriend = async () => {
-    //     const userRef = doc(db, "users", user.uid);
-    //     const friendsRef = collection(userRef, "friends");
-    //     await addDoc(friendsRef, {
-    //         friendId: selectedUser.uid,
-    //         friendName: selectedUser.displayName,
-    //         friendPic: selectedUser.photoURL
-    //     });
-    // }
-
     const sendFriendReq = async () => {
         const userRef = doc(db, "users", selectedUser.uid);
         const friendReqRef = collection(userRef, "friendRequests");
@@ -43,4 +29,4 @@ const UserProfilePopup = ({selectedUser, onClose}) => {
 
 export default UserProfilePopup;
 
-//todo: make user not able to add themselves as a friend, make friendships mutual, add friend added toast notification
+//todo: make user not able to add themselves as a friend, add friend added toast notification
