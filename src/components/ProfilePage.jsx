@@ -2,24 +2,20 @@ import { useContext } from "react";
 import { UserContext } from "../App";
 import "./ProfilePage.css"
 import { toast } from "react-toastify";
-
-
 import React, { useState } from 'react';
 import { updateProfile, updateEmail, updatePassword } from 'firebase/auth';
+import { getDownloadURL, ref, uploadBytes, getStorage } from 'firebase/storage';
+
+const storage = getStorage();
 
 const ProfilePage = () => {
     const { user } = useContext(UserContext);
-
     const [displayName, setDisplayName] = useState(user.displayName);
     const [email, setEmail] = useState(user.email);
     const [password, setPassword] = useState('');
-
     const [profilePicURL, setProfilePicURL] = useState(user.photoURL);
 
     const handleProfileUpdate = async () => {
-        // Your existing code for updating profile
-    
-        // Show toast if profile is updated successfully
         if (displayName !== user.displayName || email !== user.email || password || profilePicURL !== user.photoURL) {
             try {
                 await Promise.all([
@@ -35,7 +31,18 @@ const ProfilePage = () => {
             }
         }
     };
-    console.log(user);
+
+    const handleProfilePicChange = async (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const storageRef = ref(storage, `profile-pics/${user.uid}`);
+            const profilePicRef = ref(storageRef, file.name);
+            await uploadBytes(profilePicRef, file);
+            const profilePicURL = await getDownloadURL(profilePicRef);
+            setProfilePicURL(profilePicURL);
+        }
+    }
+
     return (
         <div className="profile-page">
             <h1>User Profile</h1>
@@ -58,9 +65,9 @@ const ProfilePage = () => {
                 placeholder="New Password (leave blank to keep current)"
             />
             <input
-                type="text"
-                value={profilePicURL}
-                onChange={(e) => setProfilePicURL(e.target.value)}
+                type="file"
+                onChange={handleProfilePicChange}
+                accept={'.jpg, .jpeg, .png'}
                 placeholder="Profile Picture URL"
             />
             <button onClick={handleProfileUpdate}>Update Profile</button>
