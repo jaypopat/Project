@@ -19,7 +19,6 @@ const App = () => {
     fetchLocation()
       .then((location) => {
         setUserLocation(location);
-        console.log(location);
         setIsLoadingGeo(false);
       })
       .catch((error) => {
@@ -28,12 +27,7 @@ const App = () => {
       });
   }, []);
 
-  useEffect(() => {
-    console.log(userLocation);
-  }, [userLocation]);
-
   const auth = getAuth();
-
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -42,7 +36,6 @@ const App = () => {
 
     return () => unsubscribe();
   }, []);
-  console.log(user)
 
 
   return (

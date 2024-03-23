@@ -8,3 +8,4 @@
 - fix map styling
 - chatroom styling
 - change name from whisper to warp lol
+- dm messages too far apart

@@ -1,14 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import "./Header.css";
 import { useContext } from "react";
-
 import { UserContext } from "../App";
 import MenuButton from "./MenuButton";
 
-
 const Header = () => {
   let navigate = useNavigate();
-
   const { user } = useContext(UserContext);
 
   const redirectHome = () => {
@@ -19,7 +16,7 @@ const Header = () => {
     <>
       <div className="header">
         <p onClick={redirectHome} id="appName">
-          Whisper
+          Warp
         </p>
         <p id="slogan">Keep it close</p>
         {user ? (
