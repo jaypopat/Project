@@ -4,19 +4,20 @@ import {collection, doc, getDocs, query, addDoc, deleteDoc } from "firebase/fire
 import {db} from "../firebaseAuth.js";
 
 const FriendRequests = () => {
-    const { user : sender } = useContext(UserContext);
+    const { user } = useContext(UserContext);
     const [ friendRequests, setFriendRequests ] = useState([]);
 
     useEffect(() => {
         const getFriendRequests = async () => {
-            const userRef = doc(db, "users", sender.uid);
+            const userRef = doc(db, "users", user.uid);
             const friendReqRef = collection(userRef, "friendRequests");
             const q = query(friendReqRef);
             const querySnapshot = await getDocs(q);
-            return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+            const requests = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+            setFriendRequests(requests);
         };
-        getFriendRequests().then(requests => setFriendRequests(requests));
-    }, [sender.uid]);
+        getFriendRequests();
+    }, [user.uid]);
 
     const addFriend = async (userId, friendData) => {
         try {
@@ -30,36 +31,29 @@ const FriendRequests = () => {
         const requestToAccept = friendRequests.find(request => request.id === requestId);
         if (!requestToAccept) return;
 
-        try {
-            console.log("Adding friend to sender...");
-            await addFriend(sender.uid, {
+        try { // Add friend to user's friend list
+            await addFriend(user.uid, {
                 friendId: requestToAccept.friendId,
                 friendName: requestToAccept.friendName,
                 friendPic: requestToAccept.friendPic
             });
-            console.log("Successfully added friend to sender.");
 
-            let receiver = requestToAccept.friendId;
-            console.log("Adding friend to receiver...");
-            await addFriend(receiver, {
-                friendId: sender.uid,
-                friendName: sender.displayName,
-                friendPic: sender.photoURL
+            await addFriend(requestToAccept.friendId, { // Add user to friend's friend list
+                friendId: user.uid,
+                friendName: user.displayName,
+                friendPic: user.photoURL
             });
-            console.log("Successfully added friend to receiver.");
 
-            await deleteDoc(doc(db, "users", sender.uid, "friendRequests", requestId));
-
+            await deleteDoc(doc(db, "users", user.uid, "friendRequests", requestId)); // Delete friend request
             setFriendRequests(currentRequests => currentRequests.filter(request => request.id !== requestId));
         } catch (error) {
             console.error("Failed to accept friend request:", error);
         }
     };
 
-
     const handleDecline = async (requestId) => {
         try {
-            await deleteDoc(doc(db, "users", sender.uid, "friendRequests", requestId));
+            await deleteDoc(doc(db, "users", user.uid, "friendRequests", requestId));
             setFriendRequests(currentRequests => currentRequests.filter(request => request.id !== requestId));
         } catch (error) {
             console.error("Failed to decline friend request:", error);
@@ -67,7 +61,6 @@ const FriendRequests = () => {
     };
 
     if (friendRequests.length === 0) return null;
-
     return (
         <div>
             <h1>Friend Requests</h1>
@@ -82,5 +75,6 @@ const FriendRequests = () => {
             </ul>
         </div>
     );
-}
+};
+
 export default FriendRequests;

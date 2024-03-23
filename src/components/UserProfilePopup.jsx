@@ -1,15 +1,19 @@
 import {addDoc, collection, doc } from "firebase/firestore";
 import { db } from "../firebaseAuth";
 import "./ProfilePagePopup.css"
+import {useContext} from "react";
+import {UserContext} from "../App.jsx";
 
 const UserProfilePopup = ({selectedUser, onClose}) => {
+    const { user } = useContext(UserContext);
+
     const sendFriendReq = async () => {
         const userRef = doc(db, "users", selectedUser.uid);
         const friendReqRef = collection(userRef, "friendRequests");
         await addDoc(friendReqRef, {
-            friendId: selectedUser.uid,
-            friendName: selectedUser.displayName,
-            friendPic: selectedUser.photoURL
+            friendId: user.uid,
+            friendName: user.displayName,
+            friendPic: user.photoURL
         });
         console.log("Friend Request Sent");
     }
