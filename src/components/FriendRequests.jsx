@@ -60,7 +60,7 @@ const FriendRequests = () => {
         }
     };
 
-    if (friendRequests.length === 0) return null;
+    if (friendRequests.length === 0) return <h1>No friend requests</h1>;
     return (
         <div>
             <h1>Friend Requests</h1>

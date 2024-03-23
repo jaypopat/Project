@@ -27,7 +27,7 @@ function FriendList() {
             {friends.map((friend) => (
                 <div key={friend.friendId} className="friend-item">
                     <Link to={`/dm/${friend.friendId}`} className="friend-link">
-                        DM {friend.friendName}
+                        {friend.friendName}
                     </Link>
                 </div>
             ))}
