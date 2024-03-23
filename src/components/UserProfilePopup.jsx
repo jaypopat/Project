@@ -8,6 +8,8 @@ const UserProfilePopup = ({selectedUser, onClose}) => {
     const { user } = useContext(UserContext);
 
     const sendFriendReq = async () => {
+        if (selectedUser.uid === user.uid) return;
+
         const userRef = doc(db, "users", selectedUser.uid);
         const friendReqRef = collection(userRef, "friendRequests");
         await addDoc(friendReqRef, {
@@ -32,5 +34,3 @@ const UserProfilePopup = ({selectedUser, onClose}) => {
 }
 
 export default UserProfilePopup;
-
-//todo: make user not able to add themselves as a friend, add friend added toast notification
