@@ -2,6 +2,7 @@ import {useContext} from "react";
 import { UserContext } from "../App";
 import {addDoc, collection, doc, query, where } from "firebase/firestore";
 import { db } from "../firebaseAuth";
+import "./ProfilePagePopup.css"
 
 const userProfilePopup = ({selectedUser, onClose}) => {
     const { user } = useContext(UserContext)

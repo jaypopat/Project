@@ -46,7 +46,7 @@ const ProfilePage = () => {
     return (
         <div className="profile-page">
             <h1>User Profile</h1>
-            <button id="close-profile" onClick={() => window.history.back()}>Close</button>
+            <img id = "pfp" src={profilePicURL} alt="pfp" />
             <input
                 type="text"
                 value={displayName}

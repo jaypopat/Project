@@ -44,36 +44,48 @@ const Rooms = () => {
   }, [userLocation]);
 
   return isLoading ? <Spinner /> : (
-      <div>
-        <table id="rooms">
-          <thead>
-          <tr>
-            <th>Room Name</th>
-            <th>Action</th>
-          </tr>
-          </thead>
-          <tbody>
-          {rooms.map((room) => (
-              <tr key={room.id}>
-                <td>{room.name}</td>
-                <td>
-                  <Link to={`/joinroom/${room.id}`}>
-                    <button className="join-button">Join</button>
-                  </Link>
-                </td>
-              </tr>
-          ))}
-          <tr>
-          </tr>
-          </tbody>
-        </table>
-        <MapComponent locations={rooms.map((room) => ({
-          longitude: room.createdLocation.longitude,
-          latitude: room.createdLocation.latitude,
-          radius: room.radius,
-        }))} />
-      </div>
+    <>
+      <RoomTable rooms={rooms} />
+      <MapComponent locations={getMapLocations(rooms)} />
+    </>
   );
-};
+}
+
+const RoomTable = ({ rooms }) => (
+  <table id="rooms">
+    <thead>
+      <tr>
+        <th>Room Name</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {rooms.map((room) => (
+        <RoomRow key={room.id} room={room} />
+      ))}
+      <tr></tr>
+    </tbody>
+  </table>
+);
+
+const RoomRow = ({ room }) => (
+  <tr key={room.id}>
+    <td>{room.name}</td>
+    <td>
+      <Link to={`/joinroom/${room.id}`}>
+        <button className="join-button">Join</button>
+      </Link>
+    </td>
+  </tr>
+);
+
+const getMapLocations = (rooms) => (
+  rooms.map((room) => ({
+    longitude: room.createdLocation.longitude,
+    latitude: room.createdLocation.latitude,
+    radius: room.radius,
+  }))
+);
+
 
 export default Rooms;
