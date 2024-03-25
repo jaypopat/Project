@@ -11,3 +11,7 @@ export { default as CreateChatRoom } from './CreateChatRoom';
 export { default as JoinRoom } from './Rooms';
 export { default as ChatRoom } from './ChatRoom';
 export { default as ForgotPassword } from './ForgotPassword';
+export { default as FriendRequests } from './FriendRequests';
+export { default as FriendList } from './FriendList';
+export { default as DM } from './Dm';
+

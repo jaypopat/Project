@@ -11,7 +11,7 @@ import Rooms from "./Rooms";
 import { Link, useParams } from "react-router-dom";
 import "./ChatRoom.css";
 import { useEffect, useState } from "react";
-import { addDoc, collection, getDoc, doc, onSnapshot, orderBy, query,Timestamp } from "firebase/firestore";
+import { addDoc, collection, getDoc, doc, onSnapshot, orderBy, query,Timestamp,updateDoc } from "firebase/firestore";
 import { auth, db } from "../firebaseAuth.js";
 import UserProfilePopup from "./UserProfilePopup.jsx";
 
@@ -80,6 +80,11 @@ function ChatRoom() {
         uid: auth.currentUser.uid,
         userPic: auth.currentUser.photoURL,
       });
+
+      await updateDoc(roomRef, {
+        lastActivity: Timestamp.now(),
+      });
+      
       setNewMessage("");
     } catch (error) {
       console.error("Failed to send message: ", error);

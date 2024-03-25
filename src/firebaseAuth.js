@@ -45,7 +45,6 @@ export const signInWithGoogle = async () => {
         const q = query(collection(db, "users"), where("uid", "==", user.uid));
         const docs = await getDocs(q);
         if (docs.docs.length === 0) {
-            // Use the UID as the document ID
             await setDoc(doc(db, "users", user.uid), {
                 uid: user.uid,
                 name: user.displayName,
@@ -77,7 +76,6 @@ export const registerWithEmailAndPassword = async (name, email, password) => {
         const res = await createUserWithEmailAndPassword(auth, email, password);
         const user = res.user;
         console.log(user);
-        // Use the UID as the document ID
         await setDoc(doc(db, "users", user.uid), {
             uid: user.uid,
             name,

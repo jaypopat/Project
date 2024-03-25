@@ -1,12 +1,9 @@
 /* eslint-disable no-unused-vars */
 import { useState, useEffect, createContext } from "react";
 import { Route, Routes } from "react-router-dom";
-import { Home, Login, Register, Header, Footer, About, ProfilePage, Protected, ErrorPage, CreateChatRoom, JoinRoom, ChatRoom, ForgotPassword } from './components';
+import { Home, Login, Register, Header, Footer, About, ProfilePage, Protected, ErrorPage, CreateChatRoom, JoinRoom, ChatRoom, ForgotPassword,FriendList,FriendRequests,DM } from './components';
 import { fetchLocation } from "./utils/fetchLocation";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import FriendRequests from "./components/FriendRequests.jsx";
-import FriendList from "./components/FriendList";
-import DM from "./components/Dm";
 
 export const UserContext = createContext();
 
@@ -19,6 +16,7 @@ const App = () => {
     fetchLocation()
       .then((location) => {
         setUserLocation(location);
+        console.log(location);
         setIsLoadingGeo(false);
       })
       .catch((error) => {
@@ -27,7 +25,12 @@ const App = () => {
       });
   }, []);
 
+  useEffect(() => {
+    console.log(userLocation);
+  }, [userLocation]);
+
   const auth = getAuth();
+
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -36,6 +39,7 @@ const App = () => {
 
     return () => unsubscribe();
   }, []);
+  console.log(user)
 
 
   return (
