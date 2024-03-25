@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { auth, signInWithGoogle,logInWithEmailAndPassword } from "../firebaseAuth.js";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import "./Login.css";
+import { FaGoogle } from "react-icons/fa";
 
 function Login() {
   const navigate = useNavigate();

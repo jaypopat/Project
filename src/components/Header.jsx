@@ -18,7 +18,6 @@ const Header = () => {
         <p onClick={redirectHome} id="appName">
           Warp
         </p>
-        <p id="slogan">Keep it close</p>
         {user?.emailVerified ? (
           <div id="hamburger">
             <MenuButton/>

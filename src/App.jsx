@@ -117,7 +117,6 @@ const App = () => {
           />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
-        <Footer />
       </>
     </UserContext.Provider>
   );
