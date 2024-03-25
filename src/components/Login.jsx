@@ -20,37 +20,29 @@ function Login() {
   }, []);
 
   return (
-    <div className="login">
-      <div className="login__container">
-        <input
-          type="text"
-          className="login__textBox"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="E-mail Address"
-        />
-          <input
-            type="password"
-            className="login__textBox"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Password"
-          />
-        <button
-          className="login__btn"
-          onClick={() => logInWithEmailAndPassword(email,password)}
-        >
-          Login
-        </button>
+    <div className="responsive-background">
+      <form action="" className="login-form">
+        <div className="container-login">
+          <h2 className="login-heading">Log In</h2>
+          
+          <p>Using your email and password</p>
+          <input type="email" placeholder="Email@address.com" 
+          className="login-box email"  value={email}
+          onChange={(e) => setEmail(e.target.value)}/>
+          <input type="password" placeholder="Password" 
+          className="login-box password" value={password}
+          onChange={(e) => setPassword(e.target.value)} />
 
-        <button className="login__btn login__google" onClick={signInWithGoogle}>
-          Login with Google
-        </button>
-        <div>
-          Don't have an account? <Link to="/register">Register</Link>
+          <input type="submit" value="Log In" className="login-button"
+          onClick={() => signInWithEmailAndPassword(auth,email, password)} />
+          <p>or</p>
+          <hr/>
+          <div className="social-icons">
+            <a onClick={signInWithGoogle} className="icon"><FaGoogle /></a>
+          </div>
+          <Link className="signUpLink" to="/forgot-password">Forgot your Password?</Link>
         </div>
-        <Link to="/forgot-password">Forgot your password?</Link>
-      </div>
+      </form>
     </div>
   );
 }
