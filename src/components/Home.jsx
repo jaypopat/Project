@@ -8,7 +8,7 @@ const Home = () => {
 
   const { user } = useContext(UserContext);
 
-  return user ? (
+  return user?.emailVerified ? (
     <div id="room-btns">
       <Link to="/createroom">
         <button className="red">Create Room</button>

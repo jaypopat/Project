@@ -17,6 +17,7 @@ function Register() {
     }
     try {
       await registerWithEmailAndPassword(name, email, password);
+      alert("A verification email has been sent to your email address. Please check your inbox and click on the verification link to complete the registration process.");
     } catch (error) {
     }
   };

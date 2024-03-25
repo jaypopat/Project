@@ -19,7 +19,7 @@ const Header = () => {
           Warp
         </p>
         <p id="slogan">Keep it close</p>
-        {user ? (
+        {user?.emailVerified ? (
           <div id="hamburger">
             <MenuButton/>
          </div>

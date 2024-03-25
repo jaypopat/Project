@@ -12,7 +12,7 @@ function Protected({ children }) {
   if (userLocationFetchingInBackground) {
     return <Spinner/>;
   }
-  if (!user) {
+  if (!user?.emailVerified) {
     return <Navigate to="/login" replace />;
   }
   if (!userLocation) {

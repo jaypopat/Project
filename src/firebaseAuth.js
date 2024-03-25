@@ -6,6 +6,7 @@ import {
     signInWithEmailAndPassword,
     createUserWithEmailAndPassword,
     sendPasswordResetEmail,
+    sendEmailVerification,
     signOut,
 } from "firebase/auth";
 import { updateProfile } from "firebase/auth";
@@ -26,7 +27,7 @@ import { toast } from "react-toastify";
 const firebaseConfig = {
     apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
     authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-    databaseURL:import.meta.env.VITE_FIREBASE_DATABASE_URL,
+    databaseURL: import.meta.env.VITE_FIREBASE_DATABASE_URL,
     projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
     storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
     messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
@@ -58,10 +59,21 @@ export const signInWithGoogle = async () => {
     }
 };
 
-export const logInWithEmailAndPassword = (email, password) => {
+
+
+export const logInWithEmailAndPassword = (email, password,username) => {
     signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
+        .then(async (userCredential) => {
             const user = userCredential.user;
+            if (user.emailVerified) {
+
+
+                await updateProfile(user, {
+                    displayName: username,
+                    photoURL: `https://api.dicebear.com/8.x/pixel-art/svg?seed=${username}`
+                });
+
+            }
             return user;
         })
         .catch((error) => {
@@ -71,11 +83,17 @@ export const logInWithEmailAndPassword = (email, password) => {
         });
 };
 
+
 export const registerWithEmailAndPassword = async (name, email, password) => {
     try {
         const res = await createUserWithEmailAndPassword(auth, email, password);
         const user = res.user;
         console.log(user);
+
+        await sendEmailVerification(user);
+
+        await user.reload();
+
         await setDoc(doc(db, "users", user.uid), {
             uid: user.uid,
             name,
@@ -83,16 +101,11 @@ export const registerWithEmailAndPassword = async (name, email, password) => {
             email,
         });
 
-        // Update the user's display name and profile picture
-        await updateProfile(user, {
-            displayName: name,
-            photoURL: `https://api.dicebear.com/8.x/pixel-art/svg?seed=${name}`
-        });
-
-        // Reload the user object to ensure it's up-to-date
-        await user.reload();
 
         console.log("User registered and profile updated successfully");
+
+
+
     } catch (err) {
         console.error(err);
         alert(err.message);
