@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { auth, signInWithGoogle } from "../firebaseAuth.js";
+import { auth, signInWithGoogle,logInWithEmailAndPassword } from "../firebaseAuth.js";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import "./Login.css";
 
@@ -38,7 +38,7 @@ function Login() {
           />
         <button
           className="login__btn"
-          onClick={() => signInWithEmailAndPassword(auth,email, password)}
+          onClick={() => logInWithEmailAndPassword(email,password)}
         >
           Login
         </button>

@@ -1,16 +1,24 @@
 /* eslint-disable react/prop-types */
 import { Navigate } from "react-router-dom";
-import { useContext } from "react";
+import { useContext,useEffect } from "react";
 
 import { UserContext } from "../App";
 import { toast } from "react-toastify";
 import Spinner from "./Spinner";
 
 function Protected({ children }) {
-  const { user, userLocation,userLocationFetchingInBackground } = useContext(UserContext);
+  const { user, userLocation, userLocationFetchingInBackground } = useContext(UserContext);
+
+  useEffect(() => {
+    const reloadUserData = async () => {
+      await user.reload();
+    }
+
+    reloadUserData();
+  }), [];
 
   if (userLocationFetchingInBackground) {
-    return <Spinner/>;
+    return <Spinner />;
   }
   if (!user?.emailVerified) {
     return <Navigate to="/login" replace />;

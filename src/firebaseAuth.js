@@ -61,20 +61,13 @@ export const signInWithGoogle = async () => {
 
 
 
-export const logInWithEmailAndPassword = (email, password,username) => {
+export const logInWithEmailAndPassword = (email, password) => {
     signInWithEmailAndPassword(auth, email, password)
         .then(async (userCredential) => {
             const user = userCredential.user;
             if (user.emailVerified) {
-
-
-                await updateProfile(user, {
-                    displayName: username,
-                    photoURL: `https://api.dicebear.com/8.x/pixel-art/svg?seed=${username}`
-                });
-
+                return user;
             }
-            return user;
         })
         .catch((error) => {
             const errorCode = error.code;
@@ -99,6 +92,10 @@ export const registerWithEmailAndPassword = async (name, email, password) => {
             name,
             authProvider: "email",
             email,
+        });
+        await updateProfile(user, {
+            displayName: name,
+            photoURL: `https://api.dicebear.com/8.x/pixel-art/svg?seed=${name}`
         });
 
 
