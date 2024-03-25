@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { auth, registerWithEmailAndPassword, signInWithGoogle } from "../firebaseAuth.js";
 import "./Register.css";
 import { useNavigate } from "react-router-dom";
+import { FaGoogle } from "react-icons/fa";
 
 function Register() {
   const navigate = useNavigate();
@@ -36,37 +37,33 @@ function Register() {
   }, []);
 
   return (
-    <div className="register">
-      <div className="register__container">
-        <input
-          type="text"
-          className="register__textBox"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          placeholder="Full Name"
-        />
-        <input
-          type="text"
-          className="register__textBox"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="E-mail Address"
-        />
-        <input
-          type="password"
-          className="register__textBox"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
-        />
-        <button className="registerbtn" onClick={register}>
-          Register
-        </button>
-        <div>
-          Already have an account? <Link to="/login">Login</Link> now.
+    <div className="responsive-background">
+    <form action="">
+      <div className="container-register">
+        <h2 className="login-heading">Sign Up</h2>
+        
+        <p>Using your email and password</p>
+        <input type="text" placeholder="Email@address.com" 
+        className="login-box email"  value={name}
+        onChange={(e) => setName(e.target.value)}/>
+
+        <input type="text" placeholder="Password" 
+        className="login-box password" value={email}
+        onChange={(e) => setEmail(e.target.value)} />
+
+        <input type="submit" value="Sign Up" className="login-button" 
+        onClick={register}/>
+        <p>or</p>
+        <hr/>
+        <div className="social-icons">
+          <a onClick={signInWithGoogle} className="icon"><FaGoogle /></a>
         </div>
+        <Link className="signUpLink" to="/login">Already have an account?</Link>
       </div>
-    </div>
+    </form>
+  </div>
+  
+  
   );
 }
 
