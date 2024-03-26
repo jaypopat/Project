@@ -28,7 +28,7 @@ label {
   color: #fff;
 }
 
-input[type="text"],
+.chatRoomInput,
 textarea {
   width: 100%;
   padding: 10px;

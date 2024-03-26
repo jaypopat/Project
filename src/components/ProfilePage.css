@@ -1,12 +1,28 @@
 /* ProfilePage.css */
-
-.profile-page {
-    background-color: #f5f5f5;
-    padding: 20px;
-    max-width: 600px;
-    margin: 0 auto;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+.user-profile{
+    font-size: 3.25rem;
+    font-weight: 550;
+    color: #6ed9a1;
+    margin-top: 0.25em;
+    margin-bottom: 0.25em;
+}
+.container-profile {
+    width: 65vw;
+    height: 55vh;
+    max-width: 500px;
+    max-height: 600px;
+    min-width: 425px;
+    min-height: 370px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 4px;
+    border: 1px solid hsla(0,0,0,0.9);
+    border-radius: 10px;
+    padding: 0px;
+    background-color: #353e44;
+    margin-bottom: 4em;
+    box-shadow: rgba(50, 50, 93, 0.45) 1px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
    }
    
    .profile-page h1 {
@@ -17,14 +33,44 @@
    #pfp{
     height: 60px;
     width: 60px;
+    border-radius: 8px;
+    margin-bottom: 1em;
    }
    
-   .profile-page input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+   .displayName,
+   .profile-input {
+    padding-left:  0.75em;
+    padding-top: 1.25em;
+    padding-bottom: 1em;
+    width: 75%;
+    border-radius: 10px;
+    border: 1px solid gray;
+    margin-bottom: 1em;
+    border: 0px;
+    font-weight: 500;
+   }
+
+   .browse-file{
+    margin-left: 5.25em;
+    font-weight: 500;
+   }
+
+   .update-profile{
+    font-weight: 500;
+    background-color: #6ed9a1;
+    border: 0px;
+    border-radius: 10px;
+    width: 55%;
+    margin-bottom: 0.5em;
+    margin-top: 1.75em;
+    padding: 1.5em;
+    text-transform: uppercase;
+    cursor: pointer;
+   }
+
+   .update-profile:hover {
+    background-color: #5ebf8d;
+    cursor: pointer;
    }
    
    .profile-page button {

@@ -70,6 +70,7 @@ const ChatRoom = () => {
             <div className="form-group">
               <label htmlFor="chatRoomName">Chat Room Name</label>
               <input
+                  className="chatRoomInput"
                   type="text"
                   id="chatRoomName"
                   name="chatRoomName"
