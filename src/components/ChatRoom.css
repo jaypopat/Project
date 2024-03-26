@@ -215,4 +215,9 @@
     padding: 0.25em
   }
  }
+@media (min-width: 768px) {
+    #sidebar {
+        display: block;
+    }
+}
 

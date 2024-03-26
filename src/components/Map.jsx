@@ -5,7 +5,7 @@ import { updateCircleRadius } from "../utils/updateCircleRadius.js";
 mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_API_KEY;
 
 const MapComponent = ({ locations }) => {
-    const randomColors = ["#59418e", "#f7a440", "#f72585", "#7209b7", "#3a0ca3", "#4361ee", "#4cc9f0", "#0be881", "#f0f66e", "#ffbe0b"];
+    const randomColors = ["#6ed9a1", "#f9d56e", "#f96e6e", "#6e7cf9", "#d96ef9"];
     const mapContainer = useRef(null);
     const map = useRef(null);
     const { userLocation } = useContext(UserContext);

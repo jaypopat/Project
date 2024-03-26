@@ -101,11 +101,13 @@ function ChatRoom() {
       </div>
       <div className="chatroom-body">
         <MainContainer>
-          <Sidebar position="left">
-            <ConversationList>
-              <Rooms />
-            </ConversationList>
-          </Sidebar>
+          <div id="sidebar">
+            <Sidebar position="left">
+              <ConversationList>
+                <Rooms />
+              </ConversationList>
+            </Sidebar>
+          </div>
           {selectedUser ? (
               <UserProfilePopup
                   selectedUser={selectedUser}
