@@ -104,10 +104,13 @@ const MenuButton = () => {
             {isMenuOpen && (
                 <div className="menu" onMouseLeave={handleMenuClose}>
                     <button onClick={handleProfile}>Profile</button>
-                    <button onClick={handleFriendList}>Friend List</button>
-                    <div className='friendRequestsButton'>
-                        <button onClick={handleFriendRequests}>Friend Requests</button>
-                        <p>{FriendRequests.length}</p>
+                    <div className='friendButton' onClick={handleFriendList}>
+                        <button>Friend List</button>
+                        {(numUnseenMessages > 0) && <span className='badge'>{numUnseenMessages}</span>}
+                    </div>
+                    <div className='friendButton' onClick={handleFriendRequests}>
+                        <button>Friend Requests</button>
+                        {(FriendRequests.length > 0) && <span className='badge'>{FriendRequests.length}</span>}
                     </div>
                     <button onClick={handleLogout}>Logout</button>
 

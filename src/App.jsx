@@ -6,11 +6,14 @@ import { fetchLocation } from "./utils/fetchLocation";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 export const UserContext = createContext();
+export const FriendRequestContext = createContext();
+
 
 const App = () => {
   const [user, setUser] = useState(null);
   const [userLocation, setUserLocation] = useState(null);
   const [userLocationFetchingInBackground, setIsLoadingGeo] = useState(true);
+  const [friendRequests, setFriendRequests] = useState([]);
 
   useEffect(() => {
     fetchLocation()

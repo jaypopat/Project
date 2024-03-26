@@ -47,6 +47,7 @@ const FriendRequests = () => {
             });
 
             await deleteDoc(doc(db, "users", user.uid, "friendRequests", requestId)); // Delete friend request
+            // Force a reload of MenuButton to update the friends list
             setFriendRequests(currentRequests => currentRequests.filter(request => request.id !== requestId));
         } catch (error) {
             console.error("Failed to accept friend request:", error);
