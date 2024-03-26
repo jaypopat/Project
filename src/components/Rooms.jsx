@@ -52,6 +52,7 @@ const Rooms = () => {
 }
 
 const RoomTable = ({ rooms }) => (
+  <div className="center-room">
   <table id="rooms">
     <thead>
       <tr>
@@ -66,6 +67,7 @@ const RoomTable = ({ rooms }) => (
       <tr></tr>
     </tbody>
   </table>
+  </div>
 );
 
 const RoomRow = ({ room }) => (
