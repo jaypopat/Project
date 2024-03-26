@@ -1,19 +1,26 @@
 #rooms {
-    width: 70vw;
+    width: 80vw;
     min-width: 350px;
-    max-width: 600px;
+    max-width: 700px;
     border-collapse: collapse;
     font-family: Arial, sans-serif;
     color: #ffffff; 
     margin: 25px 0;
     max-height: 600px;
+
   }
 
-  
+  .center-room{
+    display: flex;
+    justify-content: center;
+    
+  }
   #rooms th,
   #rooms td {
-    padding: 12px 15px;
+    padding: 20px 15px;
     border-bottom: 1px solid #ddd;
+    text-align: center;
+    color: white;
   }
 
   #rooms th:first-child{
@@ -59,48 +66,17 @@
     top: 20%;
     right: 0;
    }
-
-    #rooms .mapboxgl-canvas{
-      width: 70vw;
-      min-width: 300px;
+   .center-room{
+    display: flex;
+    align-items: center;
+    justify-content: center;
    }
-
    .map-container{
-    width: 50vw;
+    width: 40vw;
     height: 40vh;
+    max-width: 500px;
+    min-width: 345px;
+    margin: 0;
+    padding: 0;
    }
 
-@media screen and (max-width: 500px) {
-  #rooms{
-    width: 50vw;
-  }
-
-  #rooms .mapboxgl-canvas{
-    width: 50vw;
-  }
-}
-
-@media screen and (max-width: 500px) {
-  #rooms{
-    width: 40vw;
-    height: 40vh;
-  }
-
-  #rooms .mapboxgl-canvas{
-    width: 40vw;
-    height: 40vh;
-  }
-}
-
-@media screen and (max-height: 400px){
-  #rooms{
-    width: 30vw;
-    height: 30vh;
-  }
-
-  #rooms .mapboxgl-canvas{
-    width: 30vw;
-    height: 30vh;
-  }
-}
-   

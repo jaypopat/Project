@@ -1,24 +1,23 @@
 import "./Home.css";
 import { Link } from "react-router-dom";
 import { useContext } from 'react';
-
+import { useNavigate } from "react-router-dom";
 import { UserContext } from '../App';
+import { useEffect } from "react";
 
 const Home = () => {
 
+  const navigate = useNavigate();
   const { user } = useContext(UserContext);
 
-  return user?.emailVerified ? (
-    <div id="room-btns">
-      <Link to="/createroom">
-        <button className="red">Create Room</button>
-      </Link>
-      <Link to="/joinroom">
-        <button className="red">Join Room</button>
-      </Link>
+  useEffect(() => {
+    if (user?.emailVerified) {
+      // If the user's email is verified, navigate to a different path
+      navigate('/joinroom');
+    }
+  }, [user, navigate]);
 
-    </div>
-  ) : (
+  return (
     <div className="responsive-background">
         <nav className="navbar">
             <div className="brand-title phase-in">Warp</div>
