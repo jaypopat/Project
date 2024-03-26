@@ -13,9 +13,11 @@ const MenuButton = () => {
     let navigate = useNavigate();
 
     const { user } = useContext(UserContext);
+    const [friends, setFriends] = useState([]);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [FriendRequests, setFriendRequests] = useState([]);
     const [hasFriendRequests, setHasFriendRequests] = useState(false);
+    const [numUnseenMessages, setNumUnseenMessages] = useState(0);
 
     useEffect(() => {
         const getFriendRequests = async () => {
@@ -31,6 +33,38 @@ const MenuButton = () => {
             setHasFriendRequests(true);
         }
     });
+
+    useEffect(() => {
+        const getFriends = async () => {
+            const userRef = doc(db, "users", user.uid);
+            const friendRef = collection(userRef, "friends");
+            const q = query(friendRef);
+            const querySnapshot = await getDocs(q);
+            return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        };
+        getFriends().then(friends => setFriends(friends));
+    }, []);
+
+
+    // Check how many unseen messages there are for the current user and set the number of unseen messages
+    useEffect(() => {
+        console.log(friends)
+        const checkUnseenMessages = async () => {
+            for (const friend of friends) {
+                const dmDocId = [user.uid, friend.friendId].sort().join('-');
+                const dmDocRef = doc(db, "dms", dmDocId);
+                const messagesRef = collection(dmDocRef, "messages");
+                const q = query(messagesRef);
+                const querySnapshot = await getDocs(q);
+                const messages = querySnapshot.docs.map(doc => doc.data());
+                const unseenMessages = messages.filter(message => message.uid === friend.friendId && !message.seen);
+                if (unseenMessages.length > 0) {
+                    setNumUnseenMessages(numUnseenMessages + unseenMessages.length);
+                }
+            }
+        };
+        checkUnseenMessages();
+    } , [friends, user.uid]);
 
     const handleMenuToggle = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -64,7 +98,7 @@ const MenuButton = () => {
             <div>
                 <button className="menu-button" onClick={handleMenuToggle}>
                     <FontAwesomeIcon icon={faBars} size="2x" />
-                    {hasFriendRequests && <div className="notification-badge">{FriendRequests.length}</div>}
+                    {(numUnseenMessages > 0 || hasFriendRequests) && <p className='notification'>{numUnseenMessages + FriendRequests.length}</p>}
                 </button>
             </div>
             {isMenuOpen && (

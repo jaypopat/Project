@@ -9,6 +9,8 @@ import './FriendList.css';
 function FriendList() {
     const { user } = useContext(UserContext);
     const [friends, setFriends] = useState([]);
+    const [hasSentDM, setHasSentDM] = useState(false);
+    const [whoSentDM, setWhoSentDM] = useState('')
 
     useEffect(() => {
         const getFriends = async () => {
@@ -21,6 +23,26 @@ function FriendList() {
         getFriends().then(friends => setFriends(friends));
     }, []);
 
+    useEffect(() => {
+        const checkUnseenMessages = async () => {
+            for (const friend of friends) {
+                const dmDocId = [user.uid, friend.friendId].sort().join('-');
+                const dmDocRef = doc(db, "dms", dmDocId);
+                const messagesRef = collection(dmDocRef, "messages");
+                const q = query(messagesRef);
+                const querySnapshot = await getDocs(q);
+                const messages = querySnapshot.docs.map(doc => doc.data());
+                const unseenMessages = messages.filter(message => message.uid === friend.friendId && !message.seen);
+                if (unseenMessages.length > 0) {
+                    setHasSentDM(true);
+                    setWhoSentDM(friend.friendId);
+                    break;
+                }
+            }
+        };
+        checkUnseenMessages();
+    } , [friends, user.uid]);
+
     return friends && friends.length > 0 ? (
         <div className='responsive-background'>
             <div className="friend-list">
@@ -30,6 +52,7 @@ function FriendList() {
                         <Link to={`/dm/${friend.friendId}`} className="friend-link">
                             <img src={friend.friendPic} alt="Profile" className="profile-pic" />
                             <span className="friend-name">{friend.friendName}</span>
+                            {hasSentDM && whoSentDM === friend.friendId && <div className='new-message'>New Message!</div>}
                         </Link>
                     </div>
                 ))}

@@ -65,10 +65,21 @@ function DM() {
             createdAt: Timestamp.fromDate(new Date()),
             uid: user.uid,
             displayName:user.displayName,
-            userPic: user.photoURL
+            userPic: user.photoURL,
+            seen: false
         });
         setNewMessage("");
     };
+
+    // If user2 has sent a message, set the message's seen field to true
+    useEffect(() => {
+        if (messages.length > 0 && messages[messages.length - 1].uid === user2) {
+            const lastMessage = messages[messages.length - 1];
+            setDoc(doc(messagesRef, lastMessage.id), { seen: true }, { merge: true });
+        }
+    }
+    , [messages, user2]);
+    
 
     if (!user2) {
         return <div>Loading...</div>;
