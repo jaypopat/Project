@@ -1,11 +1,15 @@
 /* chat-room.css */
 .chat-room {
-  max-width: fit-content;
-  margin: 0 auto;
-  padding: 100px;
+  max-width: 500px;
+  min-width: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 40px;
   border: 1px solid #333;
   border-radius: 10px;
-  background-color: #6ed9a1;
+  background-color: #29363f;
   color: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   text-align: center;
@@ -14,6 +18,8 @@
 h2 {
   font-size: 24px;
   margin-bottom: 20px;
+  color: #6ed9a1;
+  font-size: 2.75rem;
 }
 
 .form-group {
@@ -23,12 +29,13 @@ h2 {
 
 label {
   display: block;
-  font-weight: bold;
+  font-weight: 500;
   margin-bottom: 5px;
-  color: #fff;
+  color: gray;
+
 }
 
-input[type="text"],
+.chatRoomInput,
 textarea {
   width: 100%;
   padding: 10px;
@@ -39,16 +46,33 @@ textarea {
   color: #333;
 }
 
-button {
-  background-color: #3b3b49;
-  color: #fff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
+
+.create-button {
+  background-color: #6ed9a1;
+  border: 0px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 200px;
+  margin-bottom: 0.5em;
+  margin-top: 1.75em;
+  padding: 1em;
+  text-transform: uppercase;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  color: white;
+  font-weight: 500;
+  font-size: 1.25rem;
+  margin-bottom: 2em;
 }
+
+.create-button:hover{
+  background-color: #5efaaa;
+}
+
+.chatRoomInput, #radius, .create-button{
+  width: 50vw;
+  max-width: 400px;
+}
+
 body {
   font-family: "Roboto", sans-serif;
 }
