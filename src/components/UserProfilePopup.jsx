@@ -1,4 +1,4 @@
-import {addDoc, collection, doc } from "firebase/firestore";
+import {addDoc, collection, doc, getDocs, query, where} from "firebase/firestore";
 import { db } from "../firebaseAuth";
 import "./ProfilePagePopup.css"
 import {useContext} from "react";
@@ -9,6 +9,25 @@ const UserProfilePopup = ({selectedUser, onClose}) => {
 
     const sendFriendReq = async () => {
         if (selectedUser.uid === user.uid) return;
+
+        const friendRequestsRef = collection(db, "users", selectedUser.uid, "friendRequests");
+        const friendsRef = collection(db, "users", selectedUser.uid, "friends");
+
+        const existingReqQuery = query(friendRequestsRef, where("friendId", "==", user.uid));
+        const existingReqSnapshot = await getDocs(existingReqQuery);
+
+        if (!existingReqSnapshot.empty) {
+            console.log("Friend Request already sent");
+            return;
+        }
+
+        const existingFriendQuery = query(friendsRef, where("friendId", "==", user.uid));
+        const existingFriendSnapshot = await getDocs(existingFriendQuery);
+
+        if (!existingFriendSnapshot.empty) {
+            console.log("Already Friends");
+            return;
+        }
 
         const userRef = doc(db, "users", selectedUser.uid);
         const friendReqRef = collection(userRef, "friendRequests");
