@@ -21,9 +21,6 @@ const Header = () => {
       {/* Render the header only if not on the root or "/about" page */}
       {!isRootOrAboutPage && (
         <div className="header">
-          <p onClick={redirectHome} id="appName">
-            Warp
-          </p>
           {user?.emailVerified ? (
             <div id="hamburger">
               <MenuButton/>

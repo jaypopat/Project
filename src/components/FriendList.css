@@ -1,22 +1,38 @@
 .friend-list {
-    width: 100%;
-    max-width: 400px;
+    width: 45vw;
+    max-width: 500px;
     margin: 0 auto;
+    background-color: #353e44;
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+    padding-bottom: 1.5em;
+    border-radius: 8px;
+    margin-bottom: 19em;
 }
 
+.friend-heading, .no-friends{
+    text-align: center;
+    font-size: 3.5rem;
+    font-weight: 550;
+    color: #6ed9a1;
+    margin-top: 0.5em;
+    margin-bottom: 0.25em;
+}
 .friend-item {
     display: flex;
     align-items: center;
+    width: 100%; 
     margin-bottom: 10px;
 }
 
 .friend-link {
     display: flex;
     align-items: center;
+    justify-content: space-between; 
     text-decoration: none;
     color: #333;
+    width: 100%;
 }
-
 .profile-pic {
     width: 50px;
     height: 50px;
@@ -26,4 +42,49 @@
 
 .friend-name {
     font-weight: bold;
+    color: white;
+}
+
+.empty-list{
+    margin-bottom: 15em;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.join-link{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+}
+.find-room{
+    background-color: #6ed9a1;
+    border: 0px;
+    border-radius: 10px;
+    width: 60%;
+    margin-bottom: 0.5em;
+    margin-top: 1.75em;
+    padding: 0.75em;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.find-room:hover{
+    background-color: #5ebf8d;
+}
+.empty-state{
+    text-align: center;
+    color: white;
+    font-weight: 500;
+    font-size: 1.75rem;
+}
+
+@media screen and (min-width: 600px) {
+    .friend-list{
+        width: 50vw;
+    }
 }

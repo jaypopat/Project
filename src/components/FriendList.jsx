@@ -21,20 +21,27 @@ function FriendList() {
         getFriends().then(friends => setFriends(friends));
     }, []);
 
-    return (
-        <div className="friend-list">
-            <h2>Friend List</h2>
-            {friends.map((friend) => (
-                <div key={friend.friendId} className="friend-item">
-                    <Link to={`/dm/${friend.friendId}`} className="friend-link">
-                        <img src={friend.friendPic} alt="Profile" className="profile-pic" />
-                        <span className="friend-name">{friend.friendName}</span>
-                    </Link>
-                </div>
-            ))}
+    return friends && friends.length > 0 ? (
+        <div className='responsive-background'>
+            <div className="friend-list">
+                <h2 className='friend-heading'>Friend List</h2>
+                {friends.map((friend) => (
+                    <div key={friend.friendId} className="friend-item">
+                        <Link to={`/dm/${friend.friendId}`} className="friend-link">
+                            <img src={friend.friendPic} alt="Profile" className="profile-pic" />
+                            <span className="friend-name">{friend.friendName}</span>
+                        </Link>
+                    </div>
+                ))}
+            </div>
         </div>
-
-    );
+      ) : (
+        <div className='empty-list'>
+        <h2 className='no-friends'>Uh Oh...</h2>
+        <p className='empty-state'>You have no friends. Maybe you should try make some!</p>
+        <Link to="/joinroom" className='join-link'><button className='find-room'>Join a Room</button></Link>
+        </div>
+      );
 }
 
 export default FriendList;

@@ -49,7 +49,7 @@ const ProfilePage = () => {
                 <h1 className="user-profile">User Profile</h1>
                 <img id="pfp" src={profilePicURL} alt="pfp" />
                 <input
-                    className="displayName"
+                    className="profile-input"
                     type="text"
                     value={displayName}
                     onChange={(e) => setDisplayName(e.target.value)}

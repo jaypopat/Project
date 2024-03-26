@@ -2,6 +2,8 @@ import {useContext, useEffect, useState} from "react";
 import {UserContext} from "../App.jsx";
 import {collection, doc, getDocs, query, addDoc, deleteDoc } from "firebase/firestore";
 import {db} from "../firebaseAuth.js";
+import { Link } from 'react-router-dom';
+import "./FriendRequests.css"
 
 const FriendRequests = () => {
     const { user } = useContext(UserContext);
@@ -60,7 +62,13 @@ const FriendRequests = () => {
         }
     };
 
-    if (friendRequests.length === 0) return <h1>No friend requests</h1>;
+    if (friendRequests.length === 0) return (
+    <div className="no-requests">
+        <h1 className="no-requests-msg">Womp Womp</h1>
+        <p className="empty-state">You have no current friend requests pending</p>
+        <Link to="/joinroom" className='join-link'><button className='find-room'>Join a Room</button></Link>
+    </div>
+    );
     return (
         <div>
             <h1>Friend Requests</h1>
