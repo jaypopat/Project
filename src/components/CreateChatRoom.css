@@ -1,11 +1,11 @@
 /* chat-room.css */
 .chat-room {
-  max-width: 400px;
+  max-width: fit-content;
   margin: 0 auto;
   padding: 100px;
   border: 1px solid #333;
   border-radius: 10px;
-  background-color: #59418e;
+  background-color: #6ed9a1;
   color: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   text-align: center;
@@ -72,9 +72,18 @@ input[type="range"]::-moz-range-thumb {
 .bold-text {
   font-weight: bold;
 }
+/* Hide the map on smaller screens */
 .map-container {
-  height: 400px;
+  display: none;
 }
+
+/* Show the map on screens wider than 768 pixels */
+@media (min-width: 768px) {
+  .map-container {
+    display: block;
+  }
+}
+
 .sidebar {
   background-color: rgb(35 55 75 / 90%);
   color: #fff;

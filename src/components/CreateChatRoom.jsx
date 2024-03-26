@@ -99,7 +99,9 @@ const ChatRoom = () => {
               Create Chat Room
             </button>
           </form>
-          <MapComponent locations={locations} />
+          <div className="map-container">
+            <MapComponent locations={locations} />
+          </div>
         </div>
     );
 }
