@@ -6,20 +6,15 @@ function ForgotPassword() {
   const [email, setEmail] = useState("");
 
   return (
-    <div className="login">
-      <div className="login__container">
-        <input
-          type="text"
-          className="login__textBox"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="E-mail Address"
-        />
-
-        <button className="login__btn" onClick={() => sendPasswordReset(email)}>
-          Continue
-        </button>
-      </div>
+    <div className="responsive-background">
+        <form action="">
+            <div className="container-forgot">
+                <h2 className="forgot-heading">Forgot Password</h2>
+                <p className="forgot-msg">Send link to your email address</p>
+                <input type="email" placeholder="Email@address.com" className="email-box"/>                
+                <input type="submit" value="Send" className="send-button"/>
+            </div>
+        </form>
     </div>
   );
 }

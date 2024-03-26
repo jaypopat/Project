@@ -12,22 +12,24 @@ const Header = () => {
     navigate("/");
   };
 
+ 
+  // Check if we are on the root or "/about" page
+  const isRootOrAboutPage = location.pathname === "/" || location.pathname === "/about";
+
   return (
     <>
-      <div className="header">
-        <p onClick={redirectHome} id="appName">
-          Warp
-        </p>
-        <p id="slogan">Keep it close</p>
-        {user?.emailVerified ? (
-          <div id="hamburger">
-            <MenuButton/>
-         </div>
-         
-        ) : (
-          ""
-        )}
-      </div>
+      {/* Render the header only if not on the root or "/about" page */}
+      {!isRootOrAboutPage && (
+        <div className="header">
+          {user?.emailVerified ? (
+            <div id="hamburger">
+              <MenuButton/>
+            </div>
+          ) : (
+            ""
+          )}
+        </div>
+      )}
     </>
   );
 };

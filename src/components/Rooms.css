@@ -1,28 +1,40 @@
 #rooms {
-    width: 100%;
+    width: 70vw;
+    min-width: 350px;
+    max-width: 600px;
     border-collapse: collapse;
     font-family: Arial, sans-serif;
     color: #ffffff; 
     margin: 25px 0;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    max-height: 600px;
   }
-  
-  #rooms thead tr {
-    background-color: #59418e;
-  }
+
   
   #rooms th,
   #rooms td {
     padding: 12px 15px;
     border-bottom: 1px solid #ddd;
   }
-  
-  #rooms tbody tr:hover {
-    background-color: #410c0c;
+
+  #rooms th:first-child{
+    border-radius:10px 0 0 0px;
+    background-color: #6ed9a1;
+  }
+
+  #rooms th:nth-child(2){
+    border-radius:0 10px 0 0px;
+    background-color: #6ed9a1;
+  }
+
+  #rooms tbody{
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
   }
   
+  
   .join-button {
-    background-color: #59418e;
+    box-shadow: rgba(50, 50, 93, 0.25)
+     0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+    background-color: #6ed9a1;
     color: #ffffff; 
     border: none;
     padding: 10px 20px;
@@ -34,12 +46,61 @@
     cursor: pointer;
   }
 
+  .join-button:hover{
+    background-color: #5ebf8d;
+    cursor:pointer;
+  }
+
   #map {
-    height: 700px;
-    width: 700px;
+    min-width: 300px;
+    width: 70vw;
     margin-right: 0px;
     position: fixed;
     top: 20%;
     right: 0;
    }
+
+    #rooms .mapboxgl-canvas{
+      width: 70vw;
+      min-width: 300px;
+   }
+
+   .map-container{
+    width: 50vw;
+    height: 40vh;
+   }
+
+@media screen and (max-width: 500px) {
+  #rooms{
+    width: 50vw;
+  }
+
+  #rooms .mapboxgl-canvas{
+    width: 50vw;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  #rooms{
+    width: 40vw;
+    height: 40vh;
+  }
+
+  #rooms .mapboxgl-canvas{
+    width: 40vw;
+    height: 40vh;
+  }
+}
+
+@media screen and (max-height: 400px){
+  #rooms{
+    width: 30vw;
+    height: 30vh;
+  }
+
+  #rooms .mapboxgl-canvas{
+    width: 30vw;
+    height: 30vh;
+  }
+}
    

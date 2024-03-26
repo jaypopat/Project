@@ -44,34 +44,40 @@ const ProfilePage = () => {
     }
 
     return (
-        <div className="profile-page">
-            <h1>User Profile</h1>
-            <img id = "pfp" src={profilePicURL} alt="pfp" />
-            <input
-                type="text"
-                value={displayName}
-                onChange={(e) => setDisplayName(e.target.value)}
-                placeholder="Display Name"
-            />
-            <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Email"
-            />
-            <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="New Password (leave blank to keep current)"
-            />
-            <input
-                type="file"
-                onChange={handleProfilePicChange}
-                accept={'.jpg, .jpeg, .png'}
-                placeholder="Profile Picture URL"
-            />
-            <button onClick={handleProfileUpdate}>Update Profile</button>
+        <div className="responsive-background">
+            <div className="container-profile">
+                <h1 className="user-profile">User Profile</h1>
+                <img id="pfp" src={profilePicURL} alt="pfp" />
+                <input
+                    className="profile-input"
+                    type="text"
+                    value={displayName}
+                    onChange={(e) => setDisplayName(e.target.value)}
+                    placeholder="Display Name"
+                />
+                <input
+                    className="profile-input"
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Email"
+                />
+                <input
+                    className="profile-input"
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="New Password (leave blank to keep current)"
+                />
+                <input
+                    className="browse-file"
+                    type="file"
+                    onChange={handleProfilePicChange}
+                    accept={'.jpg, .jpeg, .png'}
+                    placeholder="Profile Picture URL"
+                />
+                <button className="update-profile" onClick={handleProfileUpdate}>Update Profile</button>
+            </div>
         </div>
     );
 };

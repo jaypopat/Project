@@ -14,9 +14,22 @@
     text-align: center;
 }
 
+.no-requests-msg{
+    text-align: center;
+    font-size: 3.5rem;
+    font-weight: 550;
+    color: #6ed9a1;
+    margin-top: 0.5em;
+    margin-bottom: 0.25em;
+}
+
 .friend-requests ul {
     list-style: none;
     padding: 0;
+}
+
+.no-requests{
+    margin-bottom: 15em;
 }
 
 .friend-requests li {
@@ -58,4 +71,13 @@
 
 .friend-requests button:hover {
     opacity: 0.8;
+}
+
+@media screen and (max-width: 400px) {
+    .no-requests-msg{
+        font-size: 2.75rem
+    }
+    .no-requests{
+        margin-bottom: 10em;
+    }
 }

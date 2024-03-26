@@ -55,7 +55,7 @@ const RoomTable = ({ rooms }) => (
   <table id="rooms">
     <thead>
       <tr>
-        <th>Room Name</th>
+        <th>Room</th>
         <th>Action</th>
       </tr>
     </thead>

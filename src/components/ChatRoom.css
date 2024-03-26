@@ -9,13 +9,15 @@
   overflow: hidden;
 
 }
+
+.chatroom-body{
+  z-index: 1;
+}
 .chat-container {
   background-color: black !important;
  }
  
 .chatroom-header {
-  padding: 16px;
-  background-color: #333;
   color: white;
   font-size: 24px;
   display: flex;
@@ -34,16 +36,13 @@
   overflow: auto;
   padding: 16px;
 }
-.chatroom-footer {
-  padding: 16px;
-  background-color: #333;
-  color: white;
-}
+
 .messages {
   display: flex;
   flex-direction: column;
   gap: 10px;
   padding: 10px;
+  z-index: 1;
  }
  
  .message-container {
@@ -77,3 +76,143 @@
   color: #888;
  }
  
+ #rooms tr {
+   width: 10%;
+   color: white;
+ }
+
+ #rooms td {
+  color: black;
+  font-weight: 500;
+ }
+
+ #rooms{
+  width: 30vh;
+ }
+
+ @media screen and (max-width: 800px){
+  .messages{
+    width: 50vw;
+  }
+  #rooms td{
+    padding: 0;
+  }
+  #rooms th {
+    font-size: 0.9rem;
+    padding: 0.5em;
+  }
+  #rooms tr td:first-child{
+    width: 30%;
+    font-size: 0.75rem
+    }
+  #rooms tr td:nth-child(1){
+    width: 25%;
+  }
+ }
+
+ @media screen and (max-width: 799px) and (min-width: 760px){
+  #rooms td {
+    padding: 0.25em;
+  }
+
+  #rooms th {
+    font-size: 0.9rem;
+    padding: 0.5em;
+  }
+  #rooms tr td:first-child{
+    width: 50%;
+    font-size: 0.75rem
+    }
+ }
+
+ @media screen and (max-width: 759px) and (min-width: 700px){
+  #rooms td {
+    padding: 0.5em;
+  }
+
+  #rooms th {
+    font-size: 1.15rem;
+    padding: 0.65em;
+  }
+  #rooms tr td:first-child{
+    width: 45%;
+    font-size: 0.75rem
+    }
+ }
+
+ @media screen and (max-width: 699px) and (min-width: 650px){
+  #rooms td {
+    padding: 0.5em;
+  }
+
+  #rooms th {
+    font-size: 1.15rem;
+    padding: 0.5em;
+  }
+  #rooms tr td:first-child{
+    width: 37.5%;
+    font-size: 0.75rem
+    }
+ }
+
+ @media screen and (max-width: 649px) and (min-width: 599px){
+  #rooms td {
+    padding: 0.5em;
+  }
+
+  #rooms th {
+    font-size: 1rem;
+    padding: 0.5em;
+  }
+  #rooms tr td:first-child{
+    width: 32.5%;
+    font-size: 0.75rem
+    }
+
+  #rooms .join-button{
+    padding: 0.75em
+  }
+ }
+
+ @media screen and (max-width: 598px){
+  #rooms td {
+    padding: 0.25em;
+  }
+
+  #rooms th {
+    font-size: 1rem;
+    padding: 0.35em;
+  }
+  #rooms tr td:first-child{
+    width: 25%;
+    font-size: 0.75rem
+    }
+
+  #rooms .join-button{
+    padding: 0.5em
+  }
+ }
+
+ @media screen and (max-width: 597px){
+  #rooms td {
+    padding-top: 0.75em;
+    font-size: 1.05rem;
+  }
+  .messages{
+    width: 100%;
+  }
+
+
+  #rooms th {
+    font-size: 0.75rem;
+    padding: 0.15em;
+  }
+  #rooms tr td:first-child{
+    font-size: 0.75rem
+    }
+
+  #rooms .join-button{
+    padding: 0.25em
+  }
+ }
+
