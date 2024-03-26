@@ -32,3 +32,15 @@
 .menu button:hover {
     background-color: #e0e0e0;
 }
+
+.friendRequestsButton {
+    background-color: #3B3B49;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+
+}

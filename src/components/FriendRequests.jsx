@@ -62,6 +62,10 @@ const FriendRequests = () => {
         }
     };
 
+    const getNumberOfRequests = () => {
+        return friendRequests.length;
+    }
+
     if (friendRequests.length === 0) return (
     <div className="no-requests">
         <h1 className="no-requests-msg">Womp Womp</h1>
