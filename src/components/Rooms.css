@@ -30,6 +30,25 @@
 .center-room-joinRoom #rooms,.center-room-joinRoom #rooms th, .center-room-joinRoom #rooms td {
   color: #ffffff; /* Sets text color to white */
   font-weight: 800;
+  text-align: left;
+
+}
+
+.center-room-joinRoom #rooms td:first-child{
+  padding-left: 0.55em;
+  width: 65%;
+}
+
+.center-room-joinRoom #rooms td:nth-child(2){
+  padding-right: 1em;
+}
+
+.center-room-joinRoom #rooms th:first-child{
+  padding-left: 1.25em;
+}
+
+.center-room-joinRoom #rooms th:nth-child(2){
+  padding-left: 2em;
 }
 
 .center-room-joinRoom .create-room-button{
@@ -125,4 +144,18 @@
    }
 
 
+@media screen and (max-width: 500px) {
 
+
+.center-room-joinRoom #rooms td:nth-child(2){
+  padding-right: 1em;
+}
+
+.center-room-joinRoom #rooms th:first-child{
+  padding-left: 1.5em;
+}
+
+.center-room-joinRoom #rooms th:nth-child(2){
+  padding-left: 0.5em;
+}
+}
