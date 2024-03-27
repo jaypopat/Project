@@ -96,9 +96,6 @@ function ChatRoom() {
     <div className="chatroom">
       <div className="chatroom-header">
         <h2>{roomName}</h2>
-        <Link to="/joinroom" className="chatroom-header-back">
-          ⬅️ 
-        </Link>
       </div>
       <div className="chatroom-body">
         <MainContainer>

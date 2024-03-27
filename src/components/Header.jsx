@@ -21,9 +21,9 @@ const Header = () => {
       {/* Render the header only if not on the root or "/about" page */}
       {!isRootOrAboutPage && (
         <div className="header">
-          {user?.emailVerified ? (
+          {user?.emailVerified  ? (
               <>
-                <h1 id="home-button" onClick={() => window.location.href = "/"}>Warp</h1>
+                <h1 id="home-button" onClick={() => window.location.href = "/joinroom"}>Warp</h1>
                 <div id="hamburger">
                   <MenuButton/>
                 </div>

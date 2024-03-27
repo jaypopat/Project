@@ -7,8 +7,9 @@
   left: 0;
   width: 100%;
   height: 3em; 
-  text-align: center;
-  margin-bottom: 5px;
+  text-align: left;
+  color: #6ed9a1;
+  cursor:pointer;
 }
 
 
@@ -17,5 +18,6 @@
   top: 0;
   right: 0;
   z-index: 9999;
+  margin-right: 0.75em
  }
  
