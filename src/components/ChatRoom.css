@@ -29,7 +29,6 @@
 .chatroom-body {
   flex: 1;
   overflow: auto;
-  padding: 16px;
 }
 
 .messages {
@@ -41,6 +40,8 @@
  }
  
  .message-container {
+     position: relative;
+     z-index: 1;
   display: flex;
   align-items: center;
   gap: 10px;

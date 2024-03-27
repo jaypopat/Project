@@ -50,8 +50,7 @@ const Rooms = () => {
 
   return isLoading ? <Spinner /> : (
     <>
-      <RoomTable rooms={rooms} 
-      className={isJoinRoom ? "joinRoom":""} />
+      <RoomTable rooms={rooms} className={isJoinRoom ? "joinRoom":""} />
       <MapComponent locations={getMapLocations(rooms)} />
     </>
   );
@@ -59,6 +58,7 @@ const Rooms = () => {
 
 const RoomTable = ({ rooms, className }) => (
   <div className={`center-room ${className}`}>
+    <button className="create-room-button" onClick={() => window.location.href = "/createroom"}> Create Room </button>
   <table id="rooms">
     <thead>
       <tr>

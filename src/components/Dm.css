@@ -3,6 +3,10 @@
     background-color: #f5f5f5;
 }
 
+.chatroom-header-back {
+    z-index: 1000;
+}
+
 .message-container {
     /* Customize the appearance of individual messages */
     background-color: #ffffff;
