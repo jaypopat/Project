@@ -51,8 +51,8 @@ function FriendList() {
                     <div key={friend.friendId} className="friend-item">
                         <Link to={`/dm/${friend.friendId}`} className="friend-link">
                             <img src={friend.friendPic} alt="Profile" className="profile-pic" />
-                            <span className="friend-name">{friend.friendName}</span>
                             {hasSentDM && whoSentDM === friend.friendId && <div className='new-message'>New Message!</div>}
+                            <span className="friend-name">{friend.friendName}</span>
                         </Link>
                     </div>
                 ))}
