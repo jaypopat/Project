@@ -22,9 +22,12 @@ const Header = () => {
       {!isRootOrAboutPage && (
         <div className="header">
           {user?.emailVerified ? (
-            <div id="hamburger">
-              <MenuButton/>
-            </div>
+              <>
+                <h1 id="home-button" onClick={() => window.location.href = "/"}>Warp</h1>
+                <div id="hamburger">
+                  <MenuButton/>
+                </div>
+              </>
           ) : (
             ""
           )}
