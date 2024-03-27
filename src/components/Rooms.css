@@ -3,15 +3,15 @@
   min-width: 350px;
   max-width: 700px;
   border-collapse: collapse;
-  font-family: Arial, sans-serif;
-  margin: 25px 0; /* You can adjust this if needed */
-  height: 50vh; /* Adjust based on content, but allows for flexibility */
+  font-family: "Roboto", sans-serif;
+  margin: 25px 0; 
+  height: 50vh; 
 }
 
 .center-room-joinRoom #rooms tbody{
   box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
-  max-height: 40vh; /* Adjusted to control visible area */
-  overflow-y: auto; /* Enables scrolling for overflow content */
+  max-height: 40vh; 
+  overflow-y: auto; 
 }
 
 .center-room-{
@@ -28,10 +28,9 @@
   flex-direction: column;
 }
 .center-room-joinRoom #rooms,.center-room-joinRoom #rooms th, .center-room-joinRoom #rooms td {
-  color: #ffffff; /* Sets text color to white */
+  color: #ffffff;
   font-weight: 800;
   text-align: left;
-
 }
 
 .center-room-joinRoom #rooms td:first-child{
@@ -40,7 +39,7 @@
 }
 
 .center-room-joinRoom #rooms td:nth-child(2){
-  padding-right: 1em;
+  padding-right: 1.5em;
 }
 
 .center-room-joinRoom #rooms th:first-child{
@@ -55,7 +54,7 @@
     background-color: #6ed9a1;
     border: 0px;
     border-radius: 10px;
-    width: 55%;
+    width: 100%;
     margin-bottom: 0.75em;
     margin-top: 0.25em;
     padding: 1em;
@@ -91,12 +90,11 @@
   }
 
   .center-room #rooms td.join-button-container {
-    text-align: right; /* Aligns the button to the right */
+    text-align: right; 
   }
   
-  /* If you have a specific 'joinRoom' class that modifies this behavior */
   .center-room-joinRoom #rooms td.join-button-container {
-    text-align: right; /* Ensures consistency when the 'joinRoom' class is applied */
+    text-align: right;
   }
 
   .center-room-joinRoom .join-button {
@@ -106,12 +104,13 @@
     color: #ffffff; 
     border: none;
     padding: 0.25em;
-    width: 55%;
+    width: 70%;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
     margin: 4px 2px;
+    margin-left: 2rem;
     cursor: pointer;
     border-radius: 8px;
     font-weight: 500;

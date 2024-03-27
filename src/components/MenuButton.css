@@ -80,8 +80,7 @@
 
 .friendButton span.badge {
     position: absolute;
-    top: 12;
-    right: 0;
+    right: 126px;
     margin: 3px;
     background-color: red;
     color: white;
