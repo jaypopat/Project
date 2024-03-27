@@ -32,7 +32,7 @@ const MenuButton = () => {
         if (FriendRequests.length > 0) {
             setHasFriendRequests(true);
         }
-    });
+    }, []);
 
     useEffect(() => {
         const getFriends = async () => {
@@ -102,7 +102,7 @@ const MenuButton = () => {
                 </button>
             </div>
             {isMenuOpen && (
-                <div className="menu" onMouseLeave={handleMenuClose}>
+                <div className="menu">
                     <button onClick={handleProfile}>Profile</button>
                     <div className='friendButton' onClick={handleFriendList}>
                         <button>Friend List</button>
