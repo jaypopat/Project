@@ -15,11 +15,11 @@
  
 .chatroom-header {
   color: white;
-  font-size: 24px;
+  font-size: 1rem;
+  padding: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
 }
 .chatroom-header a {
   position: absolute;
@@ -86,7 +86,6 @@
   font-size: 0.9rem; /* Adjusted font size for smaller text */
   border-bottom: 1px solid #ddd;
   text-align: center;
-  color: black
 }
 
 .center-room #rooms {
@@ -110,9 +109,20 @@
   align-items: center;
   flex-direction: column;
 }
-.center-room #rooms,.center-room #rooms th, .center-room #rooms td {
-  color: black; /* Sets text color to white */
+
+.center-room #rooms th {
+  color: white; /* Sets text color to white */
   font-weight: 800;
+  text-align: center;
+}
+
+.center-room #rooms th:first-child{
+  text-align: left;
+}
+
+.center-room #rooms td {
+  font-weight: 800;
+  text-align: left;
 }
   .center-room{
     display: flex;
@@ -179,7 +189,7 @@
 
 
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 800px) {
   .center-room #rooms{
     display: none;
   }
