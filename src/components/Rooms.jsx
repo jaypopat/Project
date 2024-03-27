@@ -80,7 +80,8 @@ const RoomRow = ({ room }) => (
   <tr key={room.id}>
     <td>{room.name}</td>
     <td>
-      <Link to={`/joinroom/${room.id}`}>
+      <Link className="join-button-container" 
+      to={`/joinroom/${room.id}`}>
         <button className="join-button">Join</button>
       </Link>
     </td>

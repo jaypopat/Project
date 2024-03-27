@@ -146,13 +146,15 @@
     background-color: #6ed9a1;
   }
 
+
+
   .center-room .join-button {
     background-color: #6ed9a1;
     color: #ffffff; 
     border: none;
     padding: 0.25em;
     width: 55%;
-    text-align: center;
+    text-align: center !important;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
@@ -179,7 +181,7 @@
     align-items: center;
     justify-content: center;
    }
-   .map-container{
+    .center-room .map-container{
     width: 40vw;
     height: 40vh;
     max-width: 500px;
@@ -188,10 +190,12 @@
     padding: 0;
    }
 
+   @media screen and (max-width: 800px) {
+    .center-room #rooms{
+      display:none;
+    }
 
-
-@media screen and (max-width: 800px) {
-  .center-room #rooms{
-    display: none;
-  }
-}
+    .center-room .create-room-button{
+      display:none;
+    }
+   }

@@ -44,6 +44,15 @@
     background-color: #6ed9a1;
   }
 
+  .center-room #rooms td.join-button-container {
+    text-align: right; /* Aligns the button to the right */
+  }
+  
+  /* If you have a specific 'joinRoom' class that modifies this behavior */
+  .center-room.joinRoom #rooms td.join-button-container {
+    text-align: right; /* Ensures consistency when the 'joinRoom' class is applied */
+  }
+
   .center-room.joinRoom .join-button {
     box-shadow: rgba(50, 50, 93, 0.25)
      0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
