@@ -3,7 +3,7 @@ import "./Header.css";
 import { useContext } from "react";
 import { UserContext } from "../App";
 import MenuButton from "./MenuButton";
-
+import logo from "../assets/logo.png";
 const Header = () => {
   let navigate = useNavigate();
   const { user } = useContext(UserContext);
@@ -12,18 +12,18 @@ const Header = () => {
     navigate("/");
   };
 
- 
-  // Check if we are on the root or "/about" page
   const isRootOrAboutPage = location.pathname === "/" || location.pathname === "/about";
 
   return (
     <>
-      {/* Render the header only if not on the root or "/about" page */}
       {!isRootOrAboutPage && (
         <div className="header">
           {user?.emailVerified  ? (
               <>
-                <Link className="warpBack" to="/">Warp</Link>
+                <Link className="warpBack" to="/">
+                    <img src={logo} alt="Warp Logo" onClick={redirectHome} id="logo"/>
+                  Warp
+                </Link>
                 <div id="hamburger">
                   <MenuButton/>
                 </div>
