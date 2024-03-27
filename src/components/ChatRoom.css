@@ -6,6 +6,7 @@
   margin: auto;
   color: #333;
   border-radius: 10px;
+  z-index: 3;
 }
 
 .chatroom-body{
