@@ -152,15 +152,26 @@
     border-radius:0 10px 0 0px;
     background-color: #6ed9a1;
   }
-
-
+  .center-room- .create-room-button{
+    background-color: #6ed9a1;
+    border: 0px;
+    border-radius: 10px;
+    width: 55%;
+    margin-bottom: 0.75em;
+    margin-top: 0.25em;
+    padding: 1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    color: white;
+    font-weight: 500;
+  }
 
   .center-room- .join-button {
     background-color: #6ed9a1;
     color: #ffffff; 
     border: none;
     padding: 0.25em;
-    width: 55%;
+    width: 95%;
     text-align: center !important;
     text-decoration: none;
     display: inline-block;
@@ -210,3 +221,17 @@
       display:none;
     }
    }
+
+   @media screen and (max-width: 500px) {
+    .center-room-  td:nth-child(2){
+      padding-right: 12em;
+    }
+  
+    .center-room- #rooms th:first-child{
+      padding-left: 1.5em;
+    }
+  
+    .center-room- #rooms th:nth-child(2){
+      padding-left: 0.75em;
+    }
+  }
