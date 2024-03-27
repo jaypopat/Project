@@ -98,9 +98,6 @@ function DM() {
     return (<div className="chatroom">
         <div className="chatroom-header">
             <h2>{user2Data.displayName}</h2>
-            <Link to="/dm" className="chatroom-header-back">
-                ⬅️ Back to all friends
-            </Link>
         </div>
         <div className="chatroom-body">
             <MainContainer>
