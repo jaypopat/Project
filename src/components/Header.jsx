@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Header.css";
 import { useContext } from "react";
 import { UserContext } from "../App";
@@ -23,7 +23,7 @@ const Header = () => {
         <div className="header">
           {user?.emailVerified  ? (
               <>
-                <h1 id="home-button" onClick={() => window.location.href = "/joinroom"}>Warp</h1>
+                <Link className="warpBack" to="/">Warp</Link>
                 <div id="hamburger">
                   <MenuButton/>
                 </div>

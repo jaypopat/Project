@@ -32,6 +32,12 @@
     margin-bottom: 15em;
 }
 
+.find-room{
+   color: white;
+}
+
+
+
 .friend-requests li {
     padding: 10px;
     margin-bottom: 10px;
@@ -71,6 +77,10 @@
 
 .friend-requests button:hover {
     opacity: 0.8;
+}
+
+.find-room:hover{
+    background-color: #53fba5 !important;
 }
 
 @media screen and (max-width: 400px) {
