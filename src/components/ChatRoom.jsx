@@ -7,7 +7,7 @@ import {
   MessageInput,
 } from "@chatscope/chat-ui-kit-react";
 import styles from "@chatscope/chat-ui-kit-styles/dist/default/styles.min.css";
-import Rooms from "./Rooms";
+import SidebarRooms from "./SidebarRooms";
 import { Link, useParams } from "react-router-dom";
 import "./ChatRoom.css";
 import { useEffect, useState } from "react";
@@ -102,7 +102,7 @@ function ChatRoom() {
           <div id="sidebar">
             <Sidebar position="left">
               <ConversationList>
-                <Rooms />
+                <SidebarRooms />
               </ConversationList>
             </Sidebar>
           </div>
