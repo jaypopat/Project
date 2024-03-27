@@ -114,7 +114,7 @@ function ChatRoom() {
           ) : null
           }
           <ChatContainer>
-            <MessageList>
+            <MessageList className="messageList">
 
               <div className="messages">
                 {messages.map((message) => (

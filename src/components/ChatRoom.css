@@ -11,6 +11,10 @@
 .chatroom-body{
   z-index: 1;
 }
+
+.messageList{
+  background-color: #29363f;
+}
  
 .chatroom-header {
   color: white;
@@ -85,6 +89,7 @@
 
  .sidebar #rooms td {
   font-weight: 500;
+  color:white;
  }
 
  .sidebar #rooms th, .sidebar #rooms td {
