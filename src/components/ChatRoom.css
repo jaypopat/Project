@@ -42,9 +42,9 @@
  .message-container {
      position: relative;
      z-index: 1;
-  display: flex;
-  align-items: center;
-  gap: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
  }
  
  .user-pic {
@@ -56,6 +56,12 @@
  .message-content {
   display: flex;
   flex-direction: column;
+  
+ }
+ .message-text{
+  width: 80vw;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
  }
  
  .user-name {
@@ -89,7 +95,8 @@
   text-align: center;
 }
 
-.center-room #rooms {
+
+.center-room- #rooms {
   width: 30vw;
   min-width: 350px;
   max-width: 700px;
@@ -99,7 +106,7 @@
   height: 50vh; /* Adjust based on content, but allows for flexibility */
 }
 
-.center-room #rooms tbody{
+.center-room- #rooms tbody{
   max-height: 40vh; /* Adjusted to control visible area */
   overflow-y: auto; /* Enables scrolling for overflow content */
 }
@@ -111,44 +118,44 @@
   flex-direction: column;
 }
 
-.center-room #rooms th {
+.center-room- #rooms th {
   color: white; /* Sets text color to white */
   font-weight: 800;
   text-align: center;
 }
 
-.center-room #rooms th:first-child{
+.center-room- #rooms th:first-child{
   text-align: left;
 }
 
-.center-room #rooms td {
+.center-room- #rooms td {
   font-weight: 800;
   text-align: left;
 }
-  .center-room{
+  .center-room-{
     display: flex;
     justify-content: center;
     align-items: center;
   }
-  .center-room #rooms th,
-  .center-room #rooms td {
+  .center-room- #rooms th,
+  .center-room- #rooms td {
     border-bottom: 1px solid #ddd;
     padding-left: 2em
   }
 
-  .center-room #rooms th:first-child{
+  .center-room- #rooms th:first-child{
     border-radius:10px 0 0 0px;
     background-color: #6ed9a1;
   }
 
-  .center-room #rooms th:nth-child(2){
+  .center-room- #rooms th:nth-child(2){
     border-radius:0 10px 0 0px;
     background-color: #6ed9a1;
   }
 
 
 
-  .center-room .join-button {
+  .center-room- .join-button {
     background-color: #6ed9a1;
     color: #ffffff; 
     border: none;
@@ -181,7 +188,7 @@
     align-items: center;
     justify-content: center;
    }
-    .center-room .map-container{
+    .center-room- .map-container{
     width: 40vw;
     height: 40vh;
     max-width: 500px;
@@ -191,11 +198,15 @@
    }
 
    @media screen and (max-width: 800px) {
-    .center-room #rooms{
+    .center-room- #rooms{
       display:none;
     }
 
-    .center-room .create-room-button{
+    .center-room- .create-room-button{
+      display:none;
+    }
+
+    .center-room- .map-container{
       display:none;
     }
    }

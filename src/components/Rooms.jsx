@@ -57,8 +57,8 @@ const Rooms = () => {
 }
 
 const RoomTable = ({ rooms, className }) => (
-  <div className={`center-room ${className}`}>
-    <button className="create-room-button" onClick={() => window.location.href = "/createroom"}> Create Room </button>
+  <div className={`center-room-${className}`}>
+   
   <table id="rooms">
     <thead>
       <tr>
@@ -73,6 +73,7 @@ const RoomTable = ({ rooms, className }) => (
       <tr></tr>
     </tbody>
   </table>
+  <button className="create-room-button" onClick={() => window.location.href = "/createroom"}> Create Room </button>
   </div>
 );
 

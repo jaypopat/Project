@@ -1,4 +1,4 @@
-.center-room.joinRoom #rooms {
+.center-room-joinRoom #rooms {
   width: 60vw;
   min-width: 350px;
   max-width: 700px;
@@ -8,10 +8,17 @@
   height: 50vh; /* Adjust based on content, but allows for flexibility */
 }
 
-.center-room.joinRoom #rooms tbody{
+.center-room-joinRoom #rooms tbody{
   box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
   max-height: 40vh; /* Adjusted to control visible area */
   overflow-y: auto; /* Enables scrolling for overflow content */
+}
+
+.center-room-{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 #root{
@@ -20,26 +27,46 @@
   align-items: center;
   flex-direction: column;
 }
-.center-room.joinRoom #rooms,.center-room.joinRoom #rooms th, .center-room.joinRoom #rooms td {
+.center-room-joinRoom #rooms,.center-room-joinRoom #rooms th, .center-room-joinRoom #rooms td {
   color: #ffffff; /* Sets text color to white */
   font-weight: 800;
 }
-  .center-room.joinRoom{
+
+.center-room-joinRoom .create-room-button{
+    background-color: #6ed9a1;
+    border: 0px;
+    border-radius: 10px;
+    width: 55%;
+    margin-bottom: 0.75em;
+    margin-top: 0.25em;
+    padding: 1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    color: white;
+    font-weight: 500;
+}
+
+.login-button:hover{
+  background-color: #5ebf8d;
+  cursor: pointer;
+}
+  .center-room-joinRoom{
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
   }
-  .center-room.joinRoom #rooms th,
-  .center-room.joinRoom #rooms td {
+  .center-room-joinRoom #rooms th,
+  .center-room-joinRoom #rooms td {
     border-bottom: 1px solid #ddd;
   }
 
-  .center-room.joinRoom #rooms th:first-child{
+  .center-room-joinRoom #rooms th:first-child{
     border-radius:10px 0 0 0px;
     background-color: #6ed9a1;
   }
 
-  .center-room.joinRoom #rooms th:nth-child(2){
+  .center-room-joinRoom #rooms th:nth-child(2){
     border-radius:0 10px 0 0px;
     background-color: #6ed9a1;
   }
@@ -49,11 +76,11 @@
   }
   
   /* If you have a specific 'joinRoom' class that modifies this behavior */
-  .center-room.joinRoom #rooms td.join-button-container {
+  .center-room-joinRoom #rooms td.join-button-container {
     text-align: right; /* Ensures consistency when the 'joinRoom' class is applied */
   }
 
-  .center-room.joinRoom .join-button {
+  .center-room-joinRoom .join-button {
     box-shadow: rgba(50, 50, 93, 0.25)
      0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
     background-color: #6ed9a1;
@@ -83,7 +110,7 @@
     top: 20%;
     right: 0;
    }
-   .center-room.joinRoom{
+   .center-room-joinRoom{
     display: flex;
     align-items: center;
     justify-content: center;
