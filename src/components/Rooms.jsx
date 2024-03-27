@@ -50,30 +50,45 @@ const Rooms = () => {
 
   return isLoading ? <Spinner /> : (
     <>
-      <RoomTable rooms={rooms} className={isJoinRoom ? "joinRoom":""} />
-      <MapComponent locations={getMapLocations(rooms)} />
+      {rooms.length === 0 ? (
+        <>
+          <p>No rooms.. Create a Room</p>
+          <Link to={"/createroom"}>
+            <button className="create-room-button"> Create Room </button>
+          </Link>
+        </>
+
+      ) : (
+        <>
+          <RoomTable rooms={rooms} className={isJoinRoom ? "joinRoom" : ""} />
+          <MapComponent locations={getMapLocations(rooms)} />
+        </>
+      )}
     </>
   );
 }
 
 const RoomTable = ({ rooms, className }) => (
   <div className={`center-room-${className}`}>
-   
-  <table id="rooms">
-    <thead>
-      <tr>
-        <th>Room</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      {rooms.map((room) => (
-        <RoomRow key={room.id} room={room} />
-      ))}
-      <tr></tr>
-    </tbody>
-  </table>
-  <button className="create-room-button" onClick={() => window.location.href = "/createroom"}> Create Room </button>
+
+    <table id="rooms">
+      <thead>
+        <tr>
+          <th>Room</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {rooms.map((room) => (
+          <RoomRow key={room.id} room={room} />
+        ))}
+        <tr></tr>
+      </tbody>
+    </table>
+    <Link to={"/createroom"}>
+      <button className="create-room-button"> Create Room </button>
+
+    </Link>
   </div>
 );
 
@@ -81,8 +96,8 @@ const RoomRow = ({ room }) => (
   <tr key={room.id}>
     <td>{room.name}</td>
     <td>
-      <Link className="join-button-container" 
-      to={`/joinroom/${room.id}`}>
+      <Link className="join-button-container"
+        to={`/joinroom/${room.id}`}>
         <button className="join-button">Join</button>
       </Link>
     </td>
