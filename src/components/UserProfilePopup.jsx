@@ -3,6 +3,7 @@ import { db } from "../firebaseAuth";
 import "./ProfilePagePopup.css"
 import {useContext} from "react";
 import {UserContext} from "../App.jsx";
+import "./UserProfilePopup.css"
 
 const UserProfilePopup = ({selectedUser, onClose}) => {
     const { user } = useContext(UserContext);
@@ -45,8 +46,10 @@ const UserProfilePopup = ({selectedUser, onClose}) => {
         <h1 id="profile-popup-header" >{selectedUser.displayName}</h1>
             <div id="profile-popup-body">
                 <img src={selectedUser.photoURL} alt="user" className="user-pic"/>
-                <button onClick={onClose}>Close</button>
-                <button id="add-friend" onClick={sendFriendReq}>Add Friend</button>
+                <div id="add-profile">
+                    <button id="close-button" onClick={onClose}>Close</button>
+                    <button id="add-friend" onClick={sendFriendReq}>Add Friend</button>
+                </div>
             </div>
         </div>
     );
