@@ -25,6 +25,10 @@
     margin-bottom: 10px;
 }
 
+.new-message{
+    color: white;
+}
+
 .friend-link {
     display: flex;
     align-items: center;

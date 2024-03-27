@@ -11,7 +11,9 @@ function Register() {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
 
-  const register = async () => {
+  const register = async (e) => {
+    e.preventDefault();
+    console.log("attempting to register");
     if (!name) {
       alert("Please enter name");
       return;
@@ -19,7 +21,9 @@ function Register() {
     try {
       await registerWithEmailAndPassword(name, email, password);
       alert("A verification email has been sent to your email address. Please check your inbox and click on the verification link to complete the registration process.");
+      console.log("registered");
     } catch (error) {
+        console.log(error.message);
     }
   };
 
@@ -41,18 +45,34 @@ function Register() {
     <form action="">
       <div className="container-register">
         <h2 className="login-heading">Sign Up</h2>
-        
+
         <p>Using your email and password</p>
-        <input type="text" placeholder="Email@address.com" 
-        className="login-box email"  value={name}
-        onChange={(e) => setName(e.target.value)}/>
+        <input
+            type="text"
+            placeholder="Name"
+            className="login-box name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}/>
 
-        <input type="text" placeholder="Password" 
-        className="login-box password" value={email}
-        onChange={(e) => setEmail(e.target.value)} />
+        <input
+            type="text"
+            placeholder="Email@address.com"
+            className="login-box email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}/>
 
-        <input type="submit" value="Sign Up" className="login-button" 
-        onClick={register}/>
+        <input
+            type="password"
+            placeholder="Password"
+            className="login-box password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)} />
+
+        <input
+            type="submit"
+            value="Sign Up"
+            className="login-button"
+            onClick={register}/>
         <p>or</p>
         <hr/>
         <div className="social-icons">
@@ -62,8 +82,8 @@ function Register() {
       </div>
     </form>
   </div>
-  
-  
+
+
   );
 }
 

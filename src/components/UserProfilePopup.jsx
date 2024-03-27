@@ -4,6 +4,8 @@ import "./ProfilePagePopup.css"
 import {useContext} from "react";
 import {UserContext} from "../App.jsx";
 import "./UserProfilePopup.css"
+import { toast } from "react-toastify";
+
 
 const UserProfilePopup = ({selectedUser, onClose}) => {
     const { user } = useContext(UserContext);
@@ -38,6 +40,8 @@ const UserProfilePopup = ({selectedUser, onClose}) => {
             friendPic: user.photoURL
         });
         console.log("Friend Request Sent");
+        toast.success("friend request sent")
+
     }
 
     if (!selectedUser) return null;

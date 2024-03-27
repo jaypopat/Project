@@ -98,7 +98,7 @@ function ChatRoom() {
         <h2>{roomName}</h2>
       </div>
       <div className="chatroom-body">
-        <MainContainer>
+        <MainContainer className="mainContainer">
           <div id="sidebar">
             <Sidebar position="left">
               <ConversationList>
