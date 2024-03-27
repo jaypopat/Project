@@ -48,7 +48,6 @@ const MenuButton = () => {
 
     // Check how many unseen messages there are for the current user and set the number of unseen messages
     useEffect(() => {
-        console.log(friends)
         const checkUnseenMessages = async () => {
             for (const friend of friends) {
                 const dmDocId = [user.uid, friend.friendId].sort().join('-');

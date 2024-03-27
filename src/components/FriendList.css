@@ -10,6 +10,10 @@
     margin-bottom: 19em;
 }
 
+.responive-background {
+    width: 100%;
+}
+
 .friend-heading, .no-friends{
     text-align: center;
     font-size: 3.5rem;

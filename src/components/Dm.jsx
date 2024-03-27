@@ -12,7 +12,7 @@ import {
 } from "@chatscope/chat-ui-kit-react";
 import {UserContext} from "../App.jsx";
 import "./Dm.css"
-import FriendList from "./FriendList.jsx";
+import SidebarFriends from "./SidebarFriends.jsx";
 
 
 function DM() {
@@ -102,9 +102,7 @@ function DM() {
         <div className="chatroom-body">
             <MainContainer>
                 <Sidebar position="left">
-                    <ConversationList>
-                        <FriendList/>
-                    </ConversationList>
+                        <SidebarFriends/>
                 </Sidebar>
                 <ChatContainer>
                     <MessageList>
