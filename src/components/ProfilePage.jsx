@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import {useContext, useRef} from "react";
 import { UserContext } from "../App";
 import "./ProfilePage.css"
 import { toast } from "react-toastify";
@@ -14,6 +14,7 @@ const ProfilePage = () => {
     const [email, setEmail] = useState(user.email);
     const [password, setPassword] = useState('');
     const [profilePicURL, setProfilePicURL] = useState(user.photoURL);
+    const fileInputRef = useRef();
 
     const handleProfileUpdate = async () => {
         if (displayName !== user.displayName || email !== user.email || password || profilePicURL !== user.photoURL) {
@@ -32,22 +33,41 @@ const ProfilePage = () => {
         }
     };
 
-    const handleProfilePicChange = async (e) => {
-        const file = e.target.files[0];
+    const handleProfilePicChange = async (file) => {
         if (file) {
             const storageRef = ref(storage, `profile-pics/${user.uid}`);
             const profilePicRef = ref(storageRef, file.name);
             await uploadBytes(profilePicRef, file);
-            const profilePicURL = await getDownloadURL(profilePicRef);
-            setProfilePicURL(profilePicURL);
+            const url = await getDownloadURL(profilePicRef);
+            setProfilePicURL(url);
         }
     }
+
+    const triggerFileInputClick = () => {
+        const fileInput = document.createElement("input");
+        fileInput.type = "file";
+        fileInput.accept = ".jpg, .jpeg, .png";
+        fileInput.style.display = "none";
+        fileInput.onchange = (e) => {
+            const file = e.target.files[0];
+            handleProfilePicChange(file);
+            document.body.removeChild(fileInput);
+        };
+        document.body.appendChild(fileInput);
+        fileInput.click();
+    };
 
     return (
         <div className="responsive-background">
             <div className="container-profile">
                 <h1 className="user-profile">User Profile</h1>
-                <img id="pfp" src={profilePicURL} alt="pfp" />
+                <img
+                    id="pfp"
+                    src={profilePicURL}
+                    alt="pfp"
+                    onClick={triggerFileInputClick}
+                    style={{ cursor: 'pointer' }}
+                />
                 <input
                     className="profile-input"
                     type="text"
@@ -69,13 +89,7 @@ const ProfilePage = () => {
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="New Password (leave blank to keep current)"
                 />
-                <input
-                    className="browse-file"
-                    type="file"
-                    onChange={handleProfilePicChange}
-                    accept={'.jpg, .jpeg, .png'}
-                    placeholder="Profile Picture URL"
-                />
+
                 <button className="update-profile" onClick={handleProfileUpdate}>Update Profile</button>
             </div>
         </div>
