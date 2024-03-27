@@ -20,31 +20,40 @@ function Login() {
     return () => unsubscribe();
   }, []);
 
-  return (
-    <div className="responsive-background">
-      <form action="" className="login-form">
-        <div className="container-login">
-          <h2 className="login-heading">Log In</h2>
-          
-          <p>Using your email and password</p>
-          <input type="email" placeholder="Email@address.com" 
-          className="login-box email"  value={email}
-          onChange={(e) => setEmail(e.target.value)}/>
-          <input type="password" placeholder="Password" 
-          className="login-box password" value={password}
-          onChange={(e) => setPassword(e.target.value)} />
+  const handleLogin = async (event) => {
+    event.preventDefault();
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      navigate("/");
+    } catch (error) {
+      console.error("Failed to log in:", error);
+    }
+  };
 
-          <input type="submit" value="Log In" className="login-button"
-          onClick={() => signInWithEmailAndPassword(auth,email, password)} />
-          <p>or</p>
-          <hr/>
-          <div className="social-icons">
-            <a onClick={signInWithGoogle} className="icon"><FaGoogle /></a>
+  return (
+      <div className="responsive-background">
+        <form className="login-form" onSubmit={handleLogin}>
+          <div className="container-login">
+            <h2 className="login-heading">Log In</h2>
+
+            <p>Using your email and password</p>
+            <input type="email" placeholder="Email@address.com"
+                   className="login-box email"  value={email}
+                   onChange={(e) => setEmail(e.target.value)}/>
+            <input type="password" placeholder="Password"
+                   className="login-box password" value={password}
+                   onChange={(e) => setPassword(e.target.value)} />
+
+            <input type="submit" value="Log In" className="login-button" />
+            <p>or</p>
+            <hr/>
+            <div className="social-icons">
+              <a onClick={signInWithGoogle} className="icon"><FaGoogle /></a>
+            </div>
+            <Link className="signUpLink" to="/forgot-password">Forgot your Password?</Link>
           </div>
-          <Link className="signUpLink" to="/forgot-password">Forgot your Password?</Link>
-        </div>
-      </form>
-    </div>
+        </form>
+      </div>
   );
 }
 
