@@ -21,6 +21,7 @@ function ChatRoom() {
   const [messages, setMessages] = useState([]);
   const [roomName, setRoomName] = useState("");
   const [selectedUser, setSelectedUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
 
   const getRoomName = async (roomId) => {
