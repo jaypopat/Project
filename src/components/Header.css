@@ -10,8 +10,17 @@
   text-align: left;
   color: #6ed9a1;
   cursor:pointer;
+  text-decoration: none !important;
 }
 
+.warpBack {
+  color: #6ed9a1;
+  cursor:pointer;
+  text-decoration: none !important;
+  font-size: 2rem;
+  font-weight: 600;
+  margin-left: 0.25em;
+}
 
 #hamburger {
   position: absolute;
