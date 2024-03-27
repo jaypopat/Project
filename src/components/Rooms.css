@@ -1,72 +1,80 @@
-#rooms {
-    width: 80vw;
-    min-width: 350px;
-    max-width: 700px;
-    border-collapse: collapse;
-    font-family: Arial, sans-serif;
-    color: #ffffff; 
-    margin: 25px 0;
-    max-height: 600px;
+.center-room.joinRoom #rooms {
+  width: 60vw;
+  min-width: 350px;
+  max-width: 700px;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+  margin: 25px 0; /* You can adjust this if needed */
+  height: 50vh; /* Adjust based on content, but allows for flexibility */
+}
 
-  }
+.center-room.joinRoom #rooms tbody{
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+  max-height: 40vh; /* Adjusted to control visible area */
+  overflow-y: auto; /* Enables scrolling for overflow content */
+}
 
-  .center-room{
+#root{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.center-room.joinRoom #rooms,.center-room.joinRoom #rooms th, .center-room.joinRoom #rooms td {
+  color: #ffffff; /* Sets text color to white */
+  font-weight: 800;
+}
+  .center-room.joinRoom{
     display: flex;
     justify-content: center;
-    
+    align-items: center;
   }
-  #rooms th,
-  #rooms td {
-    padding: 20px 15px;
+  .center-room.joinRoom #rooms th,
+  .center-room.joinRoom #rooms td {
     border-bottom: 1px solid #ddd;
-    text-align: center;
-    color: white;
   }
 
-  #rooms th:first-child{
+  .center-room.joinRoom #rooms th:first-child{
     border-radius:10px 0 0 0px;
     background-color: #6ed9a1;
   }
 
-  #rooms th:nth-child(2){
+  .center-room.joinRoom #rooms th:nth-child(2){
     border-radius:0 10px 0 0px;
     background-color: #6ed9a1;
   }
 
-  #rooms tbody{
-    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
-  }
-  
-  
-  .join-button {
+  .center-room.joinRoom .join-button {
     box-shadow: rgba(50, 50, 93, 0.25)
      0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
     background-color: #6ed9a1;
     color: #ffffff; 
     border: none;
-    padding: 10px 20px;
+    padding: 0.25em;
+    width: 55%;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
     margin: 4px 2px;
     cursor: pointer;
+    border-radius: 8px;
+    font-weight: 500;
   }
 
   .join-button:hover{
-    background-color: #5ebf8d;
+    background-color: #5af0a2;
     cursor:pointer;
   }
 
   #map {
     min-width: 300px;
     width: 70vw;
-    margin-right: 0px;
     position: fixed;
     top: 20%;
     right: 0;
    }
-   .center-room{
+   .center-room.joinRoom{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -79,4 +87,6 @@
     margin: 0;
     padding: 0;
    }
+
+
 

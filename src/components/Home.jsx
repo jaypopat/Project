@@ -15,7 +15,7 @@ const Home = () => {
       // If the user's email is verified, navigate to a different path
       navigate('/joinroom');
     }
-  }, [user, navigate]);
+  }, [user]);
 
   return (
     <div className="responsive-background">

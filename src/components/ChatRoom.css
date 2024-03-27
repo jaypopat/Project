@@ -7,15 +7,11 @@
   color: #333;
   border-radius: 10px;
   overflow: hidden;
-
 }
 
 .chatroom-body{
   z-index: 1;
 }
-.chat-container {
-  background-color: black !important;
- }
  
 .chatroom-header {
   color: white;
@@ -29,7 +25,6 @@
   position: absolute;
   left: 10px;
   top: 10px;
-  color: #ffffff;
 }
 .chatroom-body {
   flex: 1;
@@ -76,148 +71,116 @@
   color: #888;
  }
  
- #rooms tr {
+ .sidebar #rooms tr {
    width: 10%;
    color: white;
+   padding: 0em;
  }
 
- #rooms td {
-  color: black;
+ .sidebar #rooms td {
   font-weight: 500;
  }
 
- #rooms{
-  width: 30vh;
- }
-
- @media screen and (max-width: 800px){
-  .messages{
-    width: 50vw;
-  }
-  #rooms td{
-    padding: 0;
-  }
-  #rooms th {
-    font-size: 0.9rem;
-    padding: 0.5em;
-  }
-  #rooms tr td:first-child{
-    width: 30%;
-    font-size: 0.75rem
-    }
-  #rooms tr td:nth-child(1){
-    width: 25%;
-  }
- }
-
- @media screen and (max-width: 799px) and (min-width: 760px){
-  #rooms td {
-    padding: 0.25em;
-  }
-
-  #rooms th {
-    font-size: 0.9rem;
-    padding: 0.5em;
-  }
-  #rooms tr td:first-child{
-    width: 50%;
-    font-size: 0.75rem
-    }
- }
-
- @media screen and (max-width: 759px) and (min-width: 700px){
-  #rooms td {
-    padding: 0.5em;
-  }
-
-  #rooms th {
-    font-size: 1.15rem;
-    padding: 0.65em;
-  }
-  #rooms tr td:first-child{
-    width: 45%;
-    font-size: 0.75rem
-    }
- }
-
- @media screen and (max-width: 699px) and (min-width: 650px){
-  #rooms td {
-    padding: 0.5em;
-  }
-
-  #rooms th {
-    font-size: 1.15rem;
-    padding: 0.5em;
-  }
-  #rooms tr td:first-child{
-    width: 37.5%;
-    font-size: 0.75rem
-    }
- }
-
- @media screen and (max-width: 649px) and (min-width: 599px){
-  #rooms td {
-    padding: 0.5em;
-  }
-
-  #rooms th {
-    font-size: 1rem;
-    padding: 0.5em;
-  }
-  #rooms tr td:first-child{
-    width: 32.5%;
-    font-size: 0.75rem
-    }
-
-  #rooms .join-button{
-    padding: 0.75em
-  }
- }
-
- @media screen and (max-width: 598px){
-  #rooms td {
-    padding: 0.25em;
-  }
-
-  #rooms th {
-    font-size: 1rem;
-    padding: 0.35em;
-  }
-  #rooms tr td:first-child{
-    width: 25%;
-    font-size: 0.75rem
-    }
-
-  #rooms .join-button{
-    padding: 0.5em
-  }
- }
-
- @media screen and (max-width: 597px){
-  #rooms td {
-    padding-top: 0.75em;
-    font-size: 1.05rem;
-  }
-  .messages{
-    width: 100%;
-  }
-
-
-  #rooms th {
-    font-size: 0.75rem;
-    padding: 0.15em;
-  }
-  #rooms tr td:first-child{
-    font-size: 0.75rem
-    }
-
-  #rooms .join-button{
-    padding: 0.25em
-  }
- }
-@media (min-width: 768px) {
-    #sidebar {
-        display: block;
-    }
+ .sidebar #rooms th, .sidebar #rooms td {
+  padding: 0px 0px; /* Reduced padding */
+  font-size: 0.9rem; /* Adjusted font size for smaller text */
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+  color: black
 }
 
+.center-room #rooms {
+  width: 30vw;
+  min-width: 350px;
+  max-width: 700px;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+  margin: 25px 0; /* You can adjust this if needed */
+  height: 50vh; /* Adjust based on content, but allows for flexibility */
+}
+
+.center-room #rooms tbody{
+  max-height: 40vh; /* Adjusted to control visible area */
+  overflow-y: auto; /* Enables scrolling for overflow content */
+}
+
+#root{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.center-room #rooms,.center-room #rooms th, .center-room #rooms td {
+  color: black; /* Sets text color to white */
+  font-weight: 800;
+}
+  .center-room{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .center-room #rooms th,
+  .center-room #rooms td {
+    border-bottom: 1px solid #ddd;
+    padding-left: 2em
+  }
+
+  .center-room #rooms th:first-child{
+    border-radius:10px 0 0 0px;
+    background-color: #6ed9a1;
+  }
+
+  .center-room #rooms th:nth-child(2){
+    border-radius:0 10px 0 0px;
+    background-color: #6ed9a1;
+  }
+
+  .center-room .join-button {
+    background-color: #6ed9a1;
+    color: #ffffff; 
+    border: none;
+    padding: 0.25em;
+    width: 55%;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 8px;
+    font-weight: 500;
+  }
+
+  .join-button:hover{
+    background-color: #5af0a2;
+    cursor:pointer;
+  }
+
+  #map {
+    min-width: 300px;
+    width: 70vw;
+    position: fixed;
+    top: 20%;
+    right: 0;
+   }
+   .center-room{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   }
+   .map-container{
+    width: 40vw;
+    height: 40vh;
+    max-width: 500px;
+    min-width: 345px;
+    margin: 0;
+    padding: 0;
+   }
+
+
+
+@media screen and (max-width: 500px) {
+  .center-room #rooms{
+    display: none;
+  }
+}

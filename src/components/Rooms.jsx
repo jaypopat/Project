@@ -11,11 +11,16 @@ import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import MapComponent from "./Map.jsx";
 mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_API_KEY;
+import { useLocation } from 'react-router-dom';
+
 
 const Rooms = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { userLocation } = useContext(UserContext);
   const [rooms, setRooms] = useState([]);
+  const location = useLocation();
+
+  const isJoinRoom = location.pathname === '/joinroom';
 
   useEffect(() => {
     const roomsRef = collection(db, "rooms");
@@ -45,14 +50,15 @@ const Rooms = () => {
 
   return isLoading ? <Spinner /> : (
     <>
-      <RoomTable rooms={rooms} />
+      <RoomTable rooms={rooms} 
+      className={isJoinRoom ? "joinRoom":""} />
       <MapComponent locations={getMapLocations(rooms)} />
     </>
   );
 }
 
-const RoomTable = ({ rooms }) => (
-  <div className="center-room">
+const RoomTable = ({ rooms, className }) => (
+  <div className={`center-room ${className}`}>
   <table id="rooms">
     <thead>
       <tr>
