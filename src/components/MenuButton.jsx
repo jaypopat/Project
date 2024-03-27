@@ -102,7 +102,7 @@ const MenuButton = () => {
                 </button>
             </div>
             {isMenuOpen && (
-                <div className="menu">
+                <div className="menu" onMouseLeave={handleMenuClose}>
                     <button onClick={handleProfile}>Profile</button>
                     <div className='friendButton' onClick={handleFriendList}>
                         <button>Friend List</button>
