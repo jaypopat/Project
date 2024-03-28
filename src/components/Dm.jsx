@@ -33,11 +33,10 @@ function DM() {
             const user2DocSnap = await getDoc(user2DocRef);
             if (user2DocSnap.exists()) {
                 setUser2Data(user2DocSnap.data());
-            } else {
             }
+            getUser2Data()
         };
 
-        getUser2Data();
 
         const q = query(messagesRef, orderBy("createdAt", "asc"));
         const unsubscribe = onSnapshot(q, (snapshot) => {
@@ -96,7 +95,8 @@ function DM() {
 
     return (<div className="chatroom">
         <div className="chatroom-header">
-            <h2>{user2Data.displayName}</h2>
+            {console.log(user2Data)}
+            <h2>{user2Data?.name}</h2>
         </div>
         <div className="chatroom-body">
             <MainContainer>

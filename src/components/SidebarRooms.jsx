@@ -6,10 +6,12 @@ import { calculateDistance } from "../utils/calculateDistance";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { db } from "../firebaseAuth.js";
 import { useLocation } from 'react-router-dom';
+import Spinner from "./Spinner.jsx";
 
 const SidebarRooms = () => {
   const { userLocation } = useContext(UserContext);
   const [sidebarContent, setSidebarContent] = useState([]);
+  const [loading, setLoading] = useState(true);
   const { id: currRoomID } = useParams();
   const location = useLocation();
   const isJoinRoom = location.pathname === '/joinroom';
@@ -35,12 +37,15 @@ const SidebarRooms = () => {
         }
       });
       setSidebarContent(filteredRooms);
+      setLoading(false);
     });
 
     return () => unsubscribe();
   }, [userLocation, currRoomID]);
 
-  return (
+  return loading ? (
+    <Spinner/>
+  ) : (
     <>
       {sidebarContent.length === 0 ? (
         <>

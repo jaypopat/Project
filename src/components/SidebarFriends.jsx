@@ -5,10 +5,12 @@ import { Link } from 'react-router-dom';
 import { useContext } from "react";
 import { UserContext } from "../App";
 import './SidebarFriends.css';
+import Spinner from './Spinner.jsx';
 
 function SidebarFriends() {
     const { user } = useContext(UserContext);
     const [friends, setFriends] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const getFriends = async () => {
@@ -18,27 +20,33 @@ function SidebarFriends() {
             const querySnapshot = await getDocs(q);
             return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
         };
-        getFriends().then(friends => setFriends(friends));
+
+        getFriends().then(friends => {
+            setFriends(friends);
+            setLoading(false);
+        });
     }, []);
 
-    return friends && friends.length > 0 ? (
-            <div className="friend-list-sidebar">
-                <h2 className='friend-heading'>Messages</h2>
-                {friends.map((friend) => (
-                    <div key={friend.friendId} className="friend-item">
-                        <Link to={`/dm/${friend.friendId}`} className="friend-link">
-                            <img src={friend.friendPic} alt="Profile" className="profile-pic" />
-                            <span className="friend-name">{friend.friendName}</span>
-                        </Link>
-                    </div>
-                ))}
+    return loading ? (
+        <Spinner />
+    ) : friends && friends.length > 0 ? (
+        <div className="friend-list-sidebar">
+            <h2 className='friend-heading'>Messages</h2>
+            {friends.map((friend) => (
+                <div key={friend.friendId} className="friend-item">
+                    <Link to={`/dm/${friend.friendId}`} className="friend-link">
+                        <img src={friend.friendPic} alt="Profile" className="profile-pic" />
+                        <span className="friend-name">{friend.friendName}</span>
+                    </Link>
+                </div>
+            ))}
         </div>
-      ) : (
+    ) : (
         <div className='empty-list'>
-        <h2 className='no-friends'>Uh Oh...</h2>
-        <p className='empty-state'>You have no friends. Maybe you should try make some!</p>
+            <h2 className='no-friends'>Uh Oh...</h2>
+            <p className='empty-state'>You have no friends. Maybe you should try make some!</p>
         </div>
-      );
+    );
 }
 
 export default SidebarFriends;
