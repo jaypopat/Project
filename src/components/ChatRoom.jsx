@@ -100,7 +100,7 @@ function ChatRoom() {
       <div className="chatroom-body">
         <MainContainer className="mainContainer">
           <div id="sidebar">
-            <Sidebar className="sidebar" position="left">
+            <Sidebar id="sidebar" position="left">
               <ConversationList>
                 <SidebarRooms />
               </ConversationList>
