@@ -1,6 +1,7 @@
 .menu-container {
     position: relative;
     z-index: 1000;
+    margin: 1rem;
 }
 
 .menu-button {
@@ -21,6 +22,7 @@
     border-radius: 5px;
     padding: 5px;
     z-index: 10000;
+    width: 18vw;
 }
 
 .menu button {
@@ -54,7 +56,6 @@
     border: none;
     cursor: pointer;
     padding: 5px;
-    z-index: 1000;
     display: flex;
     justify-content: space-between;
 }
@@ -66,25 +67,38 @@
     border: none;
     cursor: pointer;
     padding: 5px;
-    z-index: 1000;
 }
 
 .friendButton button:hover {
     background-color: #e0e0e0;
 }
 
-.friendButton span {
+.friendButton {
     position: relative;
-    z-index: 1000;
+    display: inline-block;
+}
+
+.friendButton button {
+    position: relative; 
+}
+
+.friendButton span {
+    position: absolute;
+    top: -10px;
+    right: -10px; 
+    z-index: 20000; 
 }
 
 .friendButton span.badge {
-    position: absolute;
-    right: 126px;
     margin: 3px;
     background-color: red;
     color: white;
-    border-radius: 50%;
-    padding: 2.5px;
-    z-index: 1000;
+    border-radius: 50%; 
+    padding: 5px; 
+    font-size: 0.75em; 
+    min-width: 20px; 
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
