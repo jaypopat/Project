@@ -41,30 +41,24 @@ function ChatRoom() {
   }
 
   useEffect(() => {
+    setMessages([]);  // Clear messages on room switch
+  
     if (!roomId) return;
-
+  
     const roomRef = doc(db, "rooms", roomId);
     const messagesRef = collection(roomRef, "messages");
     const q = query(messagesRef, orderBy("createdAt", "asc"));
-
+  
     const unsubscribe = onSnapshot(q, (snapshot) => {
-      snapshot.docChanges().forEach((change) => {
-        if (change.type === "added") {
-          setMessages((prevMessages) => [
-            ...prevMessages,
-            {
-              ...change.doc.data(),
-              id: change.doc.id,
-            },
-          ]);
-        }
-      });
+      const incomingMessages = snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }));
+      setMessages(incomingMessages);
     });
-
+  
     getRoomName(roomId).then(name => setRoomName(name));
-
+  
     return () => unsubscribe();
   }, [roomId]);
+  
 
   const handleSubmit = async (messageText) => {
     if (!messageText.trim()) return;
