@@ -1,3 +1,4 @@
+
 .chatroom {
   display: flex;
   flex-direction: column;
@@ -9,6 +10,8 @@
   z-index: 3;
   margin: 1vw;
 }
+
+
 
 .chatroom-body{
   z-index: 1;
@@ -53,6 +56,7 @@
     display: flex;
     align-items: center;
     gap: 10px;
+    
  }
  
  .user-pic {
@@ -65,11 +69,15 @@
   display: flex;
   flex-direction: column;
   
+
+  
  }
  .message-text{
   width: 80vw;
   word-wrap: break-word;
   overflow-wrap: break-word;
+
+
  }
  
  .user-name {
@@ -105,6 +113,7 @@
 
 .mainContainer {
   border: none;
+  background-color: #29363f;
 }
 
 .center-room- #rooms {
