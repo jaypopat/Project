@@ -1,17 +1,20 @@
-import {addDoc, collection, doc, getDocs, query, where} from "firebase/firestore";
+import { addDoc, collection, doc, getDocs, query, where } from "firebase/firestore";
 import { db } from "../firebaseAuth";
 import "./ProfilePagePopup.css"
-import {useContext} from "react";
-import {UserContext} from "../App.jsx";
+import { useContext } from "react";
+import { UserContext } from "../App.jsx";
 import "./UserProfilePopup.css"
 import { toast } from "react-toastify";
+import { Link } from 'react-router-dom';
 
-
-const UserProfilePopup = ({selectedUser, onClose}) => {
+const UserProfilePopup = ({ selectedUser, onClose }) => {
     const { user } = useContext(UserContext);
+    const sendToYourself = selectedUser.uid === user.uid;
+
 
     const sendFriendReq = async () => {
-        if (selectedUser.uid === user.uid) return;
+
+        if (sendToYourself) return;
 
         const friendRequestsRef = collection(db, "users", selectedUser.uid, "friendRequests");
         const friendsRef = collection(db, "users", selectedUser.uid, "friends");
@@ -38,18 +41,23 @@ const UserProfilePopup = ({selectedUser, onClose}) => {
             friendPic: user.photoURL
         });
         toast.success("friend request sent")
-
     }
 
     if (!selectedUser) return null;
     return (
         <div>
-        <h1 id="profile-popup-header" >{selectedUser.displayName}</h1>
+            <h1 id="profile-popup-header" >{selectedUser.displayName}</h1>
             <div id="profile-popup-body">
-                <img src={selectedUser.photoURL} alt="user" className="user-pic"/>
+                <img src={selectedUser.photoURL} alt="user" className="user-pic" />
                 <div id="add-profile">
                     <button id="close-button" onClick={onClose}>Close</button>
-                    <button id="add-friend" onClick={sendFriendReq}>Add Friend</button>
+                    {sendToYourself ? (
+                        <Link to={"/profile"} >
+                            <button id="add-friend">Change Profile Details</button>
+                        </Link>
+                    ) : (
+                        <button id="add-friend" onClick={sendFriendReq}>Add Friend</button>
+                    )}
                 </div>
             </div>
         </div>
