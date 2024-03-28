@@ -13,6 +13,9 @@ import {
 import { UserContext } from "../App.jsx";
 import "./Dm.css"
 import SidebarFriends from "./SidebarFriends.jsx";
+import Spinner from './Spinner.jsx';
+import {formatText} from "../utils/formatText.js"
+
 
 
 function DM() {
@@ -34,8 +37,8 @@ function DM() {
             if (user2DocSnap.exists()) {
                 setUser2Data(user2DocSnap.data());
             }
-            getUser2Data()
         };
+        getUser2Data();
 
 
         const q = query(messagesRef, orderBy("createdAt", "asc"));
@@ -69,7 +72,6 @@ function DM() {
         setNewMessage("");
     };
 
-    // If user2 has sent a message or multiple messages, set the messages seen field to true
     useEffect(() => {
         if (user2) {
             const q = query(messagesRef, orderBy("createdAt", "asc"));
@@ -90,12 +92,11 @@ function DM() {
 
 
     if (!user2) {
-        return <div>Loading...</div>;
+        return <Spinner/>;
     }
 
     return (<div className="chatroom">
         <div className="chatroom-header">
-            {console.log(user2Data)}
             <h2>{user2Data?.name}</h2>
         </div>
         <div className="chatroom-body">
@@ -114,7 +115,7 @@ function DM() {
                                 <img src={message.userPic} alt="pfp" className="user-pic" />
                                 <div className="message-content">
                                     <span className="user-name">{message.displayName}</span>
-                                    <p className="message-text">{message.text}</p>
+                                    <p className="message-text">{formatText(message.text)}</p>
                                     <p className="message-timestamp">
                                         {message.createdAt?.seconds ? new Date(message.createdAt.seconds * 1000).toLocaleTimeString([], {
                                             hour: '2-digit', minute: '2-digit'
