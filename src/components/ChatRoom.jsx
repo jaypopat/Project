@@ -121,7 +121,7 @@ function ChatRoom() {
                     }} />
                     <div className="message-content">
                       <span className="user-name">{message.displayName}</span>
-                      <p className="message-text">{message.text}</p>
+                      <p className="message-text">{formatText(message.text)}</p>
                       <p className="message-timestamp">
                         {message.createdAt?.seconds ? new Date(message.createdAt.seconds * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : 'No timestamp'}
                       </p>
