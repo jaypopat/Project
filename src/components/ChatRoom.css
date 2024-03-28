@@ -13,6 +13,12 @@
 .chatroom-body{
   z-index: 1;
 }
+@media screen and (max-width: 767px) {
+  .sidebar {
+      display: none;
+  }
+}
+
  
 .chatroom-header {
   color: white;

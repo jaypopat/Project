@@ -10,3 +10,10 @@
     border-radius: 8px;
     padding-top: 24px;
 }
+
+/* Hide the .friend-list-sidebar on devices with a maximum width of 767px
+@media screen and (max-width: 767px) {
+    .friend-list-sidebar {
+        display: none;
+    }
+} */

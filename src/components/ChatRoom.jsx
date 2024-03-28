@@ -11,7 +11,7 @@ import SidebarRooms from "./SidebarRooms";
 import { Link, useParams } from "react-router-dom";
 import "./ChatRoom.css";
 import { useEffect, useState } from "react";
-import { addDoc, collection, getDoc, doc, onSnapshot, orderBy, query,Timestamp,updateDoc } from "firebase/firestore";
+import { addDoc, collection, getDoc, doc, onSnapshot, orderBy, query, Timestamp, updateDoc } from "firebase/firestore";
 import { auth, db } from "../firebaseAuth.js";
 import UserProfilePopup from "./UserProfilePopup.jsx";
 
@@ -85,7 +85,7 @@ function ChatRoom() {
       await updateDoc(roomRef, {
         lastActivity: Timestamp.now(),
       });
-      
+
       setNewMessage("");
     } catch (error) {
       console.error("Failed to send message: ", error);
@@ -100,17 +100,17 @@ function ChatRoom() {
       <div className="chatroom-body">
         <MainContainer className="mainContainer">
           <div id="sidebar">
-            <Sidebar position="left">
+            <Sidebar className="sidebar" position="left">
               <ConversationList>
                 <SidebarRooms />
               </ConversationList>
             </Sidebar>
           </div>
           {selectedUser ? (
-              <UserProfilePopup
-                  selectedUser={selectedUser}
-                  onClose={() => setSelectedUser(null)}
-              />
+            <UserProfilePopup
+              selectedUser={selectedUser}
+              onClose={() => setSelectedUser(null)}
+            />
           ) : null
           }
           <ChatContainer>
@@ -119,16 +119,19 @@ function ChatRoom() {
               <div className="messages">
                 {messages.map((message) => (
                   <div className="message-container" key={message.id}>
-                    <img src={message.userPic} alt="pfp" className="user-pic" onClick={() => {setSelectedUser({
-                      uid: message.uid,
-                      displayName: message.displayName,
-                      photoURL: message.userPic}
-                    );}}/>
+                    <img src={message.userPic} alt="pfp" className="user-pic" onClick={() => {
+                      setSelectedUser({
+                        uid: message.uid,
+                        displayName: message.displayName,
+                        photoURL: message.userPic
+                      }
+                      );
+                    }} />
                     <div className="message-content">
                       <span className="user-name">{message.displayName}</span>
                       <p className="message-text">{message.text}</p>
                       <p className="message-timestamp">
-                      {message.createdAt?.seconds ? new Date(message.createdAt.seconds * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : 'No timestamp'}
+                        {message.createdAt?.seconds ? new Date(message.createdAt.seconds * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : 'No timestamp'}
                       </p>
                     </div>
                   </div>

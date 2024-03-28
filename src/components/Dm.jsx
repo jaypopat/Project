@@ -101,9 +101,12 @@ function DM() {
         </div>
         <div className="chatroom-body">
             <MainContainer>
-                <Sidebar position="left">
+                <Sidebar  id = "sidebar" position="left">
                         <SidebarFriends/>
                 </Sidebar>
+                <Link to={"/dm"}>
+                    <button>All DMs</button>
+                </Link>
                 <ChatContainer>
                     <MessageList>
 
