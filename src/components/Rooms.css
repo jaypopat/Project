@@ -21,6 +21,7 @@
   flex-direction: column;
 }
 
+
 #root{
   display: flex;
   justify-content: center;
@@ -31,6 +32,7 @@
   color: #ffffff;
   font-weight: 800;
   text-align: left;
+  padding: 0em;
 }
 
 .center-room-joinRoom #rooms td:first-child{
