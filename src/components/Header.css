@@ -20,6 +20,10 @@
   font-size: 2rem;
   font-weight: 600;
   margin-left: 0.25em;
+  /* Have nested image and text in-line */
+  display: flex;
+  align-items: center;
+  width: 10.5vw;
 }
 
 #hamburger {

@@ -30,9 +30,7 @@ const Home = () => {
         </nav>
         <div className="content">
             <h1 className="slogan">Keep it Close.</h1>
-            <p className="info">Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                Qui sit autem architecto? Aliquid deleniti cum ullam, 
-                harum quae illum eligendi.</p>
+            <p className="info">Welcome to Warp, the innovative chat app that brings you closer to the people around you. Our platform is designed to connect you with individuals in your immediate vicinity, fostering community and enabling real-time interactions. Whether you're at a cafe, attending a conference, or exploring a new neighborhood, Warp empowers you to discover and engage with nearby users. Experience seamless communication and make meaningful connections, right where you are.</p>
             <Link to="/about"><button className="btn-learn-more phase-in">Learn More</button></Link>
         </div>
     </div>
