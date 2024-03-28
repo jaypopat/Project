@@ -22,7 +22,7 @@ const Header = () => {
               <>
                 <Link className="warpBack" to="/">
                     <img src={logo} alt="Warp Logo" onClick={redirectHome} id="logo"/>
-                  Warp
+                    <span>Warp</span>
                 </Link>
                 <div id="hamburger">
                   <MenuButton/>
