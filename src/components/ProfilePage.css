@@ -56,7 +56,8 @@
    }
 
    .update-profile{
-    font-weight: 500;
+    color:white;
+    font-weight: 600;
     background-color: #6ed9a1;
     border: 0px;
     border-radius: 10px;
@@ -87,4 +88,17 @@
     background-color: #240533;
    }
 
-   
+  
+   @media screen and (max-height: 800px) {
+        .container-profile{
+            height: 65vh;
+            max-height: 450px;
+        }
+   }
+
+   @media screen and (max-height: 700px){
+    .container-profile{
+        height: 85vh;
+        margin-top: 5em;
+    }
+}

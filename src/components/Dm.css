@@ -17,6 +17,26 @@
     margin-bottom: 10px;
 }
 
+.all-dms-button{
+    color:white;
+    font-weight: 600;
+    background-color: #6ed9a1;
+    border: 0px;
+    border-radius: 10px;
+    width:100%;
+    margin-bottom: 0.5em;
+    margin-top: 1.75em;
+    padding: 1.25em;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-size: 0.75rem;
+}
+
+.all-dms-button:hover{
+    background-color: #7bffbb;
+}
+
+
 .user-pic {
     /* Style the user profile picture */
     width: 40px;

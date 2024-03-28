@@ -14,7 +14,55 @@
     text-align: center;
 }
 
-.no-requests-msg{
+.container-request-friends {
+    width: 90vw;
+    height: 20vh;
+    min-width: 300px;
+    min-height: 225px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 4px;
+    border: 1px solid hsla(0, 0, 0, 0.9);
+    margin-top: 4em;
+    border-radius: 10px;
+    padding: 0px;
+    background-color: #353e44;
+    ;
+}
+
+.header-requests {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 550;
+    color: #6ed9a1;
+    margin-top: 0.5em;
+    margin-bottom: 0.25em;
+}
+
+.accept-friend,
+.decline-friend {
+    background-color: #6ed9a1;
+    border: 0px;
+    border-radius: 10px;
+    width: 55%;
+    padding: 1.0em;
+    text-transform: uppercase;
+    cursor: pointer;
+    color:white;
+    font-weight: 600;
+    margin: 0.5em;
+}
+
+.button-holder{
+    display:flex;
+}
+
+.accept-friend:hover,.decline-friend:hover{
+    background-color: #5ebf8d;
+    cursor: pointer;
+}
+.no-requests-msg {
     text-align: center;
     font-size: 3.5rem;
     font-weight: 550;
@@ -28,12 +76,12 @@
     padding: 0;
 }
 
-.no-requests{
+.no-requests {
     margin-bottom: 15em;
 }
 
-.find-room{
-   color: white;
+.find-room {
+    color: white;
 }
 
 
@@ -79,15 +127,16 @@
     opacity: 0.8;
 }
 
-.find-room:hover{
+.find-room:hover {
     background-color: #53fba5 !important;
 }
 
 @media screen and (max-width: 400px) {
-    .no-requests-msg{
+    .no-requests-msg {
         font-size: 2.75rem
     }
-    .no-requests{
+
+    .no-requests {
         margin-bottom: 10em;
     }
 }
