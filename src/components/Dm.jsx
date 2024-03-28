@@ -1,7 +1,7 @@
-import React, {useContext, useEffect, useState} from 'react';
-import {Link, useParams} from 'react-router-dom';
-import {db} from '../firebaseAuth.js';
-import {addDoc, collection, doc, getDoc, onSnapshot, orderBy, query, setDoc, Timestamp} from 'firebase/firestore';
+import React, { useContext, useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import { db } from '../firebaseAuth.js';
+import { addDoc, collection, doc, getDoc, onSnapshot, orderBy, query, setDoc, Timestamp } from 'firebase/firestore';
 import {
     ChatContainer,
     ConversationList,
@@ -10,7 +10,7 @@ import {
     MessageList,
     Sidebar
 } from "@chatscope/chat-ui-kit-react";
-import {UserContext} from "../App.jsx";
+import { UserContext } from "../App.jsx";
 import "./Dm.css"
 import SidebarFriends from "./SidebarFriends.jsx";
 
@@ -64,7 +64,7 @@ function DM() {
             text: messageText,
             createdAt: Timestamp.fromDate(new Date()),
             uid: user.uid,
-            displayName:user.displayName,
+            displayName: user.displayName,
             userPic: user.photoURL,
             seen: false
         });
@@ -88,8 +88,8 @@ function DM() {
             });
         }
     }
-    , [messages, user2]);
-    
+        , [messages, user2]);
+
 
     if (!user2) {
         return <div>Loading...</div>;
@@ -101,18 +101,18 @@ function DM() {
         </div>
         <div className="chatroom-body">
             <MainContainer>
-                <Sidebar  id = "sidebar" position="left">
-                        <SidebarFriends/>
+                <Sidebar id="sidebar" position="left">
+                    <SidebarFriends />
                 </Sidebar>
                 <Link to={"/dm"}>
-                    <button>All DMs</button>
+                    <button className="all-dms-button">All DMs</button>
                 </Link>
                 <ChatContainer>
                     <MessageList>
 
                         <div className="messages">
                             {messages.map((message) => (<div className="message-container" key={message.id}>
-                                <img src={message.userPic} alt="pfp" className="user-pic"/>
+                                <img src={message.userPic} alt="pfp" className="user-pic" />
                                 <div className="message-content">
                                     <span className="user-name">{message.displayName}</span>
                                     <p className="message-text">{message.text}</p>
