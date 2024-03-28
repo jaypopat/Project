@@ -1,30 +1,23 @@
-import { useState, useEffect, useContext, useRef } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./SidebarRooms.css";
-import "react-toastify/dist/ReactToastify.css";
-import Spinner from "./Spinner";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { UserContext } from "../App";
 import { calculateDistance } from "../utils/calculateDistance";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { db } from "../firebaseAuth.js";
-import mapboxgl from 'mapbox-gl';
-import 'mapbox-gl/dist/mapbox-gl.css';
-mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_API_KEY;
 import { useLocation } from 'react-router-dom';
 
-
 const SidebarRooms = () => {
-  const [isLoading, setIsLoading] = useState(false);
   const { userLocation } = useContext(UserContext);
-  const [rooms, setRooms] = useState([]);
+  const [sidebarContent, setSidebarContent] = useState([]);
+  const { id: currRoomID } = useParams();
   const location = useLocation();
-
   const isJoinRoom = location.pathname === '/joinroom';
 
   useEffect(() => {
     const roomsRef = collection(db, "rooms");
     const queryRooms = query(roomsRef, orderBy("createdAt", "asc"));
-    setIsLoading(true)
+
     const unsubscribe = onSnapshot(queryRooms, (snapshot) => {
       let filteredRooms = [];
       snapshot.forEach((doc) => {
@@ -36,31 +29,28 @@ const SidebarRooms = () => {
             roomData.createdLocation.latitude,
             roomData.createdLocation.longitude
           );
-          if (distance <= roomData.radius) {
+          if (distance <= roomData.radius && roomData.id !== currRoomID) {
             filteredRooms.push(roomData);
           }
         }
       });
-      setIsLoading(false);
-      setRooms(filteredRooms);
+      setSidebarContent(filteredRooms);
     });
-    return () => unsubscribe();
-  }, [userLocation]);
 
-  return isLoading ? <Spinner /> : (
+    return () => unsubscribe();
+  }, [userLocation, currRoomID]);
+
+  return (
     <>
-      {rooms.length === 0 ? (
+      {sidebarContent.length === 0 ? (
         <>
           <p>No rooms.. Create a Room</p>
           <Link to={"/createroom"}>
             <button className="create-room-button"> Create Room </button>
           </Link>
         </>
-
       ) : (
-        <>
-          <RoomTable rooms={rooms} className={isJoinRoom ? "joinRoom" : ""} />
-        </>
+        <RoomTable rooms={sidebarContent} className={isJoinRoom ? "joinRoom" : ""} />
       )}
     </>
   );
@@ -68,7 +58,6 @@ const SidebarRooms = () => {
 
 const RoomTable = ({ rooms, className }) => (
   <div className={`sidebar-center-room-${className}`}>
-
     <table id="rooms">
       <thead>
         <tr>
@@ -90,8 +79,7 @@ const RoomRow = ({ room }) => (
   <tr key={room.id}>
     <td>{room.name}</td>
     <td>
-      <Link className="join-button-container"
-        to={`/joinroom/${room.id}`}>
+      <Link className="join-button-container" to={`/joinroom/${room.id}`}>
         <button className="join-button">Join</button>
       </Link>
     </td>
