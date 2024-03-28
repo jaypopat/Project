@@ -1,19 +1,17 @@
 /* eslint-disable no-unused-vars */
 import { useState, useEffect, createContext } from "react";
 import { Route, Routes } from "react-router-dom";
-import { Home, Login, Register, Header, Footer, About, ProfilePage, Protected, ErrorPage, CreateChatRoom, JoinRoom, ChatRoom, ForgotPassword,FriendList,FriendRequests,DM } from './components';
+import { Home, Login, Register, Header, Footer, About, ProfilePage, Protected, ErrorPage, CreateChatRoom, JoinRoom, ChatRoom, ForgotPassword, FriendList, FriendRequests, DM } from './components';
 import { fetchLocation } from "./utils/fetchLocation";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 export const UserContext = createContext();
-export const FriendRequestContext = createContext();
 
 
 const App = () => {
   const [user, setUser] = useState(null);
   const [userLocation, setUserLocation] = useState(null);
   const [userLocationFetchingInBackground, setIsLoadingGeo] = useState(true);
-  const [friendRequests, setFriendRequests] = useState([]);
 
   useEffect(() => {
     fetchLocation()
@@ -21,7 +19,8 @@ const App = () => {
         setUserLocation(location);
         setIsLoadingGeo(false);
       })
-      .catch((error) => {
+      .catch((e) => {
+        console.error(e)
         setIsLoadingGeo(false);
       });
   }, []);
@@ -70,13 +69,13 @@ const App = () => {
             }
           />
           <Route
-              exact
-              path="/friend-requests"
-              element={
-                <Protected>
-                  <FriendRequests />
-                </Protected>
-              }
+            exact
+            path="/friend-requests"
+            element={
+              <Protected>
+                <FriendRequests />
+              </Protected>
+            }
           />
           <Route
             exact
@@ -110,7 +109,7 @@ const App = () => {
             path="/dm/:id"
             element={
               <Protected>
-                <DM/>
+                <DM />
               </Protected>
             }
           />

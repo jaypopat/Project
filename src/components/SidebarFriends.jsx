@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { db } from '../firebaseAuth.js';
 import { collection, doc, getDocs, query } from 'firebase/firestore';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useContext } from "react";
 import { UserContext } from "../App";
 import './SidebarFriends.css';
@@ -11,6 +11,7 @@ function SidebarFriends() {
     const { user } = useContext(UserContext);
     const [friends, setFriends] = useState([]);
     const [loading, setLoading] = useState(true);
+    const { id: dmFriend } = useParams();
 
     useEffect(() => {
         const getFriends = async () => {
@@ -20,12 +21,14 @@ function SidebarFriends() {
             const querySnapshot = await getDocs(q);
             return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
         };
-
+    
         getFriends().then(friends => {
-            setFriends(friends);
+            const filteredFriends = friends.filter(friend => friend.friendId !== dmFriend);
+            setFriends(filteredFriends);
             setLoading(false);
         });
-    }, []);
+    }, [dmFriend, user.uid]);
+    
 
     return loading ? (
         <Spinner />
