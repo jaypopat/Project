@@ -11,7 +11,6 @@ exports.deleteInactiveRooms = functions.pubsub.schedule('every 24 hours').onRun(
 
  const snapshot = await query.get();
  if (snapshot.empty) {
-    console.log('No inactive rooms found.');
     return null;
  }
 
@@ -21,6 +20,5 @@ exports.deleteInactiveRooms = functions.pubsub.schedule('every 24 hours').onRun(
  });
 
  await batch.commit();
- console.log('Deleted inactive rooms.');
  return null;
 });

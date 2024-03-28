@@ -30,10 +30,8 @@ function ChatRoom() {
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
-        console.log("Room Name:", docSnap.data().name);
         return docSnap.data().name;
       } else {
-        console.log("No such document!");
         return null;
       }
     } catch (error) {

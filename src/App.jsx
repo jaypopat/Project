@@ -19,17 +19,14 @@ const App = () => {
     fetchLocation()
       .then((location) => {
         setUserLocation(location);
-        console.log(location);
         setIsLoadingGeo(false);
       })
       .catch((error) => {
-        console.log(error);
         setIsLoadingGeo(false);
       });
   }, []);
 
   useEffect(() => {
-    console.log(userLocation);
   }, [userLocation]);
 
   const auth = getAuth();
@@ -42,7 +39,6 @@ const App = () => {
 
     return () => unsubscribe();
   }, []);
-  console.log(user)
 
 
   return (

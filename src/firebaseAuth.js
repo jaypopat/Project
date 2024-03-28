@@ -72,7 +72,6 @@ export const logInWithEmailAndPassword = (email, password) => {
         .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
-            console.log(errorCode, errorMessage);
         });
 };
 
@@ -81,7 +80,6 @@ export const registerWithEmailAndPassword = async (name, email, password) => {
     try {
         const res = await createUserWithEmailAndPassword(auth, email, password);
         const user = res.user;
-        console.log(user);
 
         await sendEmailVerification(user);
 
@@ -97,10 +95,6 @@ export const registerWithEmailAndPassword = async (name, email, password) => {
             displayName: name,
             photoURL: `https://api.dicebear.com/8.x/pixel-art/svg?seed=${name}`
         });
-
-
-        console.log("User registered and profile updated successfully");
-
 
 
     } catch (err) {

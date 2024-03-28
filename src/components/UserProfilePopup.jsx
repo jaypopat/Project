@@ -20,7 +20,6 @@ const UserProfilePopup = ({selectedUser, onClose}) => {
         const existingReqSnapshot = await getDocs(existingReqQuery);
 
         if (!existingReqSnapshot.empty) {
-            console.log("Friend Request already sent");
             return;
         }
 
@@ -28,7 +27,6 @@ const UserProfilePopup = ({selectedUser, onClose}) => {
         const existingFriendSnapshot = await getDocs(existingFriendQuery);
 
         if (!existingFriendSnapshot.empty) {
-            console.log("Already Friends");
             return;
         }
 
@@ -39,7 +37,6 @@ const UserProfilePopup = ({selectedUser, onClose}) => {
             friendName: user.displayName,
             friendPic: user.photoURL
         });
-        console.log("Friend Request Sent");
         toast.success("friend request sent")
 
     }

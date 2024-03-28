@@ -13,7 +13,6 @@ function Register() {
 
   const register = async (e) => {
     e.preventDefault();
-    console.log("attempting to register");
     if (!name) {
       alert("Please enter name");
       return;
@@ -21,9 +20,8 @@ function Register() {
     try {
       await registerWithEmailAndPassword(name, email, password);
       alert("A verification email has been sent to your email address. Please check your inbox and click on the verification link to complete the registration process.");
-      console.log("registered");
     } catch (error) {
-        console.log(error.message);
+        console.error(error.message);
     }
   };
 

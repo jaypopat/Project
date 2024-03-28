@@ -34,7 +34,6 @@ function DM() {
             if (user2DocSnap.exists()) {
                 setUser2Data(user2DocSnap.data());
             } else {
-                console.log("No such document!");
             }
         };
 
