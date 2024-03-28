@@ -97,8 +97,8 @@
  }
 
  .sidebar #rooms th, .sidebar #rooms td {
-  padding: 0px 0px; /* Reduced padding */
-  font-size: 0.9rem; /* Adjusted font size for smaller text */
+  padding: 0px 0px;
+  font-size: 0.9rem;
   border-bottom: 1px solid #ddd;
   text-align: center;
 }
@@ -113,13 +113,13 @@
   max-width: 700px;
   border-collapse: collapse;
   font-family: Arial, sans-serif;
-  margin: 25px 0; /* You can adjust this if needed */
-  height: 50vh; /* Adjust based on content, but allows for flexibility */
+  margin: 25px 0;
+  height: 50vh;
 }
 
 .center-room- #rooms tbody{
-  max-height: 40vh; /* Adjusted to control visible area */
-  overflow-y: auto; /* Enables scrolling for overflow content */
+  max-height: 40vh;
+  overflow-y: auto;
 }
 
 #root{
@@ -130,7 +130,7 @@
 }
 
 .center-room- #rooms th {
-  color: white; /* Sets text color to white */
+  color: white;
   font-weight: 800;
   text-align: center;
 }
