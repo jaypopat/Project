@@ -28,6 +28,11 @@
     height: 40vh;
 }
 
+#profile-popup-header{
+    margin: 0.25em;
+    color: #6ed9a1;
+}
+
 
 #add-friend{
     width: 60%;

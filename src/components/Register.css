@@ -183,6 +183,12 @@ Typography
 }
 
 
+
+@media screen and (max-height: 700px) {
+    .container-register{
+        height: 97.5vh;
+    }
+}
 .responsive-background {
     display: flex;
     justify-content: center;

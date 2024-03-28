@@ -15,7 +15,7 @@
 }
 
 .container-request-friends {
-    width: 90vw;
+    width: 35vw;
     height: 20vh;
     min-width: 300px;
     min-height: 225px;
@@ -28,7 +28,6 @@
     border-radius: 10px;
     padding: 0px;
     background-color: #353e44;
-    ;
 }
 
 .header-requests {
@@ -45,7 +44,7 @@
     background-color: #6ed9a1;
     border: 0px;
     border-radius: 10px;
-    width: 55%;
+    width: 75%;
     padding: 1.0em;
     text-transform: uppercase;
     cursor: pointer;
@@ -56,6 +55,8 @@
 
 .button-holder{
     display:flex;
+    width: 90%;
+    height: 30%;
 }
 
 .accept-friend:hover,.decline-friend:hover{
@@ -87,6 +88,7 @@
 
 
 .friend-requests li {
+    list-style: none;
     padding: 10px;
     margin-bottom: 10px;
     border-bottom: 1px solid #eee;
@@ -99,6 +101,17 @@
     margin: 0;
     font-size: 18px;
     color: #666;
+}
+
+.container-request-friends ul {
+    list-style: none;
+}
+
+.container-request-friends p{
+    text-align: center;
+    font-weight: 600;
+    font-size: 1.15rem;
+    margin-bottom: 0em;
 }
 
 .friend-requests button {
@@ -138,5 +151,9 @@
 
     .no-requests {
         margin-bottom: 10em;
+    }
+
+    .container-request-friends{
+        max-width: 200px;
     }
 }
