@@ -42,8 +42,7 @@ function ChatRoom() {
   }
 
   useEffect(() => {
-    setMessages([]);  // Clear messages on room switch
-  
+    setMessages([]);
     if (!roomId) return;
   
     const roomRef = doc(db, "rooms", roomId);
@@ -132,7 +131,7 @@ function ChatRoom() {
               </div>
 
             </MessageList>
-            <MessageInput
+            <MessageInput autoFocus={true} attachButton={false}
               value={newMessage}
               onChange={(val) => setNewMessage(val)}
               onSend={handleSubmit}

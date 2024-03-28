@@ -126,7 +126,7 @@ function DM() {
                         </div>
 
                     </MessageList>
-                    <MessageInput
+                    <MessageInput autoFocus={true} attachButton={false}
                         value={newMessage}
                         onChange={(val) => setNewMessage(val)}
                         onSend={handleSubmit}
