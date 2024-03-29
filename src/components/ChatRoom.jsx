@@ -1,20 +1,13 @@
-import {
-  MainContainer,
-  Sidebar,
-  ConversationList,
-  ChatContainer,
-  MessageList,
-  MessageInput,
-} from "@chatscope/chat-ui-kit-react";
+import React, { useState, useEffect } from 'react';
+import { MainContainer, Sidebar, ConversationList, ChatContainer, MessageList, MessageInput } from "@chatscope/chat-ui-kit-react";
 import styles from "@chatscope/chat-ui-kit-styles/dist/default/styles.min.css";
 import SidebarRooms from "./SidebarRooms";
 import { Link, useParams } from "react-router-dom";
 import "./ChatRoom.css";
-import { useEffect, useState } from "react";
 import { addDoc, collection, getDoc, doc, onSnapshot, orderBy, query, Timestamp, updateDoc } from "firebase/firestore";
 import { auth, db } from "../firebaseAuth.js";
 import UserProfilePopup from "./UserProfilePopup.jsx";
-import {formatText} from "../utils/formatText.js"
+import { formatText } from "../utils/formatText.js"
 
 function ChatRoom() {
   const { id: roomId } = useParams();
@@ -22,8 +15,6 @@ function ChatRoom() {
   const [messages, setMessages] = useState([]);
   const [roomName, setRoomName] = useState("");
   const [selectedUser, setSelectedUser] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
-
 
   const getRoomName = async (roomId) => {
     try {
@@ -44,21 +35,20 @@ function ChatRoom() {
   useEffect(() => {
     setMessages([]);
     if (!roomId) return;
-  
+
     const roomRef = doc(db, "rooms", roomId);
     const messagesRef = collection(roomRef, "messages");
     const q = query(messagesRef, orderBy("createdAt", "asc"));
-  
+
     const unsubscribe = onSnapshot(q, (snapshot) => {
       const incomingMessages = snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }));
       setMessages(incomingMessages);
     });
-  
+
     getRoomName(roomId).then(name => setRoomName(name));
-  
+
     return () => unsubscribe();
   }, [roomId]);
-  
 
   const handleSubmit = async (messageText) => {
     if (!messageText.trim()) return;
@@ -107,29 +97,31 @@ function ChatRoom() {
           }
           <ChatContainer>
             <MessageList>
-
               <div className="messages">
-                {messages.map((message) => (
-                  <div className="message-container" key={message.id}>
-                    <img src={message.userPic} alt="pfp" className="user-pic" onClick={() => {
-                      setSelectedUser({
-                        uid: message.uid,
-                        displayName: message.displayName,
-                        photoURL: message.userPic
-                      }
-                      );
-                    }} />
-                    <div className="message-content">
-                      <span className="user-name">{message.displayName}</span>
-                      <p className="message-text">{formatText(message.text)}</p>
-                      <p className="message-timestamp">
-                        {message.createdAt?.seconds ? new Date(message.createdAt.seconds * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : 'No timestamp'}
-                      </p>
+                {messages.map((message, index) => (
+                  <div key={message.id}>
+                    {index === 0 || new Date(message.createdAt.seconds * 1000).toDateString() !== new Date(messages[index - 1].createdAt.seconds * 1000).toDateString() ? (
+                      <div className="message-date">{new Date(message.createdAt.seconds * 1000).toDateString()}</div>
+                    ) : null}
+                    <div className="message-container">
+                      <img src={message.userPic} alt="pfp" className="user-pic" onClick={() => {
+                        setSelectedUser({
+                          uid: message.uid,
+                          displayName: message.displayName,
+                          photoURL: message.userPic
+                        });
+                      }} />
+                      <div className="message-content">
+                        <span className="user-name">{message.displayName}</span>
+                        <p className="message-text">{formatText(message.text)}</p>
+                        <p className="message-timestamp">
+                          {message.createdAt?.seconds ? new Date(message.createdAt.seconds * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : 'No timestamp'}
+                        </p>
+                      </div>
                     </div>
                   </div>
                 ))}
               </div>
-
             </MessageList>
             <MessageInput autoFocus={true} attachButton={false}
               value={newMessage}
@@ -143,4 +135,5 @@ function ChatRoom() {
     </div>
   );
 }
+
 export default ChatRoom;

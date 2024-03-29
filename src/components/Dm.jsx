@@ -14,7 +14,7 @@ import { UserContext } from "../App.jsx";
 import "./Dm.css"
 import SidebarFriends from "./SidebarFriends.jsx";
 import Spinner from './Spinner.jsx';
-import {formatText} from "../utils/formatText.js"
+import { formatText } from "../utils/formatText.js"
 
 
 
@@ -92,7 +92,7 @@ function DM() {
 
 
     if (!user2) {
-        return <Spinner/>;
+        return <Spinner />;
     }
 
     return (<div className="chatroom">
@@ -109,20 +109,24 @@ function DM() {
                 </Link>
                 <ChatContainer>
                     <MessageList>
-
                         <div className="messages">
-                            {messages.map((message) => (<div className="message-container" key={message.id}>
-                                <img src={message.userPic} alt="pfp" className="user-pic" />
-                                <div className="message-content">
-                                    <span className="user-name">{message.displayName}</span>
-                                    <p className="message-text">{formatText(message.text)}</p>
-                                    <p className="message-timestamp">
-                                        {message.createdAt?.seconds ? new Date(message.createdAt.seconds * 1000).toLocaleTimeString([], {
-                                            hour: '2-digit', minute: '2-digit'
-                                        }) : 'No timestamp'}
-                                    </p>
+                            {messages.map((message, index) => (
+                                <div key={message.id}>
+                                    {index === 0 || new Date(message.createdAt.seconds * 1000).toDateString() !== new Date(messages[index - 1].createdAt.seconds * 1000).toDateString() ? (
+                                        <div className="message-date">{new Date(message.createdAt.seconds * 1000).toDateString()}</div>
+                                    ) : null}
+                                    <div className="message-container">
+                                        <img src={message.userPic} alt="pfp" className="user-pic" />
+                                        <div className="message-content">
+                                            <span className="user-name">{message.displayName}</span>
+                                            <p className="message-text">{formatText(message.text)}</p>
+                                            <p className="message-timestamp">
+                                                {message.createdAt?.seconds ? new Date(message.createdAt.seconds * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : 'No timestamp'}
+                                            </p>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>))}
+                            ))}
                         </div>
 
                     </MessageList>

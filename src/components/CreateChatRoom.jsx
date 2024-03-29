@@ -44,8 +44,10 @@ const ChatRoom = () => {
       toast.error("Don't use bad words in chat room");
     } else if (chatRoomName.trim() === "") {
       toast.error("Chat room name cannot be empty");
-    }else if (chatRoomName.length >20) {
+    } else if (chatRoomName.length > 20) {
       toast.error("Chat room name cannot be more than 20 chars");
+    } else if (radius == 0) {
+      toast.error("Radius cannot be 0");
     } else {
       setFormData((prevData) => ({
         ...prevData,
